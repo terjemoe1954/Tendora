@@ -1,0 +1,240 @@
+"app.name" = "Tendora";
+
+"tab.home" = "Hjem";
+"tab.calendar" = "Kalender";
+"tab.add" = "Legg til";
+"tab.documents" = "Dokumenter";
+"tab.settings" = "Innstillinger";
+
+
+"onboarding.page1.title" = "Tendora";
+"onboarding.page1.message" = "Ta vare på det du eier.";
+"onboarding.page2.title" = "Smarte påminnelser";
+"onboarding.page2.message" = "Hold deg i forkant av service, inspeksjoner, fornyelser og vedlikehold.";
+"onboarding.page3.title" = "Alt på ett sted";
+"onboarding.page3.message" = "Samle oppgaver, bilder, kvitteringer, manualer og historikk på ett sted.";
+"onboarding.cta" = "Kom i gang";
+
+"home.add_asset.accessibility" = "Legg til eiendel";
+"home.dashboard.tagline" = "Ta vare på det du eier.";
+"home.dashboard.intro" = "Hold oversikt over eiendelene dine, kommende vedlikehold og viktige dokumenter på ett sted.";
+"home.assets.section_title" = "Mine eiendeler";
+"home.upcoming.section_title" = "Kommende";
+"home.upcoming.empty_title" = "Ingenting planlagt ennå";
+"home.upcoming.empty_message" = "Legg til din første vedlikeholdsoppgave fra en eiendel, så vises den her.";
+"home.upcoming.due_format" = "Forfaller %@";
+"home.empty.title" = "Ta vare på tingene du eier";
+"home.empty.message" = "Legg til hjemmet, bilen, hytta, båten eller noe annet du vil at Tendora skal hjelpe deg å huske.";
+"home.empty.cta" = "Legg til din første eiendel";
+
+"calendar.selected_day" = "Valgt dag";
+"calendar.summary.tasks_due" = "%d oppgaver forfaller denne måneden";
+"calendar.summary.next_due" = "Neste forfall: %@ den %@";
+"calendar.empty.title" = "Ingenting forfaller denne dagen";
+"calendar.empty.message" = "Velg en annen dato eller legg til en ny vedlikeholdsoppgave.";
+
+"add_asset.title" = "Legg til eiendel";
+"add_asset.prompt" = "Hva vil du legge til?";
+"add_asset.section.details" = "Detaljer";
+"add_asset.section.location" = "Sted";
+"add_asset.section.vehicle" = "Kjøretøy";
+"add_asset.section.boat" = "Båt";
+"add_asset.field.name" = "Navn";
+"add_asset.field.notes" = "Notater";
+"add_asset.field.address" = "Adresse";
+"add_asset.field.year_built" = "Byggeår";
+"add_asset.field.make" = "Merke";
+"add_asset.field.model" = "Modell";
+"add_asset.field.year" = "År";
+"add_asset.field.fuel_type" = "Drivstofftype";
+"add_asset.field.current_odometer" = "Nåværende kilometerstand";
+"add_asset.field.registration_number" = "Registreringsnummer";
+
+"common.cancel" = "Avbryt";
+"common.ok" = "OK";
+"common.save" = "Lagre";
+"common.done" = "Ferdig";
+
+"add_task.title" = "Legg til oppgave";
+"add_task.section.asset" = "Eiendel";
+"add_task.section.details" = "Oppgavedetaljer";
+"add_task.section.schedule" = "Plan";
+"add_task.section.reminder" = "Påminnelse";
+"add_task.field.asset" = "Eiendel";
+"add_task.field.title" = "Oppgavetittel";
+"add_task.field.notes" = "Notater";
+"add_task.field.due_date" = "Forfallsdato";
+"add_task.field.repeat" = "Gjenta";
+"add_task.field.custom_value" = "Egendefinert intervall";
+"add_task.field.custom_unit" = "Intervallenhet";
+"add_task.field.reminder_enabled" = "Aktiver påminnelse";
+"add_task.field.reminder_timing" = "Minn meg på";
+
+"asset_type.home.display_name" = "Hjem";
+"asset_type.cabin.display_name" = "Hytte";
+"asset_type.car.display_name" = "Bil";
+"asset_type.boat.display_name" = "Båt";
+"asset_type.other.display_name" = "Annet";
+
+"asset_type.home.selection_title" = "Hus";
+"asset_type.cabin.selection_title" = "Hytte / fritidsbolig";
+"asset_type.car.selection_title" = "Bil";
+"asset_type.boat.selection_title" = "Båt";
+"asset_type.other.selection_title" = "Annet";
+
+"asset.metadata.built" = "Bygget %d";
+"asset.metadata.empty" = "Ingen detaljer lagt til ennå";
+"asset.card.task_count" = "%d oppgaver";
+"asset.card.next_due" = "Neste: %@ den %@";
+
+"asset_detail.section.info" = "Info";
+"asset_detail.section.tasks" = "Oppgaver";
+"asset_detail.section.documents" = "Dokumenter";
+"asset_detail.section.history" = "Historikk";
+"asset_detail.add_task" = "Legg til oppgave";
+"asset_detail.edit_asset" = "Rediger eiendel";
+"asset_detail.delete_asset" = "Slett eiendel";
+"asset_detail.delete_asset_confirmation" = "Slette denne eiendelen og alt som er knyttet til den?";
+"asset_detail.add_document" = "Legg til dokument";
+"asset_detail.tasks.empty_title" = "Ingen oppgaver ennå";
+"asset_detail.tasks.empty_message" = "Legg til en vedlikeholdsoppgave slik at Tendora kan begynne å holde oversikt.";
+"asset_detail.documents.empty_title" = "Ingen dokumenter ennå";
+"asset_detail.documents.empty_message" = "Legg til bilder, kvitteringer eller manualer for denne eiendelen.";
+"asset_detail.history.empty_title" = "Ingen historikk ennå";
+"asset_detail.history.empty_message" = "Fullførte oppgaver vises her over tid.";
+"asset_detail.history.completed_format" = "Fullført %@";
+"asset_detail.field.asset_type" = "Type eiendel";
+"asset_detail.field.make" = "Merke";
+"asset_detail.field.model" = "Modell";
+"asset_detail.field.year" = "År";
+"asset_detail.field.fuel_type" = "Drivstofftype";
+"asset_detail.field.odometer" = "Kilometerstand";
+"asset_detail.field.registration" = "Registrering";
+"asset_detail.field.address" = "Adresse";
+"asset_detail.field.notes" = "Notater";
+"asset_detail.field.created" = "Opprettet";
+
+"repeat_rule.never" = "Aldri";
+"repeat_rule.weekly" = "Ukentlig";
+"repeat_rule.monthly" = "Månedlig";
+"repeat_rule.three_months" = "Hver 3. måned";
+"repeat_rule.six_months" = "Hver 6. måned";
+"repeat_rule.yearly" = "Årlig";
+"repeat_rule.two_years" = "Hvert 2. år";
+"repeat_rule.custom" = "Egendefinert";
+
+"repeat_unit.days" = "dager";
+"repeat_unit.weeks" = "uker";
+"repeat_unit.months" = "måneder";
+"repeat_unit.years" = "år";
+
+"task.status.normal" = "Normal";
+"task.status.due_soon" = "Snart forfall";
+"task.status.overdue" = "Forfalt";
+"task.status.completed" = "Fullført";
+"task.reminder.off" = "Av";
+"task.repeat.custom_format" = "Hver %d %@";
+
+"reminder_offset.same_day" = "Samme dag";
+"reminder_offset.one_day_before" = "1 dag før";
+"reminder_offset.three_days_before" = "3 dager før";
+"reminder_offset.one_week_before" = "1 uke før";
+"reminder_offset.two_weeks_before" = "2 uker før";
+"reminder_offset.one_month_before" = "1 måned før";
+
+"task_detail.due_date" = "Forfallsdato";
+"task_detail.mark_done" = "Marker som utført";
+"task_detail.section.details" = "Detaljer";
+"task_detail.section.attachments" = "Vedlegg";
+"task_detail.section.history" = "Fullføringshistorikk";
+"task_detail.repeat_rule" = "Gjentakelse";
+"task_detail.reminder" = "Påminnelse";
+"task_detail.status" = "Status";
+"task_detail.notes" = "Notater";
+"task_detail.add_attachment" = "Legg til vedlegg";
+"task_detail.edit_task" = "Rediger oppgave";
+"task_detail.delete_task" = "Slett oppgave";
+"task_detail.delete_task_confirmation" = "Slette denne oppgaven og historikken dens?";
+"task_detail.attachments.empty_title" = "Ingen vedlegg ennå";
+"task_detail.attachments.empty_message" = "Legg til et bilde eller dokument for å knytte det til denne oppgaven.";
+"task_detail.history.empty_title" = "Ingen fullføringer ennå";
+"task_detail.history.empty_message" = "Marker oppgaven som utført, så lagrer Tendora historikken her.";
+"task_detail.history.completed" = "Fullført";
+"task_detail.completion_recorded" = "Oppgaven er markert som utført.";
+"task_detail.completion_recorded_next_due" = "Lagret i historikk. Neste forfall %1$@.";
+
+"notification.title" = "Tendora-påminnelse";
+"notification.body.format" = "%@ for %@ forfaller %@.";
+
+"settings.section.reminders" = "Påminnelser";
+"settings.section.appearance" = "Utseende";
+"settings.section.support" = "Hjelp";
+"settings.section.demo" = "Demoverktøy";
+"settings.notifications" = "Åpne varslingsinnstillinger";
+"settings.notifications.help" = "Her styrer du i iPhone-innstillinger om Tendora har lov til å sende påminnelser.";
+"settings.default_reminder" = "Standard tidspunkt for påminnelse";
+"settings.demo.load" = "Last inn skjermbildedata";
+"settings.demo.clear" = "Slett alle lokale data";
+"settings.demo.footer" = "Bruk disse verktøyene for å forberede App Store-skjermbilder og opptak. Fjern eller skjul dem før lansering.";
+"settings.demo.load.confirmation" = "Erstatte de nåværende lokale dataene dine med demodata for skjermbilder?";
+"settings.demo.clear.confirmation" = "Slette alle lokale eiendeler, oppgaver, dokumenter og historikk fra denne enheten?";
+"settings.demo.success.title" = "Demoverktøy";
+"settings.demo.load.success.message" = "Demodata for skjermbilder er lastet inn.";
+"settings.demo.clear.success.message" = "Alle lokale data er slettet.";
+"settings.demo.error.title" = "Feil i demoverktøy";
+"settings.demo.error.message" = "Tendora kunne ikke fullføre den handlingen for demodata.";
+"settings.appearance" = "Utseende";
+"settings.appearance.system" = "System";
+"settings.appearance.light" = "Lys";
+"settings.appearance.dark" = "Mørk";
+"settings.about" = "Om Tendora";
+"settings.about.message" = "Hold hjem, kjøretøy og vedlikeholdshistorikk samlet på ett sted.";
+"settings.about.section.app" = "App";
+"settings.about.version" = "Versjon";
+"settings.about.build" = "Bygg";
+
+"documents.empty.title" = "Ingen dokumenter ennå";
+"documents.empty.message" = "Legg til et bilde, en kvittering eller en manual fra en eiendel eller oppgave for å se det her.";
+
+"add_attachment.title" = "Legg til vedlegg";
+"add_attachment.section.linked_to" = "Knyttet til";
+"add_attachment.section.type" = "Type";
+"add_attachment.section.import" = "Importer";
+"add_attachment.field.asset" = "Eiendel";
+"add_attachment.field.task" = "Oppgave";
+"add_attachment.field.type" = "Vedleggstype";
+"add_attachment.photo" = "Velg bilde";
+"add_attachment.document" = "Importer fil";
+"add_attachment.help" = "Bilder og importerte filer kopieres til Tendora sin lokale lagring på denne enheten.";
+"add_attachment.default_photo_name" = "Bildevedlegg";
+
+"edit_asset.title" = "Rediger eiendel";
+"edit_task.title" = "Rediger oppgave";
+
+"attachment.delete.action" = "Slett vedlegg";
+"attachment.delete.confirmation" = "Slette dette vedlegget?";
+"attachment.share.action" = "Del vedlegg";
+
+"error.notifications.title" = "Påminnelsesfeil";
+"error.notifications.denied.message" = "Varslinger er slått av for Tendora. Aktiver dem i Innstillinger for å bruke påminnelser.";
+"error.notifications.request_failed.message" = "Tendora kunne ikke be om varslings­tillatelse akkurat nå.";
+"error.notifications.scheduling_failed.message" = "Tendora kunne ikke planlegge den påminnelsen.";
+
+"error.attachments.title" = "Vedleggsfeil";
+"error.attachments.import_failed.message" = "Tendora kunne ikke importere den filen.";
+"error.attachments.photo_failed.message" = "Tendora kunne ikke laste inn det bildet.";
+"error.attachments.delete_failed.message" = "Tendora kunne ikke fjerne den lagrede filen for vedlegget.";
+"error.attachments.open_failed.message" = "Tendora kunne ikke åpne vedlegget.";
+
+"error.assets.title" = "Feil i eiendel";
+"error.assets.invalid_year.message" = "Skriv inn et gyldig år før du lagrer.";
+"error.assets.invalid_odometer.message" = "Skriv inn en gyldig kilometerstand før du lagrer.";
+
+"attachment_type.photo" = "Bilde";
+"attachment_type.receipt" = "Kvittering";
+"attachment_type.invoice" = "Faktura";
+"attachment_type.manual" = "Manual";
+"attachment_type.warranty" = "Garanti";
+"attachment_type.insurance" = "Forsikring";
+"attachment_type.service_record" = "Servicerapport";
+"attachment_type.other" = "Annet";

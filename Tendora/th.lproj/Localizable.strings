@@ -1,0 +1,240 @@
+"app.name" = "Tendora";
+
+"tab.home" = "หน้าหลัก";
+"tab.calendar" = "ปฏิทิน";
+"tab.add" = "เพิ่ม";
+"tab.documents" = "เอกสาร";
+"tab.settings" = "การตั้งค่า";
+
+
+"onboarding.page1.title" = "Tendora";
+"onboarding.page1.message" = "ดูแลสิ่งที่คุณเป็นเจ้าของ";
+"onboarding.page2.title" = "การเตือนอัจฉริยะ";
+"onboarding.page2.message" = "จัดการบริการ การตรวจสอบ การต่ออายุ และงานบำรุงรักษาได้ล่วงหน้า";
+"onboarding.page3.title" = "ทุกอย่างอยู่ในที่เดียว";
+"onboarding.page3.message" = "เก็บงาน รูปภาพ ใบเสร็จ คู่มือ และประวัติไว้ด้วยกัน";
+"onboarding.cta" = "เริ่มต้นใช้งาน";
+
+"home.add_asset.accessibility" = "เพิ่มทรัพย์สิน";
+"home.dashboard.tagline" = "ดูแลสิ่งที่คุณเป็นเจ้าของ";
+"home.dashboard.intro" = "ติดตามทรัพย์สิน งานบำรุงรักษาที่กำลังจะมาถึง และเอกสารสำคัญของคุณไว้ในที่เดียว";
+"home.assets.section_title" = "ทรัพย์สินของฉัน";
+"home.upcoming.section_title" = "กำลังจะมาถึง";
+"home.upcoming.empty_title" = "ยังไม่มีรายการที่กำหนดไว้";
+"home.upcoming.empty_message" = "เพิ่มงานบำรุงรักษาแรกจากทรัพย์สินของคุณ แล้วงานจะปรากฏที่นี่";
+"home.upcoming.due_format" = "ครบกำหนด %@";
+"home.empty.title" = "ดูแลสิ่งของที่คุณเป็นเจ้าของ";
+"home.empty.message" = "เพิ่มบ้าน รถ กระท่อม เรือ หรือสิ่งอื่นใดที่คุณอยากให้ Tendora ช่วยจดจำ";
+"home.empty.cta" = "เพิ่มทรัพย์สินชิ้นแรกของคุณ";
+
+"calendar.selected_day" = "วันที่เลือก";
+"calendar.summary.tasks_due" = "มีงานครบกำหนด %d งานในเดือนนี้";
+"calendar.summary.next_due" = "ครบกำหนดถัดไป: %@ วันที่ %@";
+"calendar.empty.title" = "ไม่มีงานครบกำหนดในวันนั้น";
+"calendar.empty.message" = "เลือกวันอื่นหรือเพิ่มงานบำรุงรักษาใหม่";
+
+"add_asset.title" = "เพิ่มทรัพย์สิน";
+"add_asset.prompt" = "คุณต้องการเพิ่มอะไร";
+"add_asset.section.details" = "รายละเอียด";
+"add_asset.section.location" = "สถานที่";
+"add_asset.section.vehicle" = "ยานพาหนะ";
+"add_asset.section.boat" = "เรือ";
+"add_asset.field.name" = "ชื่อ";
+"add_asset.field.notes" = "บันทึก";
+"add_asset.field.address" = "ที่อยู่";
+"add_asset.field.year_built" = "ปีที่สร้าง";
+"add_asset.field.make" = "ยี่ห้อ";
+"add_asset.field.model" = "รุ่น";
+"add_asset.field.year" = "ปี";
+"add_asset.field.fuel_type" = "ประเภทเชื้อเพลิง";
+"add_asset.field.current_odometer" = "เลขไมล์ปัจจุบัน";
+"add_asset.field.registration_number" = "หมายเลขทะเบียน";
+
+"common.cancel" = "ยกเลิก";
+"common.ok" = "ตกลง";
+"common.save" = "บันทึก";
+"common.done" = "เสร็จสิ้น";
+
+"add_task.title" = "เพิ่มงาน";
+"add_task.section.asset" = "ทรัพย์สิน";
+"add_task.section.details" = "รายละเอียดงาน";
+"add_task.section.schedule" = "กำหนดการ";
+"add_task.section.reminder" = "การเตือน";
+"add_task.field.asset" = "ทรัพย์สิน";
+"add_task.field.title" = "ชื่องาน";
+"add_task.field.notes" = "บันทึก";
+"add_task.field.due_date" = "วันครบกำหนด";
+"add_task.field.repeat" = "ทำซ้ำ";
+"add_task.field.custom_value" = "ช่วงเวลาที่กำหนดเอง";
+"add_task.field.custom_unit" = "หน่วยช่วงเวลา";
+"add_task.field.reminder_enabled" = "เปิดใช้การเตือน";
+"add_task.field.reminder_timing" = "เตือนฉัน";
+
+"asset_type.home.display_name" = "บ้าน";
+"asset_type.cabin.display_name" = "บ้านพัก";
+"asset_type.car.display_name" = "รถ";
+"asset_type.boat.display_name" = "เรือ";
+"asset_type.other.display_name" = "อื่น ๆ";
+
+"asset_type.home.selection_title" = "บ้าน";
+"asset_type.cabin.selection_title" = "กระท่อม / บ้านพักตากอากาศ";
+"asset_type.car.selection_title" = "รถ";
+"asset_type.boat.selection_title" = "เรือ";
+"asset_type.other.selection_title" = "อื่น ๆ";
+
+"asset.metadata.built" = "สร้างเมื่อ %d";
+"asset.metadata.empty" = "ยังไม่มีรายละเอียด";
+"asset.card.task_count" = "%d งาน";
+"asset.card.next_due" = "ถัดไป: %@ วันที่ %@";
+
+"asset_detail.section.info" = "ข้อมูล";
+"asset_detail.section.tasks" = "งาน";
+"asset_detail.section.documents" = "เอกสาร";
+"asset_detail.section.history" = "ประวัติ";
+"asset_detail.add_task" = "เพิ่มงาน";
+"asset_detail.edit_asset" = "แก้ไขทรัพย์สิน";
+"asset_detail.delete_asset" = "ลบทรัพย์สิน";
+"asset_detail.delete_asset_confirmation" = "ลบทรัพย์สินนี้และทุกอย่างที่เชื่อมโยงกับมันหรือไม่";
+"asset_detail.add_document" = "เพิ่มเอกสาร";
+"asset_detail.tasks.empty_title" = "ยังไม่มีงาน";
+"asset_detail.tasks.empty_message" = "เพิ่มงานบำรุงรักษาเพื่อให้ Tendora เริ่มติดตามได้";
+"asset_detail.documents.empty_title" = "ยังไม่มีเอกสาร";
+"asset_detail.documents.empty_message" = "เพิ่มรูป ใบเสร็จ หรือคู่มือสำหรับทรัพย์สินนี้";
+"asset_detail.history.empty_title" = "ยังไม่มีประวัติ";
+"asset_detail.history.empty_message" = "งานที่เสร็จแล้วจะปรากฏที่นี่เมื่อเวลาผ่านไป";
+"asset_detail.history.completed_format" = "เสร็จสิ้น %@";
+"asset_detail.field.asset_type" = "ประเภททรัพย์สิน";
+"asset_detail.field.make" = "ยี่ห้อ";
+"asset_detail.field.model" = "รุ่น";
+"asset_detail.field.year" = "ปี";
+"asset_detail.field.fuel_type" = "ประเภทเชื้อเพลิง";
+"asset_detail.field.odometer" = "เลขไมล์";
+"asset_detail.field.registration" = "ทะเบียน";
+"asset_detail.field.address" = "ที่อยู่";
+"asset_detail.field.notes" = "บันทึก";
+"asset_detail.field.created" = "สร้างเมื่อ";
+
+"repeat_rule.never" = "ไม่ทำซ้ำ";
+"repeat_rule.weekly" = "ทุกสัปดาห์";
+"repeat_rule.monthly" = "ทุกเดือน";
+"repeat_rule.three_months" = "ทุก 3 เดือน";
+"repeat_rule.six_months" = "ทุก 6 เดือน";
+"repeat_rule.yearly" = "ทุกปี";
+"repeat_rule.two_years" = "ทุก 2 ปี";
+"repeat_rule.custom" = "กำหนดเอง";
+
+"repeat_unit.days" = "วัน";
+"repeat_unit.weeks" = "สัปดาห์";
+"repeat_unit.months" = "เดือน";
+"repeat_unit.years" = "ปี";
+
+"task.status.normal" = "ปกติ";
+"task.status.due_soon" = "ใกล้ครบกำหนด";
+"task.status.overdue" = "เลยกำหนด";
+"task.status.completed" = "เสร็จสิ้น";
+"task.reminder.off" = "ปิด";
+"task.repeat.custom_format" = "ทุก %d %@";
+
+"reminder_offset.same_day" = "วันเดียวกัน";
+"reminder_offset.one_day_before" = "1 วันก่อน";
+"reminder_offset.three_days_before" = "3 วันก่อน";
+"reminder_offset.one_week_before" = "1 สัปดาห์ก่อน";
+"reminder_offset.two_weeks_before" = "2 สัปดาห์ก่อน";
+"reminder_offset.one_month_before" = "1 เดือนก่อน";
+
+"task_detail.due_date" = "วันครบกำหนด";
+"task_detail.mark_done" = "ทำเครื่องหมายว่าเสร็จแล้ว";
+"task_detail.section.details" = "รายละเอียด";
+"task_detail.section.attachments" = "ไฟล์แนบ";
+"task_detail.section.history" = "ประวัติการเสร็จสิ้น";
+"task_detail.repeat_rule" = "การทำซ้ำ";
+"task_detail.reminder" = "การเตือน";
+"task_detail.status" = "สถานะ";
+"task_detail.notes" = "บันทึก";
+"task_detail.add_attachment" = "เพิ่มไฟล์แนบ";
+"task_detail.edit_task" = "แก้ไขงาน";
+"task_detail.delete_task" = "ลบงาน";
+"task_detail.delete_task_confirmation" = "ลบงานนี้และประวัติของมันหรือไม่";
+"task_detail.attachments.empty_title" = "ยังไม่มีไฟล์แนบ";
+"task_detail.attachments.empty_message" = "เพิ่มรูปภาพหรือเอกสารเพื่อเก็บไว้กับงานนี้";
+"task_detail.history.empty_title" = "ยังไม่มีการเสร็จสิ้น";
+"task_detail.history.empty_message" = "ทำเครื่องหมายงานว่าเสร็จแล้ว แล้ว Tendora จะเก็บประวัติไว้ที่นี่";
+"task_detail.history.completed" = "เสร็จสิ้น";
+"task_detail.completion_recorded" = "ทำเครื่องหมายงานว่าเสร็จแล้ว";
+"task_detail.completion_recorded_next_due" = "บันทึกลงประวัติแล้ว ครบกำหนดถัดไป %1$@";
+
+"notification.title" = "การเตือนจาก Tendora";
+"notification.body.format" = "%@ สำหรับ %@ ครบกำหนดในวันที่ %@";
+
+"settings.section.reminders" = "การเตือน";
+"settings.section.appearance" = "รูปลักษณ์";
+"settings.section.support" = "การช่วยเหลือ";
+"settings.section.demo" = "เครื่องมือเดโม";
+"settings.notifications" = "เปิดการตั้งค่าการแจ้งเตือน";
+"settings.notifications.help" = "จัดการในแอปการตั้งค่าของ iPhone ว่า Tendora ได้รับอนุญาตให้ส่งการเตือนหรือไม่";
+"settings.default_reminder" = "เวลาเตือนเริ่มต้น";
+"settings.demo.load" = "โหลดข้อมูลเดโมสำหรับภาพหน้าจอ";
+"settings.demo.clear" = "ล้างข้อมูลภายในเครื่องทั้งหมด";
+"settings.demo.footer" = "ใช้เครื่องมือเหล่านี้เพื่อเตรียมภาพหน้าจอและวิดีโอสำหรับ App Store และควรลบหรือซ่อนไว้ก่อนเปิดตัว";
+"settings.demo.load.confirmation" = "แทนที่ข้อมูลภายในเครื่องปัจจุบันของคุณด้วยข้อมูลเดโมสำหรับภาพหน้าจอหรือไม่";
+"settings.demo.clear.confirmation" = "ลบทรัพย์สิน งาน เอกสาร และประวัติทั้งหมดจากอุปกรณ์นี้หรือไม่";
+"settings.demo.success.title" = "เครื่องมือเดโม";
+"settings.demo.load.success.message" = "โหลดข้อมูลเดโมสำหรับภาพหน้าจอแล้ว";
+"settings.demo.clear.success.message" = "ล้างข้อมูลภายในเครื่องทั้งหมดแล้ว";
+"settings.demo.error.title" = "ข้อผิดพลาดของเครื่องมือเดโม";
+"settings.demo.error.message" = "Tendora ไม่สามารถดำเนินการข้อมูลเดโมนั้นให้เสร็จสิ้นได้";
+"settings.appearance" = "รูปลักษณ์";
+"settings.appearance.system" = "ตามระบบ";
+"settings.appearance.light" = "สว่าง";
+"settings.appearance.dark" = "มืด";
+"settings.about" = "เกี่ยวกับ Tendora";
+"settings.about.message" = "จัดระเบียบบ้าน ยานพาหนะ และประวัติการบำรุงรักษาไว้ในที่เดียว.";
+"settings.about.section.app" = "แอป";
+"settings.about.version" = "เวอร์ชัน";
+"settings.about.build" = "บิลด์";
+
+"documents.empty.title" = "ยังไม่มีเอกสาร";
+"documents.empty.message" = "เพิ่มรูปภาพ ใบเสร็จ หรือคู่มือจากทรัพย์สินหรืองานเพื่อดูที่นี่";
+
+"add_attachment.title" = "เพิ่มไฟล์แนบ";
+"add_attachment.section.linked_to" = "เชื่อมโยงกับ";
+"add_attachment.section.type" = "ประเภท";
+"add_attachment.section.import" = "นำเข้า";
+"add_attachment.field.asset" = "ทรัพย์สิน";
+"add_attachment.field.task" = "งาน";
+"add_attachment.field.type" = "ประเภทไฟล์แนบ";
+"add_attachment.photo" = "เลือกรูปภาพ";
+"add_attachment.document" = "นำเข้าไฟล์";
+"add_attachment.help" = "รูปภาพและไฟล์ที่นำเข้าจะถูกคัดลอกไปยังพื้นที่จัดเก็บภายในเครื่องของ Tendora บนอุปกรณ์นี้";
+"add_attachment.default_photo_name" = "ไฟล์แนบรูปภาพ";
+
+"edit_asset.title" = "แก้ไขทรัพย์สิน";
+"edit_task.title" = "แก้ไขงาน";
+
+"attachment.delete.action" = "ลบไฟล์แนบ";
+"attachment.delete.confirmation" = "ลบไฟล์แนบนี้หรือไม่";
+"attachment.share.action" = "แชร์ไฟล์แนบ";
+
+"error.notifications.title" = "ข้อผิดพลาดเกี่ยวกับการเตือน";
+"error.notifications.denied.message" = "ปิดการแจ้งเตือนสำหรับ Tendora อยู่ เปิดใช้งานในการตั้งค่าเพื่อใช้การเตือน";
+"error.notifications.request_failed.message" = "Tendora ไม่สามารถขอสิทธิ์การแจ้งเตือนได้ในขณะนี้";
+"error.notifications.scheduling_failed.message" = "Tendora ไม่สามารถตั้งเวลาเตือนนั้นได้";
+
+"error.attachments.title" = "ข้อผิดพลาดเกี่ยวกับไฟล์แนบ";
+"error.attachments.import_failed.message" = "Tendora ไม่สามารถนำเข้าไฟล์นั้นได้";
+"error.attachments.photo_failed.message" = "Tendora ไม่สามารถโหลดรูปภาพนั้นได้";
+"error.attachments.delete_failed.message" = "Tendora ไม่สามารถลบไฟล์ที่บันทึกไว้สำหรับไฟล์แนบนั้นได้";
+"error.attachments.open_failed.message" = "Tendora ไม่สามารถเปิดไฟล์แนบนั้นได้";
+
+"error.assets.title" = "ข้อผิดพลาดเกี่ยวกับทรัพย์สิน";
+"error.assets.invalid_year.message" = "กรอกปีที่ถูกต้องก่อนบันทึก";
+"error.assets.invalid_odometer.message" = "กรอกเลขไมล์ที่ถูกต้องก่อนบันทึก";
+
+"attachment_type.photo" = "รูปภาพ";
+"attachment_type.receipt" = "ใบเสร็จ";
+"attachment_type.invoice" = "ใบแจ้งหนี้";
+"attachment_type.manual" = "คู่มือ";
+"attachment_type.warranty" = "การรับประกัน";
+"attachment_type.insurance" = "ประกัน";
+"attachment_type.service_record" = "บันทึกการซ่อมบำรุง";
+"attachment_type.other" = "อื่น ๆ";

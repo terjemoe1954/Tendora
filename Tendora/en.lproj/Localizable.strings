@@ -1,0 +1,240 @@
+"app.name" = "Tendora";
+
+"tab.home" = "Home";
+"tab.calendar" = "Calendar";
+"tab.add" = "Add";
+"tab.documents" = "Documents";
+"tab.settings" = "Settings";
+
+
+"onboarding.page1.title" = "Tendora";
+"onboarding.page1.message" = "Take care of what you own.";
+"onboarding.page2.title" = "Smart reminders";
+"onboarding.page2.message" = "Stay ahead of service, inspections, renewals, and maintenance.";
+"onboarding.page3.title" = "Everything in one place";
+"onboarding.page3.message" = "Keep tasks, photos, receipts, manuals, and history together.";
+"onboarding.cta" = "Get Started";
+
+"home.add_asset.accessibility" = "Add asset";
+"home.dashboard.tagline" = "Take care of what you own.";
+"home.dashboard.intro" = "Track your assets, upcoming maintenance, and important documents in one place.";
+"home.assets.section_title" = "My Assets";
+"home.upcoming.section_title" = "Upcoming";
+"home.upcoming.empty_title" = "Nothing scheduled yet";
+"home.upcoming.empty_message" = "Add your first maintenance task from an asset and it will show up here.";
+"home.upcoming.due_format" = "Due %@";
+"home.empty.title" = "Take care of the things you own";
+"home.empty.message" = "Add your home, car, cabin, boat, or anything else you want Tendora to help you remember.";
+"home.empty.cta" = "Add Your First Asset";
+
+"calendar.selected_day" = "Selected Day";
+"calendar.summary.tasks_due" = "%d tasks due this month";
+"calendar.summary.next_due" = "Next due: %@ on %@";
+"calendar.empty.title" = "Nothing due that day";
+"calendar.empty.message" = "Pick another date or add a new maintenance task.";
+
+"add_asset.title" = "Add Asset";
+"add_asset.prompt" = "What do you want to add?";
+"add_asset.section.details" = "Details";
+"add_asset.section.location" = "Location";
+"add_asset.section.vehicle" = "Vehicle";
+"add_asset.section.boat" = "Boat";
+"add_asset.field.name" = "Name";
+"add_asset.field.notes" = "Notes";
+"add_asset.field.address" = "Address";
+"add_asset.field.year_built" = "Year Built";
+"add_asset.field.make" = "Make";
+"add_asset.field.model" = "Model";
+"add_asset.field.year" = "Year";
+"add_asset.field.fuel_type" = "Fuel Type";
+"add_asset.field.current_odometer" = "Current Odometer";
+"add_asset.field.registration_number" = "Registration Number";
+
+"common.cancel" = "Cancel";
+"common.ok" = "OK";
+"common.save" = "Save";
+"common.done" = "Done";
+
+"add_task.title" = "Add Task";
+"add_task.section.asset" = "Asset";
+"add_task.section.details" = "Task Details";
+"add_task.section.schedule" = "Schedule";
+"add_task.section.reminder" = "Reminder";
+"add_task.field.asset" = "Asset";
+"add_task.field.title" = "Task Title";
+"add_task.field.notes" = "Notes";
+"add_task.field.due_date" = "Due Date";
+"add_task.field.repeat" = "Repeat";
+"add_task.field.custom_value" = "Custom Interval";
+"add_task.field.custom_unit" = "Interval Unit";
+"add_task.field.reminder_enabled" = "Enable Reminder";
+"add_task.field.reminder_timing" = "Remind Me";
+
+"asset_type.home.display_name" = "Home";
+"asset_type.cabin.display_name" = "Cabin";
+"asset_type.car.display_name" = "Car";
+"asset_type.boat.display_name" = "Boat";
+"asset_type.other.display_name" = "Other";
+
+"asset_type.home.selection_title" = "House";
+"asset_type.cabin.selection_title" = "Cabin / Holiday Home";
+"asset_type.car.selection_title" = "Car";
+"asset_type.boat.selection_title" = "Boat";
+"asset_type.other.selection_title" = "Other";
+
+"asset.metadata.built" = "Built %d";
+"asset.metadata.empty" = "No details added yet";
+"asset.card.task_count" = "%d tasks";
+"asset.card.next_due" = "Next: %@ on %@";
+
+"asset_detail.section.info" = "Info";
+"asset_detail.section.tasks" = "Tasks";
+"asset_detail.section.documents" = "Documents";
+"asset_detail.section.history" = "History";
+"asset_detail.add_task" = "Add Task";
+"asset_detail.edit_asset" = "Edit Asset";
+"asset_detail.delete_asset" = "Delete Asset";
+"asset_detail.delete_asset_confirmation" = "Delete this asset and everything attached to it?";
+"asset_detail.add_document" = "Add Document";
+"asset_detail.tasks.empty_title" = "No tasks yet";
+"asset_detail.tasks.empty_message" = "Add a maintenance task so Tendora can start keeping track.";
+"asset_detail.documents.empty_title" = "No documents yet";
+"asset_detail.documents.empty_message" = "Add photos, receipts, or manuals for this asset.";
+"asset_detail.history.empty_title" = "No history yet";
+"asset_detail.history.empty_message" = "Completed tasks will appear here over time.";
+"asset_detail.history.completed_format" = "Completed %@";
+"asset_detail.field.asset_type" = "Asset Type";
+"asset_detail.field.make" = "Make";
+"asset_detail.field.model" = "Model";
+"asset_detail.field.year" = "Year";
+"asset_detail.field.fuel_type" = "Fuel Type";
+"asset_detail.field.odometer" = "Odometer";
+"asset_detail.field.registration" = "Registration";
+"asset_detail.field.address" = "Address";
+"asset_detail.field.notes" = "Notes";
+"asset_detail.field.created" = "Created";
+
+"repeat_rule.never" = "Never";
+"repeat_rule.weekly" = "Weekly";
+"repeat_rule.monthly" = "Monthly";
+"repeat_rule.three_months" = "Every 3 Months";
+"repeat_rule.six_months" = "Every 6 Months";
+"repeat_rule.yearly" = "Yearly";
+"repeat_rule.two_years" = "Every 2 Years";
+"repeat_rule.custom" = "Custom";
+
+"repeat_unit.days" = "Days";
+"repeat_unit.weeks" = "Weeks";
+"repeat_unit.months" = "Months";
+"repeat_unit.years" = "Years";
+
+"task.status.normal" = "Normal";
+"task.status.due_soon" = "Due Soon";
+"task.status.overdue" = "Overdue";
+"task.status.completed" = "Completed";
+"task.reminder.off" = "Off";
+"task.repeat.custom_format" = "Every %d %@";
+
+"reminder_offset.same_day" = "Same Day";
+"reminder_offset.one_day_before" = "1 Day Before";
+"reminder_offset.three_days_before" = "3 Days Before";
+"reminder_offset.one_week_before" = "1 Week Before";
+"reminder_offset.two_weeks_before" = "2 Weeks Before";
+"reminder_offset.one_month_before" = "1 Month Before";
+
+"task_detail.due_date" = "Due Date";
+"task_detail.mark_done" = "Mark as Done";
+"task_detail.section.details" = "Details";
+"task_detail.section.attachments" = "Attachments";
+"task_detail.section.history" = "Completion History";
+"task_detail.repeat_rule" = "Repeat Rule";
+"task_detail.reminder" = "Reminder";
+"task_detail.status" = "Status";
+"task_detail.notes" = "Notes";
+"task_detail.add_attachment" = "Add Attachment";
+"task_detail.edit_task" = "Edit Task";
+"task_detail.delete_task" = "Delete Task";
+"task_detail.delete_task_confirmation" = "Delete this task and its history?";
+"task_detail.attachments.empty_title" = "No attachments yet";
+"task_detail.attachments.empty_message" = "Add a photo or document to keep it with this task.";
+"task_detail.history.empty_title" = "No completions yet";
+"task_detail.history.empty_message" = "Mark the task as done and Tendora will keep the history here.";
+"task_detail.history.completed" = "Completed";
+"task_detail.completion_recorded" = "Task marked as done.";
+"task_detail.completion_recorded_next_due" = "Saved to history. Next due %1$@.";
+
+"notification.title" = "Tendora Reminder";
+"notification.body.format" = "%@ for %@ is due on %@.";
+
+"settings.section.reminders" = "Reminders";
+"settings.section.appearance" = "Appearance";
+"settings.section.support" = "Support";
+"settings.section.demo" = "Demo Tools";
+"settings.notifications" = "Open Notification Settings";
+"settings.notifications.help" = "Manage whether Tendora is allowed to send reminders in the iPhone Settings app.";
+"settings.default_reminder" = "Default Reminder Timing";
+"settings.demo.load" = "Load Screenshot Demo Data";
+"settings.demo.clear" = "Clear All Local Data";
+"settings.demo.footer" = "Use these tools to prepare App Store screenshots and recordings. Remove or hide them before release.";
+"settings.demo.load.confirmation" = "Replace your current local data with the screenshot demo data?";
+"settings.demo.clear.confirmation" = "Delete all local assets, tasks, documents, and history from this device?";
+"settings.demo.success.title" = "Demo Tools";
+"settings.demo.load.success.message" = "Screenshot demo data has been loaded.";
+"settings.demo.clear.success.message" = "All local data has been cleared.";
+"settings.demo.error.title" = "Demo Tools Error";
+"settings.demo.error.message" = "Tendora could not complete that demo data action.";
+"settings.appearance" = "Appearance";
+"settings.appearance.system" = "System";
+"settings.appearance.light" = "Light";
+"settings.appearance.dark" = "Dark";
+"settings.about" = "About Tendora";
+"settings.about.message" = "Keep your homes, vehicles, and maintenance history organized in one place.";
+"settings.about.section.app" = "App";
+"settings.about.version" = "Version";
+"settings.about.build" = "Build";
+
+"documents.empty.title" = "No documents yet";
+"documents.empty.message" = "Add a photo, receipt, or manual from an asset or task to see it here.";
+
+"add_attachment.title" = "Add Attachment";
+"add_attachment.section.linked_to" = "Linked To";
+"add_attachment.section.type" = "Type";
+"add_attachment.section.import" = "Import";
+"add_attachment.field.asset" = "Asset";
+"add_attachment.field.task" = "Task";
+"add_attachment.field.type" = "Attachment Type";
+"add_attachment.photo" = "Choose Photo";
+"add_attachment.document" = "Import File";
+"add_attachment.help" = "Photos and imported files are copied into Tendora’s local storage on this device.";
+"add_attachment.default_photo_name" = "Photo Attachment";
+
+"edit_asset.title" = "Edit Asset";
+"edit_task.title" = "Edit Task";
+
+"attachment.delete.action" = "Delete Attachment";
+"attachment.delete.confirmation" = "Delete this attachment?";
+"attachment.share.action" = "Share Attachment";
+
+"error.notifications.title" = "Reminder Error";
+"error.notifications.denied.message" = "Notifications are turned off for Tendora. Enable them in Settings to use reminders.";
+"error.notifications.request_failed.message" = "Tendora could not request notification permission right now.";
+"error.notifications.scheduling_failed.message" = "Tendora could not schedule that reminder.";
+
+"error.attachments.title" = "Attachment Error";
+"error.attachments.import_failed.message" = "Tendora could not import that file.";
+"error.attachments.photo_failed.message" = "Tendora could not load that photo.";
+"error.attachments.delete_failed.message" = "Tendora could not remove the saved file for that attachment.";
+"error.attachments.open_failed.message" = "Tendora could not open that attachment.";
+
+"error.assets.title" = "Asset Error";
+"error.assets.invalid_year.message" = "Enter a valid year before saving.";
+"error.assets.invalid_odometer.message" = "Enter a valid odometer value before saving.";
+
+"attachment_type.photo" = "Photo";
+"attachment_type.receipt" = "Receipt";
+"attachment_type.invoice" = "Invoice";
+"attachment_type.manual" = "Manual";
+"attachment_type.warranty" = "Warranty";
+"attachment_type.insurance" = "Insurance";
+"attachment_type.service_record" = "Service Record";
+"attachment_type.other" = "Other";
