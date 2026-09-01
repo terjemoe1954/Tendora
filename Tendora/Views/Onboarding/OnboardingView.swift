@@ -8,56 +8,9 @@
 import SwiftUI
 
 struct OnboardingView: View {
+    @State private var hasContinued = false
+
     let onGetStarted: () -> Void
-
-    var body: some View {
-        TabView {
-            OnboardingPageView(
-                titleKey: "onboarding.page1.title",
-                messageKey: "onboarding.page1.message",
-                systemImage: "house.and.flag.fill"
-            )
-
-            OnboardingPageView(
-                titleKey: "onboarding.page2.title",
-                messageKey: "onboarding.page2.message",
-                systemImage: "bell.badge.fill"
-            )
-
-            VStack(spacing: 28) {
-                Spacer()
-
-                OnboardingPageView(
-                    titleKey: "onboarding.page3.title",
-                    messageKey: "onboarding.page3.message",
-                    systemImage: "tray.full.fill"
-                )
-
-                Button("onboarding.cta", action: onGetStarted)
-                    .buttonStyle(.borderedProminent)
-                    .controlSize(.large)
-
-                Spacer()
-            }
-            .padding(.horizontal, 28)
-            .padding(.vertical, 40)
-            .background(
-                LinearGradient(
-                    colors: [Color(.systemBackground), Color.blue.opacity(0.08)],
-                    startPoint: .top,
-                    endPoint: .bottom
-                )
-            )
-        }
-        .tabViewStyle(.page(indexDisplayMode: .always))
-        .background(Color(.systemBackground))
-    }
-}
-
-private struct OnboardingPageView: View {
-    let titleKey: LocalizedStringKey
-    let messageKey: LocalizedStringKey
-    let systemImage: String
 
     var body: some View {
         VStack(spacing: 28) {
@@ -68,22 +21,31 @@ private struct OnboardingPageView: View {
                     .fill(Color.blue.opacity(0.12))
                     .frame(width: 140, height: 140)
 
-                Image(systemName: systemImage)
+                Image(systemName: "house.and.flag.fill")
                     .font(.system(size: 46, weight: .semibold))
                     .foregroundStyle(.blue)
             }
 
             VStack(spacing: 12) {
-                Text(titleKey)
+                Text("onboarding.page1.title")
                     .font(.largeTitle.weight(.bold))
                     .multilineTextAlignment(.center)
 
-                Text(messageKey)
+                Text("onboarding.page1.message")
                     .font(.body)
+                    .foregroundStyle(.secondary)
+                    .multilineTextAlignment(.center)
+
+                Text("onboarding.auto_continue")
+                    .font(.footnote)
                     .foregroundStyle(.secondary)
                     .multilineTextAlignment(.center)
             }
             .padding(.horizontal, 8)
+
+            Button("onboarding.cta", action: continueToApp)
+                .buttonStyle(.borderedProminent)
+                .controlSize(.large)
 
             Spacer()
         }
@@ -96,6 +58,21 @@ private struct OnboardingPageView: View {
                 endPoint: .bottom
             )
         )
+        .task {
+            try? await Task.sleep(for: .seconds(3))
+            await MainActor.run {
+                continueToApp()
+            }
+        }
+    }
+
+    private func continueToApp() {
+        guard hasContinued == false else {
+            return
+        }
+
+        hasContinued = true
+        onGetStarted()
     }
 }
 
