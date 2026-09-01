@@ -107,11 +107,12 @@ struct AddAttachmentView: View {
                 task: task
             )
             modelContext.insert(attachment)
+            try modelContext.save()
             dismiss()
         } catch {
             alertState = AppAlertState(
-                title: String(localized: "error.attachments.title"),
-                message: String(localized: "error.attachments.import_failed.message")
+                title: String(localized: "error.data.title"),
+                message: String(localized: "error.data.save_failed.message")
             )
         }
     }
@@ -139,11 +140,12 @@ struct AddAttachmentView: View {
                 task: task
             )
             modelContext.insert(attachment)
+            try modelContext.save()
             dismiss()
         } catch {
             alertState = AppAlertState(
-                title: String(localized: "error.attachments.title"),
-                message: String(localized: "error.attachments.photo_failed.message")
+                title: String(localized: "error.data.title"),
+                message: String(localized: "error.data.save_failed.message")
             )
         }
     }

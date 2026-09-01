@@ -280,9 +280,18 @@ struct TaskDetailView: View {
             }
         }
 
-        isUpdatingTask = false
-        await MainActor.run {
-            showCompletionConfirmation(nextDueDate: nextDueDate)
+        do {
+            try modelContext.save()
+            isUpdatingTask = false
+            await MainActor.run {
+                showCompletionConfirmation(nextDueDate: nextDueDate)
+            }
+        } catch {
+            isUpdatingTask = false
+            alertState = AppAlertState(
+                title: String(localized: "error.data.title"),
+                message: String(localized: "error.data.save_failed.message")
+            )
         }
     }
 
@@ -355,20 +364,29 @@ struct TaskDetailView: View {
             try? AttachmentManager.shared.deleteAttachmentFile(for: attachment)
         }
         modelContext.delete(task)
-        dismiss()
+        do {
+            try modelContext.save()
+            dismiss()
+        } catch {
+            alertState = AppAlertState(
+                title: String(localized: "error.data.title"),
+                message: String(localized: "error.data.delete_failed.message")
+            )
+        }
     }
 
     private func deleteAttachment(_ attachment: Attachment) {
         do {
             try AttachmentManager.shared.deleteAttachmentFile(for: attachment)
+            modelContext.delete(attachment)
+            try modelContext.save()
+            attachmentPendingDeletion = nil
         } catch {
             alertState = AppAlertState(
-                title: String(localized: "error.attachments.title"),
-                message: String(localized: "error.attachments.delete_failed.message")
+                title: String(localized: "error.data.title"),
+                message: String(localized: "error.data.delete_failed.message")
             )
         }
-        modelContext.delete(attachment)
-        attachmentPendingDeletion = nil
     }
 
     private func openAttachment(_ attachment: Attachment) {

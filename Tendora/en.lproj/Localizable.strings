@@ -13,6 +13,8 @@
 "onboarding.page2.message" = "Stay ahead of service, inspections, renewals, and maintenance.";
 "onboarding.page3.title" = "Everything in one place";
 "onboarding.page3.message" = "Keep tasks, photos, receipts, manuals, and history together.";
+"onboarding.skip" = "Skip";
+"onboarding.next" = "Next";
 "onboarding.cta" = "Get Started";
 
 "home.add_asset.accessibility" = "Add asset";
@@ -229,6 +231,10 @@
 "error.assets.title" = "Asset Error";
 "error.assets.invalid_year.message" = "Enter a valid year before saving.";
 "error.assets.invalid_odometer.message" = "Enter a valid odometer value before saving.";
+
+"error.data.title" = "Data Error";
+"error.data.save_failed.message" = "Tendora could not save your changes right now.";
+"error.data.delete_failed.message" = "Tendora could not delete that item right now.";
 
 "attachment_type.photo" = "Photo";
 "attachment_type.receipt" = "Receipt";

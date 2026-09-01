@@ -13,6 +13,8 @@
 "onboarding.page2.message" = "Hold deg i forkant av service, inspeksjoner, fornyelser og vedlikehold.";
 "onboarding.page3.title" = "Alt på ett sted";
 "onboarding.page3.message" = "Samle oppgaver, bilder, kvitteringer, manualer og historikk på ett sted.";
+"onboarding.skip" = "Hopp over";
+"onboarding.next" = "Neste";
 "onboarding.cta" = "Kom i gang";
 
 "home.add_asset.accessibility" = "Legg til eiendel";
@@ -229,6 +231,10 @@
 "error.assets.title" = "Feil i eiendel";
 "error.assets.invalid_year.message" = "Skriv inn et gyldig år før du lagrer.";
 "error.assets.invalid_odometer.message" = "Skriv inn en gyldig kilometerstand før du lagrer.";
+
+"error.data.title" = "Datafeil";
+"error.data.save_failed.message" = "Tendora kunne ikke lagre endringene dine akkurat nå.";
+"error.data.delete_failed.message" = "Tendora kunne ikke slette dette elementet akkurat nå.";
 
 "attachment_type.photo" = "Bilde";
 "attachment_type.receipt" = "Kvittering";

@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct OnboardingView: View {
-    @State private var hasContinued = false
-
     let onGetStarted: () -> Void
 
     var body: some View {
@@ -35,15 +33,10 @@ struct OnboardingView: View {
                     .font(.body)
                     .foregroundStyle(.secondary)
                     .multilineTextAlignment(.center)
-
-                Text("onboarding.auto_continue")
-                    .font(.footnote)
-                    .foregroundStyle(.secondary)
-                    .multilineTextAlignment(.center)
             }
             .padding(.horizontal, 8)
 
-            Button("onboarding.cta", action: continueToApp)
+            Button("onboarding.cta", action: onGetStarted)
                 .buttonStyle(.borderedProminent)
                 .controlSize(.large)
 
@@ -58,21 +51,6 @@ struct OnboardingView: View {
                 endPoint: .bottom
             )
         )
-        .task {
-            try? await Task.sleep(for: .seconds(3))
-            await MainActor.run {
-                continueToApp()
-            }
-        }
-    }
-
-    private func continueToApp() {
-        guard hasContinued == false else {
-            return
-        }
-
-        hasContinued = true
-        onGetStarted()
     }
 }
 

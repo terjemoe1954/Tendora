@@ -12,22 +12,17 @@ import SwiftUI
 struct TendoraApp: App {
     @AppStorage("hasSeenOnboarding") private var hasSeenOnboarding = false
     @AppStorage("appAppearance") private var appAppearanceRawValue = AppAppearance.system.rawValue
-    @AppStorage("dataResetVersion") private var dataResetVersion = 0
+    private let sharedModelContainer: ModelContainer
 
-    private let sharedModelContainer: ModelContainer = {
-        let schema = Schema(versionedSchema: TendoraSchemaV2.self)
-
-        do {
-            return try makeModelContainer(for: schema)
-        } catch {
-            fatalError("Unable to create model container: \(error)")
-        }
-    }()
+    init() {
+        Self.resetPrereleaseStoreIfNeeded()
+        NotificationManager.shared.configure()
+        sharedModelContainer = Self.makeSharedModelContainer()
+    }
 
     var body: some Scene {
         WindowGroup {
             MainTabView()
-                .id(dataResetVersion)
                 .preferredColorScheme(selectedAppearance.colorScheme)
                 .fullScreenCover(isPresented: onboardingBinding) {
                     OnboardingView {
@@ -54,23 +49,58 @@ struct TendoraApp: App {
     }
 }
 
-private func makeModelContainer(for schema: Schema) throws -> ModelContainer {
-    let configuration = ModelConfiguration(schema: schema)
+private extension TendoraApp {
+    static let prereleaseStoreResetVersion = 1
 
-    do {
-        return try ModelContainer(
-            for: schema,
-            migrationPlan: TendoraMigrationPlan.self,
-            configurations: [configuration]
-        )
-    } catch {
-        try resetDefaultStoreFiles()
-        return try ModelContainer(
-            for: schema,
-            migrationPlan: TendoraMigrationPlan.self,
-            configurations: [configuration]
-        )
+    static func makeSharedModelContainer() -> ModelContainer {
+        do {
+            return try makeModelContainer()
+        } catch {
+            do {
+                try resetDefaultStoreFiles()
+                return try makeModelContainer()
+            } catch {
+                do {
+                    return try makeInMemoryModelContainer()
+                } catch {
+                    fatalError("Unable to create model container: \(error)")
+                }
+            }
+        }
     }
+
+    static func resetPrereleaseStoreIfNeeded() {
+        let defaults = UserDefaults.standard
+        let storedVersion = defaults.integer(forKey: "dataResetVersion")
+        guard storedVersion < Self.prereleaseStoreResetVersion else {
+            return
+        }
+
+        try? resetDefaultStoreFiles()
+        defaults.set(Self.prereleaseStoreResetVersion, forKey: "dataResetVersion")
+    }
+}
+
+private func makeModelContainer() throws -> ModelContainer {
+    let configuration = ModelConfiguration()
+    return try ModelContainer(
+        for: Asset.self,
+        MaintenanceTask.self,
+        CompletionRecord.self,
+        Attachment.self,
+        configurations: configuration
+    )
+}
+
+private func makeInMemoryModelContainer() throws -> ModelContainer {
+    let configuration = ModelConfiguration(isStoredInMemoryOnly: true)
+    return try ModelContainer(
+        for: Asset.self,
+        MaintenanceTask.self,
+        CompletionRecord.self,
+        Attachment.self,
+        configurations: configuration
+    )
 }
 
 private func resetDefaultStoreFiles() throws {

@@ -13,6 +13,8 @@
 "onboarding.page2.message" = "จัดการบริการ การตรวจสอบ การต่ออายุ และงานบำรุงรักษาได้ล่วงหน้า";
 "onboarding.page3.title" = "ทุกอย่างอยู่ในที่เดียว";
 "onboarding.page3.message" = "เก็บงาน รูปภาพ ใบเสร็จ คู่มือ และประวัติไว้ด้วยกัน";
+"onboarding.skip" = "ข้าม";
+"onboarding.next" = "ถัดไป";
 "onboarding.cta" = "เริ่มต้นใช้งาน";
 
 "home.add_asset.accessibility" = "เพิ่มทรัพย์สิน";
@@ -229,6 +231,10 @@
 "error.assets.title" = "ข้อผิดพลาดเกี่ยวกับทรัพย์สิน";
 "error.assets.invalid_year.message" = "กรอกปีที่ถูกต้องก่อนบันทึก";
 "error.assets.invalid_odometer.message" = "กรอกเลขไมล์ที่ถูกต้องก่อนบันทึก";
+
+"error.data.title" = "ข้อผิดพลาดของข้อมูล";
+"error.data.save_failed.message" = "Tendora ไม่สามารถบันทึกการเปลี่ยนแปลงของคุณได้ในขณะนี้";
+"error.data.delete_failed.message" = "Tendora ไม่สามารถลบรายการนั้นได้ในขณะนี้";
 
 "attachment_type.photo" = "รูปภาพ";
 "attachment_type.receipt" = "ใบเสร็จ";

@@ -127,50 +127,60 @@ struct AddTaskView: View {
     }
 
     private func saveTask() async {
-        if let taskToEdit {
-            taskToEdit.title = title.trimmingCharacters(in: .whitespacesAndNewlines)
-            taskToEdit.dueDate = dueDate
-            taskToEdit.notes = notes.trimmedNilIfEmpty
-            taskToEdit.repeatRule = repeatRule
-            taskToEdit.customRepeatValue = repeatRule == .custom ? Int(customRepeatValue) : nil
-            taskToEdit.customRepeatUnit = repeatRule == .custom ? customRepeatUnit : nil
-            taskToEdit.reminderEnabled = reminderEnabled
-            taskToEdit.reminderOffset = reminderOffset
-            taskToEdit.asset = asset
-            do {
-                try await updateNotification(for: taskToEdit)
-            } catch {
-                alertState = AppAlertState(
-                    title: String(localized: "error.notifications.title"),
-                    message: error.localizedDescription
+        do {
+            if let taskToEdit {
+                taskToEdit.title = title.trimmingCharacters(in: .whitespacesAndNewlines)
+                taskToEdit.dueDate = dueDate
+                taskToEdit.notes = notes.trimmedNilIfEmpty
+                taskToEdit.repeatRule = repeatRule
+                taskToEdit.customRepeatValue = repeatRule == .custom ? Int(customRepeatValue) : nil
+                taskToEdit.customRepeatUnit = repeatRule == .custom ? customRepeatUnit : nil
+                taskToEdit.reminderEnabled = reminderEnabled
+                taskToEdit.reminderOffset = reminderOffset
+                taskToEdit.asset = asset
+                try modelContext.save()
+                do {
+                    try await updateNotification(for: taskToEdit)
+                } catch {
+                    alertState = AppAlertState(
+                        title: String(localized: "error.notifications.title"),
+                        message: error.localizedDescription
+                    )
+                    return
+                }
+            } else {
+                let task = MaintenanceTask(
+                    title: title.trimmingCharacters(in: .whitespacesAndNewlines),
+                    dueDate: dueDate,
+                    notes: notes.trimmedNilIfEmpty,
+                    repeatRule: repeatRule,
+                    customRepeatValue: repeatRule == .custom ? Int(customRepeatValue) : nil,
+                    customRepeatUnit: repeatRule == .custom ? customRepeatUnit : nil,
+                    reminderEnabled: reminderEnabled,
+                    reminderOffset: reminderOffset,
+                    asset: asset
                 )
-                return
-            }
-        } else {
-            let task = MaintenanceTask(
-                title: title.trimmingCharacters(in: .whitespacesAndNewlines),
-                dueDate: dueDate,
-                notes: notes.trimmedNilIfEmpty,
-                repeatRule: repeatRule,
-                customRepeatValue: repeatRule == .custom ? Int(customRepeatValue) : nil,
-                customRepeatUnit: repeatRule == .custom ? customRepeatUnit : nil,
-                reminderEnabled: reminderEnabled,
-                reminderOffset: reminderOffset,
-                asset: asset
-            )
 
-            modelContext.insert(task)
-            do {
-                try await updateNotification(for: task)
-            } catch {
-                alertState = AppAlertState(
-                    title: String(localized: "error.notifications.title"),
-                    message: error.localizedDescription
-                )
-                return
+                modelContext.insert(task)
+                try modelContext.save()
+                do {
+                    try await updateNotification(for: task)
+                } catch {
+                    alertState = AppAlertState(
+                        title: String(localized: "error.notifications.title"),
+                        message: error.localizedDescription
+                    )
+                    return
+                }
             }
+
+            dismiss()
+        } catch {
+            alertState = AppAlertState(
+                title: String(localized: "error.data.title"),
+                message: String(localized: "error.data.save_failed.message")
+            )
         }
-        dismiss()
     }
 
     private func updateNotification(for task: MaintenanceTask) async throws {

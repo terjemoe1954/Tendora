@@ -26,12 +26,19 @@ enum NotificationManagerError: LocalizedError {
 }
 
 @MainActor
-final class NotificationManager {
+final class NotificationManager: NSObject, UNUserNotificationCenterDelegate {
     static let shared = NotificationManager()
 
     private let center = UNUserNotificationCenter.current()
 
-    private init() {}
+    private override init() {
+        super.init()
+        center.delegate = self
+    }
+
+    func configure() {
+        center.delegate = self
+    }
 
     func requestAuthorizationIfNeeded() async throws -> Bool {
         let settings = await center.notificationSettings()
@@ -57,7 +64,7 @@ final class NotificationManager {
 
         guard task.reminderEnabled,
               task.isCompleted == false,
-              let triggerDate = task.reminderOffset.triggerDate(for: task.dueDate),
+              let triggerDate = adjustedTriggerDate(for: task),
               triggerDate > .now
         else {
             return
@@ -106,5 +113,28 @@ final class NotificationManager {
         let format = String(localized: "notification.body.format")
         let dueDate = task.dueDate.formatted(date: .abbreviated, time: .omitted)
         return String(format: format, locale: .current, task.title, assetName, dueDate)
+    }
+
+    private func adjustedTriggerDate(for task: MaintenanceTask, now: Date = .now) -> Date? {
+        guard let triggerDate = task.reminderOffset.triggerDate(for: task.dueDate) else {
+            return nil
+        }
+
+        if triggerDate > now {
+            return triggerDate
+        }
+
+        if task.reminderOffset == .sameDay, Calendar.current.isDate(task.dueDate, inSameDayAs: now) {
+            return now.addingTimeInterval(60)
+        }
+
+        return triggerDate
+    }
+
+    nonisolated func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        willPresent notification: UNNotification
+    ) async -> UNNotificationPresentationOptions {
+        [.banner, .sound, .list]
     }
 }

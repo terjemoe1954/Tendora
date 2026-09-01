@@ -174,34 +174,43 @@ struct AddAssetView: View {
             return
         }
 
-        if let assetToEdit {
-            assetToEdit.name = input.name
-            assetToEdit.type = selectedType
-            assetToEdit.notes = input.notes
-            assetToEdit.make = input.make
-            assetToEdit.model = input.model
-            assetToEdit.year = input.year
-            assetToEdit.fuelType = input.fuelType
-            assetToEdit.odometer = input.odometer
-            assetToEdit.registrationNumber = input.registrationNumber
-            assetToEdit.address = input.address
-        } else {
-            let asset = Asset(
-                name: input.name,
-                type: selectedType,
-                notes: input.notes,
-                make: input.make,
-                model: input.model,
-                year: input.year,
-                fuelType: input.fuelType,
-                odometer: input.odometer,
-                registrationNumber: input.registrationNumber,
-                address: input.address
-            )
+        do {
+            if let assetToEdit {
+                assetToEdit.name = input.name
+                assetToEdit.type = selectedType
+                assetToEdit.notes = input.notes
+                assetToEdit.make = input.make
+                assetToEdit.model = input.model
+                assetToEdit.year = input.year
+                assetToEdit.fuelType = input.fuelType
+                assetToEdit.odometer = input.odometer
+                assetToEdit.registrationNumber = input.registrationNumber
+                assetToEdit.address = input.address
+            } else {
+                let asset = Asset(
+                    name: input.name,
+                    type: selectedType,
+                    notes: input.notes,
+                    make: input.make,
+                    model: input.model,
+                    year: input.year,
+                    fuelType: input.fuelType,
+                    odometer: input.odometer,
+                    registrationNumber: input.registrationNumber,
+                    address: input.address
+                )
 
-            modelContext.insert(asset)
+                modelContext.insert(asset)
+            }
+
+            try modelContext.save()
+            dismiss()
+        } catch {
+            alertState = AppAlertState(
+                title: String(localized: "error.data.title"),
+                message: String(localized: "error.data.save_failed.message")
+            )
         }
-        dismiss()
     }
 
     private var parsedOdometer: Double? {
