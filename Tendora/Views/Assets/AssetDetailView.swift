@@ -113,7 +113,7 @@ struct AssetDetailView: View {
                 Text(asset.name)
                     .font(.title2.weight(.semibold))
 
-                Text(asset.type.displayName)
+                Text(LocalizedStringKey(asset.type.displayNameLocalizationKey))
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
 
@@ -140,7 +140,15 @@ struct AssetDetailView: View {
 
             VStack(spacing: 0) {
                 ForEach(asset.detailItems) { item in
-                    LabeledContent(item.title, value: item.value)
+                    LabeledContent {
+                        if let valueKey = item.valueKey {
+                            Text(LocalizedStringKey(valueKey))
+                        } else {
+                            Text(item.value)
+                        }
+                    } label: {
+                        Text(LocalizedStringKey(item.titleKey))
+                    }
                         .padding(.horizontal, 16)
                         .padding(.vertical, 14)
 
@@ -158,15 +166,15 @@ struct AssetDetailView: View {
     }
 
     private var activeTasks: [MaintenanceTask] {
-        asset.tasks
+        (asset.tasks ?? [])
             .filter { $0.isCompleted == false }
             .sorted { $0.dueDate < $1.dueDate }
     }
 
     private var completionHistory: [(task: MaintenanceTask, record: CompletionRecord)] {
-        asset.tasks
+        (asset.tasks ?? [])
             .flatMap { task in
-                task.completionRecords.map { (task: task, record: $0) }
+                (task.completionRecords ?? []).map { (task: task, record: $0) }
             }
             .sorted { $0.record.completedAt > $1.record.completedAt }
     }
@@ -226,7 +234,7 @@ struct AssetDetailView: View {
                 .font(.subheadline.weight(.semibold))
             }
 
-            if asset.attachments.isEmpty {
+            if (asset.attachments ?? []).isEmpty {
                 ContentUnavailableView(
                     "asset_detail.documents.empty_title",
                     systemImage: "doc.text",
@@ -240,7 +248,7 @@ struct AssetDetailView: View {
                 )
             } else {
                 VStack(spacing: 12) {
-                    ForEach(asset.attachments.sorted { $0.createdAt > $1.createdAt }.prefix(4)) { attachment in
+                    ForEach((asset.attachments ?? []).sorted { $0.createdAt > $1.createdAt }.prefix(4)) { attachment in
                         AttachmentRowView(
                             attachment: attachment,
                             onOpen: {
@@ -322,16 +330,16 @@ struct AssetDetailView: View {
     }
 
     private func deleteAsset() {
-        for attachment in asset.attachments {
+        for attachment in asset.attachments ?? [] {
             try? AttachmentManager.shared.deleteAttachmentFile(for: attachment)
         }
 
-        for task in asset.tasks {
+        for task in asset.tasks ?? [] {
             Task {
                 await NotificationManager.shared.cancelNotification(for: task)
             }
 
-            for attachment in task.attachments {
+            for attachment in task.attachments ?? [] {
                 try? AttachmentManager.shared.deleteAttachmentFile(for: attachment)
             }
         }
@@ -389,51 +397,64 @@ struct AssetDetailView: View {
 
 private struct AssetDetailItem: Identifiable {
     let id = UUID()
-    let title: String
+    let titleKey: String
     let value: String
+    let valueKey: String?
+
+    init(titleKey: String, value: String) {
+        self.titleKey = titleKey
+        self.value = value
+        self.valueKey = nil
+    }
+
+    init(titleKey: String, valueKey: String) {
+        self.titleKey = titleKey
+        self.value = ""
+        self.valueKey = valueKey
+    }
 }
 
 private extension Asset {
     var detailItems: [AssetDetailItem] {
         var items: [AssetDetailItem] = [
-            AssetDetailItem(title: String(localized: "asset_detail.field.asset_type"), value: type.displayName)
+            AssetDetailItem(titleKey: "asset_detail.field.asset_type", valueKey: type.displayNameLocalizationKey)
         ]
 
         if let make, make.isEmpty == false {
-            items.append(AssetDetailItem(title: String(localized: "asset_detail.field.make"), value: make))
+            items.append(AssetDetailItem(titleKey: "asset_detail.field.make", value: make))
         }
 
         if let model, model.isEmpty == false {
-            items.append(AssetDetailItem(title: String(localized: "asset_detail.field.model"), value: model))
+            items.append(AssetDetailItem(titleKey: "asset_detail.field.model", value: model))
         }
 
         if let year {
-            items.append(AssetDetailItem(title: String(localized: "asset_detail.field.year"), value: String(year)))
+            items.append(AssetDetailItem(titleKey: "asset_detail.field.year", value: String(year)))
         }
 
         if let fuelType, fuelType.isEmpty == false {
-            items.append(AssetDetailItem(title: String(localized: "asset_detail.field.fuel_type"), value: fuelType))
+            items.append(AssetDetailItem(titleKey: "asset_detail.field.fuel_type", value: fuelType))
         }
 
         if let odometer {
-            items.append(AssetDetailItem(title: String(localized: "asset_detail.field.odometer"), value: odometer.formatted()))
+            items.append(AssetDetailItem(titleKey: "asset_detail.field.odometer", value: odometer.formatted()))
         }
 
         if let registrationNumber, registrationNumber.isEmpty == false {
-            items.append(AssetDetailItem(title: String(localized: "asset_detail.field.registration"), value: registrationNumber))
+            items.append(AssetDetailItem(titleKey: "asset_detail.field.registration", value: registrationNumber))
         }
 
         if let address, address.isEmpty == false {
-            items.append(AssetDetailItem(title: String(localized: "asset_detail.field.address"), value: address))
+            items.append(AssetDetailItem(titleKey: "asset_detail.field.address", value: address))
         }
 
         if let notes, notes.isEmpty == false {
-            items.append(AssetDetailItem(title: String(localized: "asset_detail.field.notes"), value: notes))
+            items.append(AssetDetailItem(titleKey: "asset_detail.field.notes", value: notes))
         }
 
         items.append(
             AssetDetailItem(
-                title: String(localized: "asset_detail.field.created"),
+                titleKey: "asset_detail.field.created",
                 value: createdAt.formatted(date: .abbreviated, time: .omitted)
             )
         )

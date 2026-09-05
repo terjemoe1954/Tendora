@@ -38,7 +38,7 @@ struct AttachmentRowView: View {
                     .font(.headline)
                     .lineLimit(1)
 
-                Text(attachment.type.displayName)
+                Text(LocalizedStringKey(attachment.type.displayNameLocalizationKey))
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
             }

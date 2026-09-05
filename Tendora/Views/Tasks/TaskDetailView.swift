@@ -178,7 +178,7 @@ struct TaskDetailView: View {
             Text("task_detail.section.history")
                 .font(.headline)
 
-            if task.completionRecords.isEmpty {
+            if (task.completionRecords ?? []).isEmpty {
                 ContentUnavailableView(
                     "task_detail.history.empty_title",
                     systemImage: "clock.arrow.circlepath",
@@ -226,7 +226,7 @@ struct TaskDetailView: View {
                 .font(.subheadline.weight(.semibold))
             }
 
-            if task.attachments.isEmpty {
+            if (task.attachments ?? []).isEmpty {
                 ContentUnavailableView(
                     "task_detail.attachments.empty_title",
                     systemImage: "paperclip",
@@ -240,7 +240,7 @@ struct TaskDetailView: View {
                 )
             } else {
                 VStack(spacing: 12) {
-                    ForEach(task.attachments.sorted { $0.createdAt > $1.createdAt }) { attachment in
+                    ForEach((task.attachments ?? []).sorted { $0.createdAt > $1.createdAt }) { attachment in
                         AttachmentRowView(
                             attachment: attachment,
                             onOpen: {
@@ -259,7 +259,7 @@ struct TaskDetailView: View {
     }
 
     private var sortedHistory: [CompletionRecord] {
-        task.completionRecords.sorted { $0.completedAt > $1.completedAt }
+        (task.completionRecords ?? []).sorted { $0.completedAt > $1.completedAt }
     }
 
     private func markTaskDone() async {
@@ -360,7 +360,7 @@ struct TaskDetailView: View {
 
     private func deleteTask() async {
         await NotificationManager.shared.cancelNotification(for: task)
-        for attachment in task.attachments {
+        for attachment in task.attachments ?? [] {
             try? AttachmentManager.shared.deleteAttachmentFile(for: attachment)
         }
         modelContext.delete(task)

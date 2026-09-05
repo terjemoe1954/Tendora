@@ -152,7 +152,7 @@ struct AddAssetView: View {
                     .font(.headline)
                     .foregroundStyle(selectedType == type ? Color.white : Color.accentColor)
 
-                Text(type.selectionTitle)
+                Text(LocalizedStringKey(type.selectionTitleLocalizationKey))
                     .font(.subheadline.weight(.medium))
                     .foregroundStyle(selectedType == type ? Color.white : Color.primary)
                     .multilineTextAlignment(.leading)

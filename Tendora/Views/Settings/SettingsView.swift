@@ -12,11 +12,66 @@ struct SettingsView: View {
     @Environment(\.openURL) private var openURL
     @AppStorage("defaultReminderOffset") private var defaultReminderOffsetRawValue = ReminderOffset.oneWeekBefore.rawValue
     @AppStorage("appAppearance") private var appAppearanceRawValue = AppAppearance.system.rawValue
+    @AppStorage("appLanguage") private var appLanguageRawValue = AppLanguage.system.rawValue
+    @State private var cloudSyncStatus = CloudSyncStatusService()
+    @State private var premiumEntitlement = PremiumEntitlementService()
     @State private var isPresentingAbout = false
 
     var body: some View {
         NavigationStack {
             List {
+                Section {
+                    VStack(alignment: .leading, spacing: 8) {
+                        Label(cloudSyncStatus.status.title, systemImage: syncStatusIconName)
+                            .font(.headline)
+
+                        Text(cloudSyncStatus.status.message)
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
+                    }
+                    .padding(.vertical, 4)
+
+                    Button {
+                        Task {
+                            await cloudSyncStatus.refresh()
+                        }
+                    } label: {
+                        Label("settings.sync.refresh", systemImage: "arrow.clockwise")
+                    }
+                } header: {
+                    Text("settings.section.sync")
+                }
+
+                Section {
+                    VStack(alignment: .leading, spacing: 8) {
+                        Label {
+                            Text(LocalizedStringKey(premiumEntitlement.status.titleLocalizationKey))
+                        } icon: {
+                            Image(systemName: premiumStatusIconName)
+                        }
+                        .font(.headline)
+
+                        Text(LocalizedStringKey(premiumEntitlement.status.messageLocalizationKey))
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
+                    }
+                    .padding(.vertical, 4)
+
+                    PremiumFeatureRow(titleKey: "settings.premium.feature.icloud", systemImage: "icloud")
+                    PremiumFeatureRow(titleKey: "settings.premium.feature.backup", systemImage: "externaldrive.badge.icloud")
+                    PremiumFeatureRow(titleKey: "settings.premium.feature.attachments", systemImage: "paperclip")
+
+                    Button {
+                    } label: {
+                        Label("settings.premium.upgrade", systemImage: "crown")
+                    }
+                    .disabled(true)
+                } header: {
+                    Text("settings.section.premium")
+                } footer: {
+                    Text("settings.premium.footer")
+                }
+
                 Section {
                     Button(action: openNotificationSettings) {
                         Label("settings.notifications", systemImage: "bell.badge")
@@ -39,6 +94,12 @@ struct SettingsView: View {
                             Text(appearance.displayName).tag(appearance.rawValue)
                         }
                     }
+
+                    Picker("settings.language", selection: $appLanguageRawValue) {
+                        ForEach(AppLanguage.allCases) { language in
+                            Text(language.displayName).tag(language.rawValue)
+                        }
+                    }
                 }
 
                 Section("settings.section.support") {
@@ -53,7 +114,25 @@ struct SettingsView: View {
             .sheet(isPresented: $isPresentingAbout) {
                 AboutTendoraView()
             }
+            .task {
+                await cloudSyncStatus.refresh()
+            }
         }
+    }
+
+    private var syncStatusIconName: String {
+        switch cloudSyncStatus.status {
+        case .checking:
+            return "icloud"
+        case .available:
+            return "icloud.fill"
+        case .noAccount, .restricted, .temporarilyUnavailable, .unavailable:
+            return "icloud.slash"
+        }
+    }
+
+    private var premiumStatusIconName: String {
+        premiumEntitlement.isPremiumUnlocked ? "crown.fill" : "crown"
     }
 
     private func openNotificationSettings() {
@@ -62,6 +141,19 @@ struct SettingsView: View {
         }
 
         openURL(settingsURL)
+    }
+}
+
+private struct PremiumFeatureRow: View {
+    let titleKey: String
+    let systemImage: String
+
+    var body: some View {
+        Label {
+            Text(LocalizedStringKey(titleKey))
+        } icon: {
+            Image(systemName: systemImage)
+        }
     }
 }
 

@@ -16,34 +16,42 @@ enum AssetType: String, CaseIterable, Codable, Identifiable {
 
     var id: String { rawValue }
 
-    var displayName: String {
+    var displayNameLocalizationKey: String {
         switch self {
         case .home:
-            return String(localized: "asset_type.home.display_name")
+            return "asset_type.home.display_name"
         case .cabin:
-            return String(localized: "asset_type.cabin.display_name")
+            return "asset_type.cabin.display_name"
         case .car:
-            return String(localized: "asset_type.car.display_name")
+            return "asset_type.car.display_name"
         case .boat:
-            return String(localized: "asset_type.boat.display_name")
+            return "asset_type.boat.display_name"
         case .other:
-            return String(localized: "asset_type.other.display_name")
+            return "asset_type.other.display_name"
         }
     }
 
-    var selectionTitle: String {
+    var selectionTitleLocalizationKey: String {
         switch self {
         case .home:
-            return String(localized: "asset_type.home.selection_title")
+            return "asset_type.home.selection_title"
         case .cabin:
-            return String(localized: "asset_type.cabin.selection_title")
+            return "asset_type.cabin.selection_title"
         case .car:
-            return String(localized: "asset_type.car.selection_title")
+            return "asset_type.car.selection_title"
         case .boat:
-            return String(localized: "asset_type.boat.selection_title")
+            return "asset_type.boat.selection_title"
         case .other:
-            return String(localized: "asset_type.other.selection_title")
+            return "asset_type.other.selection_title"
         }
+    }
+
+    var displayName: String {
+        String(localized: String.LocalizationValue(displayNameLocalizationKey))
+    }
+
+    var selectionTitle: String {
+        String(localized: String.LocalizationValue(selectionTitleLocalizationKey))
     }
 
     var symbolName: String {

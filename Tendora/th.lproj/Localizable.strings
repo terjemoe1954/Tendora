@@ -170,6 +170,8 @@
 
 "settings.section.reminders" = "การเตือน";
 "settings.section.appearance" = "รูปลักษณ์";
+"settings.language" = "ภาษา";
+"settings.language.system" = "ระบบ";
 "settings.section.support" = "การช่วยเหลือ";
 "settings.section.demo" = "เครื่องมือเดโม";
 "settings.notifications" = "เปิดการตั้งค่าการแจ้งเตือน";
@@ -242,5 +244,33 @@
 "attachment_type.manual" = "คู่มือ";
 "attachment_type.warranty" = "การรับประกัน";
 "attachment_type.insurance" = "ประกัน";
+"attachment_type.contract" = "สัญญา";
+"attachment_type.registration_document" = "เอกสารทะเบียนรถ";
 "attachment_type.service_record" = "บันทึกการซ่อมบำรุง";
 "attachment_type.other" = "อื่น ๆ";
+
+"settings.section.sync" = "การซิงค์ iCloud";
+"settings.sync.refresh" = "ตรวจสอบสถานะ";
+"settings.sync.status.checking" = "กำลังตรวจสอบ iCloud";
+"settings.sync.status.available" = "iCloud พร้อมใช้งาน";
+"settings.sync.status.no_account" = "ยังไม่ได้ลงชื่อเข้าใช้ iCloud";
+"settings.sync.status.restricted" = "iCloud ถูกจำกัด";
+"settings.sync.status.temporarily_unavailable" = "iCloud ไม่พร้อมใช้งานชั่วคราว";
+"settings.sync.status.unavailable" = "ไม่สามารถดูสถานะ iCloud ได้";
+"settings.sync.message.checking" = "Tendora กำลังตรวจสอบว่าอุปกรณ์นี้สามารถใช้การซิงค์ iCloud ได้หรือไม่";
+"settings.sync.message.available" = "Tendora สามารถซิงค์ข้อมูลของคุณกับ iCloud บนอุปกรณ์นี้ได้";
+"settings.sync.message.no_account" = "ลงชื่อเข้าใช้ iCloud บนอุปกรณ์นี้เพื่อซิงค์ข้อมูล Tendora";
+"settings.sync.message.restricted" = "อุปกรณ์นี้ไม่สามารถเข้าถึง iCloud ได้เนื่องจากข้อจำกัดของบัญชี การควบคุมโดยผู้ปกครอง หรือการจัดการอุปกรณ์";
+"settings.sync.message.temporarily_unavailable" = "iCloud พร้อมใช้งานแต่ยังไม่พร้อมในขณะนี้ โปรดลองอีกครั้งภายหลัง";
+"settings.sync.message.unavailable" = "Tendora ไม่สามารถตรวจสอบสถานะ iCloud บนอุปกรณ์นี้ได้";
+
+"settings.section.premium" = "Tendora Premium";
+"settings.premium.status.active" = "Premium เปิดใช้งานแล้ว";
+"settings.premium.status.not_purchased" = "แผนฟรี";
+"settings.premium.message.active" = "ปลดล็อกฟีเจอร์ Premium บนอุปกรณ์นี้แล้ว";
+"settings.premium.message.not_purchased" = "เตรียมระบบการซื้อ Premium ไว้แล้ว แต่ยังไม่ได้เปิดใช้ในเวอร์ชันนี้";
+"settings.premium.feature.icloud" = "ซิงค์ iCloud ระหว่างอุปกรณ์ของคุณ";
+"settings.premium.feature.backup" = "สำรองข้อมูล Tendora ของคุณบนคลาวด์";
+"settings.premium.feature.attachments" = "รูปภาพและเอกสารสำหรับทรัพย์สินของคุณ";
+"settings.premium.upgrade" = "อัปเกรดเป็น Premium";
+"settings.premium.footer" = "ส่วนนี้พร้อมสำหรับ StoreKit 2 และการตั้งค่า App Store Connect เมื่อคุณต้องการเปิดใช้การเข้าถึงแบบชำระเงิน";

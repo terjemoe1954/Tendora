@@ -191,13 +191,13 @@ private struct AssetCardView: View {
 
 extension Asset {
     var cardSubtitle: String {
-        let activeTaskCount = tasks.filter { $0.isCompleted == false }.count
+        let activeTaskCount = (tasks ?? []).filter { $0.isCompleted == false }.count
 
         if activeTaskCount > 0 {
             let format = String(localized: "asset.card.task_count")
             let taskSummary = String(format: format, locale: .current, activeTaskCount)
 
-            if let nextTask = tasks
+            if let nextTask = (tasks ?? [])
                 .filter({ $0.isCompleted == false })
                 .sorted(by: { $0.dueDate < $1.dueDate })
                 .first

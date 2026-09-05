@@ -170,6 +170,8 @@
 
 "settings.section.reminders" = "Påminnelser";
 "settings.section.appearance" = "Utseende";
+"settings.language" = "Språk";
+"settings.language.system" = "System";
 "settings.section.support" = "Hjelp";
 "settings.section.demo" = "Demoverktøy";
 "settings.notifications" = "Åpne varslingsinnstillinger";
@@ -242,5 +244,33 @@
 "attachment_type.manual" = "Manual";
 "attachment_type.warranty" = "Garanti";
 "attachment_type.insurance" = "Forsikring";
+"attachment_type.contract" = "Kontrakt";
+"attachment_type.registration_document" = "Vognkort";
 "attachment_type.service_record" = "Servicerapport";
 "attachment_type.other" = "Annet";
+
+"settings.section.sync" = "iCloud-synk";
+"settings.sync.refresh" = "Sjekk status";
+"settings.sync.status.checking" = "Sjekker iCloud";
+"settings.sync.status.available" = "iCloud er tilgjengelig";
+"settings.sync.status.no_account" = "iCloud er ikke logget inn";
+"settings.sync.status.restricted" = "iCloud er begrenset";
+"settings.sync.status.temporarily_unavailable" = "iCloud er midlertidig utilgjengelig";
+"settings.sync.status.unavailable" = "iCloud-status er utilgjengelig";
+"settings.sync.message.checking" = "Tendora sjekker om denne enheten kan bruke iCloud-synk.";
+"settings.sync.message.available" = "Tendora kan synkronisere dataene dine med iCloud på denne enheten.";
+"settings.sync.message.no_account" = "Logg inn på iCloud på denne enheten for å synkronisere Tendora-data.";
+"settings.sync.message.restricted" = "Denne enheten har ikke tilgang til iCloud på grunn av konto-, foreldrekontroll- eller administrasjonsbegrensninger.";
+"settings.sync.message.temporarily_unavailable" = "iCloud er tilgjengelig, men ikke klar akkurat nå. Prøv igjen senere.";
+"settings.sync.message.unavailable" = "Tendora kunne ikke finne iCloud-status på denne enheten.";
+
+"settings.section.premium" = "Tendora Premium";
+"settings.premium.status.active" = "Premium er aktiv";
+"settings.premium.status.not_purchased" = "Gratisversjon";
+"settings.premium.message.active" = "Premium-funksjoner er låst opp på denne enheten.";
+"settings.premium.message.not_purchased" = "Betalt tilgang er forberedt, men ikke aktivert i denne versjonen.";
+"settings.premium.feature.icloud" = "iCloud-synk på tvers av enhetene dine";
+"settings.premium.feature.backup" = "Skybackup av Tendora-dataene dine";
+"settings.premium.feature.attachments" = "Bilder og dokumenter sammen med eiendelene dine";
+"settings.premium.upgrade" = "Oppgrader til Premium";
+"settings.premium.footer" = "Denne seksjonen er klar for StoreKit 2 og App Store Connect-oppsett når du vil aktivere betalt tilgang.";

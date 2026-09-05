@@ -170,6 +170,8 @@
 
 "settings.section.reminders" = "Reminders";
 "settings.section.appearance" = "Appearance";
+"settings.language" = "Language";
+"settings.language.system" = "System";
 "settings.section.support" = "Support";
 "settings.section.demo" = "Demo Tools";
 "settings.notifications" = "Open Notification Settings";
@@ -242,5 +244,33 @@
 "attachment_type.manual" = "Manual";
 "attachment_type.warranty" = "Warranty";
 "attachment_type.insurance" = "Insurance";
+"attachment_type.contract" = "Contract";
+"attachment_type.registration_document" = "Registration Document";
 "attachment_type.service_record" = "Service Record";
 "attachment_type.other" = "Other";
+
+"settings.section.sync" = "iCloud Sync";
+"settings.sync.refresh" = "Check Status";
+"settings.sync.status.checking" = "Checking iCloud";
+"settings.sync.status.available" = "iCloud is available";
+"settings.sync.status.no_account" = "iCloud is not signed in";
+"settings.sync.status.restricted" = "iCloud is restricted";
+"settings.sync.status.temporarily_unavailable" = "iCloud is temporarily unavailable";
+"settings.sync.status.unavailable" = "iCloud status unavailable";
+"settings.sync.message.checking" = "Tendora is checking whether this device can use iCloud sync.";
+"settings.sync.message.available" = "Tendora can sync your data with iCloud on this device.";
+"settings.sync.message.no_account" = "Sign in to iCloud on this device to sync Tendora data.";
+"settings.sync.message.restricted" = "This device cannot access iCloud because of account, parental control, or management restrictions.";
+"settings.sync.message.temporarily_unavailable" = "iCloud is available but not ready right now. Try again later.";
+"settings.sync.message.unavailable" = "Tendora could not determine iCloud status on this device.";
+
+"settings.section.premium" = "Tendora Premium";
+"settings.premium.status.active" = "Premium Active";
+"settings.premium.status.not_purchased" = "Free Plan";
+"settings.premium.message.active" = "Premium features are unlocked on this device.";
+"settings.premium.message.not_purchased" = "Premium purchase handling is prepared, but not enabled in this build.";
+"settings.premium.feature.icloud" = "iCloud sync across your devices";
+"settings.premium.feature.backup" = "Cloud backup for your Tendora data";
+"settings.premium.feature.attachments" = "Photos and documents with your assets";
+"settings.premium.upgrade" = "Upgrade to Premium";
+"settings.premium.footer" = "This section is ready for StoreKit 2 and App Store Connect setup when you decide to enable paid access.";

@@ -10,10 +10,10 @@ import SwiftData
 
 @Model
 final class Asset {
-    var id: UUID
-    var name: String
-    var type: AssetType
-    var createdAt: Date
+    var id: UUID = UUID()
+    var name: String = ""
+    var type: AssetType = AssetType.home
+    var createdAt: Date = Date.now
     var notes: String?
     var make: String?
     var model: String?
@@ -23,9 +23,9 @@ final class Asset {
     var registrationNumber: String?
     var address: String?
     @Relationship(deleteRule: .cascade, inverse: \MaintenanceTask.asset)
-    var tasks: [MaintenanceTask]
+    var tasks: [MaintenanceTask]? = []
     @Relationship(deleteRule: .cascade, inverse: \Attachment.asset)
-    var attachments: [Attachment]
+    var attachments: [Attachment]? = []
 
     init(
         id: UUID = UUID(),

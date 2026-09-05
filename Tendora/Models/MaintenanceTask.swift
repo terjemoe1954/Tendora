@@ -10,22 +10,22 @@ import SwiftData
 
 @Model
 final class MaintenanceTask {
-    var id: UUID
-    var title: String
-    var createdAt: Date
-    var dueDate: Date
+    var id: UUID = UUID()
+    var title: String = ""
+    var createdAt: Date = Date.now
+    var dueDate: Date = Date.now
     var notes: String?
-    var isCompleted: Bool
-    var repeatRule: RepeatRule
+    var isCompleted: Bool = false
+    var repeatRule: RepeatRule = RepeatRule.never
     var customRepeatValue: Int?
     var customRepeatUnit: RepeatUnit?
-    var reminderEnabled: Bool
-    var reminderOffset: ReminderOffset
+    var reminderEnabled: Bool = false
+    var reminderOffset: ReminderOffset = ReminderOffset.oneWeekBefore
     var asset: Asset?
     @Relationship(deleteRule: .cascade, inverse: \CompletionRecord.task)
-    var completionRecords: [CompletionRecord]
+    var completionRecords: [CompletionRecord]? = []
     @Relationship(deleteRule: .cascade, inverse: \Attachment.task)
-    var attachments: [Attachment]
+    var attachments: [Attachment]? = []
 
     init(
         id: UUID = UUID(),
@@ -64,7 +64,7 @@ final class MaintenanceTask {
     }
 
     func markCompleted(on date: Date = .now) {
-        completionRecords.append(CompletionRecord(completedAt: date, task: self))
+        completionRecords = (completionRecords ?? []) + [CompletionRecord(completedAt: date, task: self)]
 
         if let nextDueDateAfterCompletion {
             dueDate = nextDueDateAfterCompletion

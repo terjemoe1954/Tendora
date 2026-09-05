@@ -10,8 +10,8 @@ import SwiftData
 
 @Model
 final class CompletionRecord {
-    var id: UUID
-    var completedAt: Date
+    var id: UUID = UUID()
+    var completedAt: Date = Date.now
     var notes: String?
     var task: MaintenanceTask?
 

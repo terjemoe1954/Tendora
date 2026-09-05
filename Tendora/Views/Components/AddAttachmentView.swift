@@ -39,7 +39,7 @@ struct AddAttachmentView: View {
                 Section("add_attachment.section.type") {
                     Picker("add_attachment.field.type", selection: $attachmentType) {
                         ForEach(AttachmentType.allCases) { type in
-                            Text(type.displayName).tag(type)
+                            Text(LocalizedStringKey(type.displayNameLocalizationKey)).tag(type)
                         }
                     }
                 }

@@ -8,14 +8,16 @@
 import SwiftData
 import SwiftUI
 
+private let tendoraCloudKitContainerIdentifier = "iCloud.com.terjemoe.Tendora"
+
 @main
 struct TendoraApp: App {
     @AppStorage("hasSeenOnboarding") private var hasSeenOnboarding = false
     @AppStorage("appAppearance") private var appAppearanceRawValue = AppAppearance.system.rawValue
+    @AppStorage("appLanguage") private var appLanguageRawValue = AppLanguage.system.rawValue
     private let sharedModelContainer: ModelContainer
 
     init() {
-        Self.resetPrereleaseStoreIfNeeded()
         NotificationManager.shared.configure()
         sharedModelContainer = Self.makeSharedModelContainer()
     }
@@ -24,6 +26,7 @@ struct TendoraApp: App {
         WindowGroup {
             MainTabView()
                 .preferredColorScheme(selectedAppearance.colorScheme)
+                .environment(\.locale, selectedLanguage.locale)
                 .fullScreenCover(isPresented: onboardingBinding) {
                     OnboardingView {
                         hasSeenOnboarding = true
@@ -47,53 +50,49 @@ struct TendoraApp: App {
     private var selectedAppearance: AppAppearance {
         AppAppearance(rawValue: appAppearanceRawValue) ?? .system
     }
+
+    private var selectedLanguage: AppLanguage {
+        AppLanguage(rawValue: appLanguageRawValue) ?? .system
+    }
 }
 
 private extension TendoraApp {
-    static let prereleaseStoreResetVersion = 1
-
     static func makeSharedModelContainer() -> ModelContainer {
         do {
             return try makeModelContainer()
         } catch {
+            print("Unable to create CloudKit model container: \(error)")
             do {
-                try resetDefaultStoreFiles()
-                return try makeModelContainer()
+                return try makeInMemoryModelContainer()
             } catch {
-                do {
-                    return try makeInMemoryModelContainer()
-                } catch {
-                    fatalError("Unable to create model container: \(error)")
-                }
+                fatalError("Unable to create model container: \(error)")
             }
         }
-    }
-
-    static func resetPrereleaseStoreIfNeeded() {
-        let defaults = UserDefaults.standard
-        let storedVersion = defaults.integer(forKey: "dataResetVersion")
-        guard storedVersion < Self.prereleaseStoreResetVersion else {
-            return
-        }
-
-        try? resetDefaultStoreFiles()
-        defaults.set(Self.prereleaseStoreResetVersion, forKey: "dataResetVersion")
     }
 }
 
 private func makeModelContainer() throws -> ModelContainer {
-    let configuration = ModelConfiguration()
+    let configuration = ModelConfiguration(
+        cloudKitDatabase: .private(tendoraCloudKitContainerIdentifier)
+    )
     return try ModelContainer(
         for: Asset.self,
         MaintenanceTask.self,
         CompletionRecord.self,
         Attachment.self,
+        migrationPlan: TendoraMigrationPlan.self,
         configurations: configuration
     )
 }
 
 private func makeInMemoryModelContainer() throws -> ModelContainer {
-    let configuration = ModelConfiguration(isStoredInMemoryOnly: true)
+    let configuration = ModelConfiguration(
+        "Fallback",
+        schema: Schema([Asset.self, MaintenanceTask.self, CompletionRecord.self, Attachment.self]),
+        isStoredInMemoryOnly: true,
+        allowsSave: true,
+        cloudKitDatabase: .none
+    )
     return try ModelContainer(
         for: Asset.self,
         MaintenanceTask.self,
@@ -101,25 +100,4 @@ private func makeInMemoryModelContainer() throws -> ModelContainer {
         Attachment.self,
         configurations: configuration
     )
-}
-
-private func resetDefaultStoreFiles() throws {
-    let fileManager = FileManager.default
-    let applicationSupportURL = try fileManager.url(
-        for: .applicationSupportDirectory,
-        in: .userDomainMask,
-        appropriateFor: nil,
-        create: true
-    )
-
-    let defaultStoreURL = applicationSupportURL.appendingPathComponent("default.store")
-    let relatedURLs = [
-        defaultStoreURL,
-        defaultStoreURL.appendingPathExtension("shm"),
-        defaultStoreURL.appendingPathExtension("wal")
-    ]
-
-    for url in relatedURLs where fileManager.fileExists(atPath: url.path()) {
-        try fileManager.removeItem(at: url)
-    }
 }

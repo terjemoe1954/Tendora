@@ -14,30 +14,40 @@ enum AttachmentType: String, CaseIterable, Codable, Identifiable {
     case manual
     case warranty
     case insurance
+    case contract
+    case registrationDocument
     case serviceRecord
     case other
 
     var id: String { rawValue }
 
-    var displayName: String {
+    var displayNameLocalizationKey: String {
         switch self {
         case .photo:
-            return String(localized: "attachment_type.photo")
+            return "attachment_type.photo"
         case .receipt:
-            return String(localized: "attachment_type.receipt")
+            return "attachment_type.receipt"
         case .invoice:
-            return String(localized: "attachment_type.invoice")
+            return "attachment_type.invoice"
         case .manual:
-            return String(localized: "attachment_type.manual")
+            return "attachment_type.manual"
         case .warranty:
-            return String(localized: "attachment_type.warranty")
+            return "attachment_type.warranty"
         case .insurance:
-            return String(localized: "attachment_type.insurance")
+            return "attachment_type.insurance"
+        case .contract:
+            return "attachment_type.contract"
+        case .registrationDocument:
+            return "attachment_type.registration_document"
         case .serviceRecord:
-            return String(localized: "attachment_type.service_record")
+            return "attachment_type.service_record"
         case .other:
-            return String(localized: "attachment_type.other")
+            return "attachment_type.other"
         }
+    }
+
+    var displayName: String {
+        String(localized: String.LocalizationValue(displayNameLocalizationKey))
     }
 
     var symbolName: String {
@@ -52,6 +62,10 @@ enum AttachmentType: String, CaseIterable, Codable, Identifiable {
             return "checkmark.shield"
         case .insurance:
             return "shield"
+        case .contract:
+            return "doc.text"
+        case .registrationDocument:
+            return "car.text"
         case .serviceRecord:
             return "wrench.and.screwdriver"
         case .other:

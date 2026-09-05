@@ -10,11 +10,11 @@ import SwiftData
 
 @Model
 final class Attachment {
-    var id: UUID
-    var createdAt: Date
-    var type: AttachmentType
-    var displayName: String
-    var fileName: String
+    var id: UUID = UUID()
+    var createdAt: Date = Date.now
+    var type: AttachmentType = AttachmentType.other
+    var displayName: String = ""
+    var fileName: String = ""
     var contentTypeIdentifier: String?
     var asset: Asset?
     var task: MaintenanceTask?
