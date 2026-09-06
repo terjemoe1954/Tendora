@@ -237,6 +237,8 @@
 "error.data.title" = "Datafeil";
 "error.data.save_failed.message" = "Tendora kunne ikke lagre endringene dine akkurat nå.";
 "error.data.delete_failed.message" = "Tendora kunne ikke slette dette elementet akkurat nå.";
+"storage_unavailable.title" = "Lagring utilgjengelig";
+"storage_unavailable.message" = "Tendora kunne ikke åpne iCloud-datalageret. Start appen på nytt, sjekk iCloud-innstillinger, eller installer på nytt fra TestFlight.";
 
 "attachment_type.photo" = "Bilde";
 "attachment_type.receipt" = "Kvittering";

@@ -15,25 +15,32 @@ struct TendoraApp: App {
     @AppStorage("hasSeenOnboarding") private var hasSeenOnboarding = false
     @AppStorage("appAppearance") private var appAppearanceRawValue = AppAppearance.system.rawValue
     @AppStorage("appLanguage") private var appLanguageRawValue = AppLanguage.system.rawValue
-    private let sharedModelContainer: ModelContainer
+    private let modelContainerResult: Result<ModelContainer, Error>
 
     init() {
         NotificationManager.shared.configure()
-        sharedModelContainer = Self.makeSharedModelContainer()
+        modelContainerResult = Self.makeSharedModelContainerResult()
     }
 
     var body: some Scene {
         WindowGroup {
-            MainTabView()
-                .preferredColorScheme(selectedAppearance.colorScheme)
-                .environment(\.locale, selectedLanguage.locale)
-                .fullScreenCover(isPresented: onboardingBinding) {
-                    OnboardingView {
-                        hasSeenOnboarding = true
+            switch modelContainerResult {
+            case .success(let sharedModelContainer):
+                MainTabView()
+                    .preferredColorScheme(selectedAppearance.colorScheme)
+                    .environment(\.locale, selectedLanguage.locale)
+                    .modelContainer(sharedModelContainer)
+                    .fullScreenCover(isPresented: onboardingBinding) {
+                        OnboardingView {
+                            hasSeenOnboarding = true
+                        }
                     }
-                }
+            case .failure(let error):
+                StorageUnavailableView(error: error)
+                    .preferredColorScheme(selectedAppearance.colorScheme)
+                    .environment(\.locale, selectedLanguage.locale)
+            }
         }
-        .modelContainer(sharedModelContainer)
     }
 
     private var onboardingBinding: Binding<Bool> {
@@ -57,17 +64,32 @@ struct TendoraApp: App {
 }
 
 private extension TendoraApp {
-    static func makeSharedModelContainer() -> ModelContainer {
+    static func makeSharedModelContainerResult() -> Result<ModelContainer, Error> {
         do {
-            return try makeModelContainer()
+            return .success(try makeModelContainer())
         } catch {
             print("Unable to create CloudKit model container: \(error)")
-            do {
-                return try makeInMemoryModelContainer()
-            } catch {
-                fatalError("Unable to create model container: \(error)")
-            }
+            return .failure(error)
         }
+    }
+}
+
+private struct StorageUnavailableView: View {
+    let error: Error
+
+    var body: some View {
+        ContentUnavailableView {
+            Label("storage_unavailable.title", systemImage: "externaldrive.badge.exclamationmark")
+        } description: {
+            Text("storage_unavailable.message")
+        } actions: {
+            Text(error.localizedDescription)
+                .font(.caption)
+                .foregroundStyle(.secondary)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal)
+        }
+        .padding()
     }
 }
 
@@ -81,23 +103,6 @@ private func makeModelContainer() throws -> ModelContainer {
         CompletionRecord.self,
         Attachment.self,
         migrationPlan: TendoraMigrationPlan.self,
-        configurations: configuration
-    )
-}
-
-private func makeInMemoryModelContainer() throws -> ModelContainer {
-    let configuration = ModelConfiguration(
-        "Fallback",
-        schema: Schema([Asset.self, MaintenanceTask.self, CompletionRecord.self, Attachment.self]),
-        isStoredInMemoryOnly: true,
-        allowsSave: true,
-        cloudKitDatabase: .none
-    )
-    return try ModelContainer(
-        for: Asset.self,
-        MaintenanceTask.self,
-        CompletionRecord.self,
-        Attachment.self,
         configurations: configuration
     )
 }

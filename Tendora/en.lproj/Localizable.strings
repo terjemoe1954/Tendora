@@ -237,6 +237,8 @@
 "error.data.title" = "Data Error";
 "error.data.save_failed.message" = "Tendora could not save your changes right now.";
 "error.data.delete_failed.message" = "Tendora could not delete that item right now.";
+"storage_unavailable.title" = "Storage unavailable";
+"storage_unavailable.message" = "Tendora could not open its iCloud data store. Restart the app, check iCloud settings, or reinstall from TestFlight.";
 
 "attachment_type.photo" = "Photo";
 "attachment_type.receipt" = "Receipt";

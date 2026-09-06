@@ -237,6 +237,8 @@
 "error.data.title" = "ข้อผิดพลาดของข้อมูล";
 "error.data.save_failed.message" = "Tendora ไม่สามารถบันทึกการเปลี่ยนแปลงของคุณได้ในขณะนี้";
 "error.data.delete_failed.message" = "Tendora ไม่สามารถลบรายการนั้นได้ในขณะนี้";
+"storage_unavailable.title" = "พื้นที่จัดเก็บไม่พร้อมใช้งาน";
+"storage_unavailable.message" = "Tendora ไม่สามารถเปิดที่เก็บข้อมูล iCloud ได้ โปรดเปิดแอปใหม่ ตรวจสอบการตั้งค่า iCloud หรือติดตั้งใหม่จาก TestFlight";
 
 "attachment_type.photo" = "รูปภาพ";
 "attachment_type.receipt" = "ใบเสร็จ";
