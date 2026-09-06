@@ -15,16 +15,24 @@ enum RepeatUnit: String, CaseIterable, Codable, Identifiable {
 
     var id: String { rawValue }
 
-    var displayName: String {
+    var displayNameLocalizationKey: String {
         switch self {
         case .days:
-            return String(localized: "repeat_unit.days")
+            return "repeat_unit.days"
         case .weeks:
-            return String(localized: "repeat_unit.weeks")
+            return "repeat_unit.weeks"
         case .months:
-            return String(localized: "repeat_unit.months")
+            return "repeat_unit.months"
         case .years:
-            return String(localized: "repeat_unit.years")
+            return "repeat_unit.years"
         }
+    }
+
+    var displayName: String {
+        String(localized: String.LocalizationValue(displayNameLocalizationKey))
+    }
+
+    func displayName(locale: Locale) -> String {
+        String(localized: String.LocalizationValue(displayNameLocalizationKey), locale: locale)
     }
 }

@@ -17,21 +17,29 @@ enum ReminderOffset: String, CaseIterable, Codable, Identifiable {
 
     var id: String { rawValue }
 
-    var displayName: String {
+    var displayNameLocalizationKey: String {
         switch self {
         case .sameDay:
-            return String(localized: "reminder_offset.same_day")
+            return "reminder_offset.same_day"
         case .oneDayBefore:
-            return String(localized: "reminder_offset.one_day_before")
+            return "reminder_offset.one_day_before"
         case .threeDaysBefore:
-            return String(localized: "reminder_offset.three_days_before")
+            return "reminder_offset.three_days_before"
         case .oneWeekBefore:
-            return String(localized: "reminder_offset.one_week_before")
+            return "reminder_offset.one_week_before"
         case .twoWeeksBefore:
-            return String(localized: "reminder_offset.two_weeks_before")
+            return "reminder_offset.two_weeks_before"
         case .oneMonthBefore:
-            return String(localized: "reminder_offset.one_month_before")
+            return "reminder_offset.one_month_before"
         }
+    }
+
+    var displayName: String {
+        String(localized: String.LocalizationValue(displayNameLocalizationKey))
+    }
+
+    func displayName(locale: Locale) -> String {
+        String(localized: String.LocalizationValue(displayNameLocalizationKey), locale: locale)
     }
 
     func triggerDate(for dueDate: Date, calendar: Calendar = .current) -> Date? {

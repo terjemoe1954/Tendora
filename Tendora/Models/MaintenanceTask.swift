@@ -75,40 +75,52 @@ final class MaintenanceTask {
     }
 
     var repeatSummary: String {
+        repeatSummary(locale: .current)
+    }
+
+    func repeatSummary(locale: Locale) -> String {
         switch repeatRule {
         case .custom:
             guard let customRepeatValue, let customRepeatUnit else {
-                return repeatRule.displayName
+                return repeatRule.displayName(locale: locale)
             }
 
-            let format = String(localized: "task.repeat.custom_format")
-            return String(format: format, locale: .current, customRepeatValue, customRepeatUnit.displayName)
+            let format = String(localized: "task.repeat.custom_format", locale: locale)
+            return String(format: format, locale: locale, customRepeatValue, customRepeatUnit.displayName(locale: locale))
         default:
-            return repeatRule.displayName
+            return repeatRule.displayName(locale: locale)
         }
     }
 
     var currentStatus: String {
+        currentStatus(locale: .current)
+    }
+
+    func currentStatus(locale: Locale) -> String {
         if isCompleted {
-            return String(localized: "task.status.completed")
+            return String(localized: "task.status.completed", locale: locale)
         }
 
         if dueDate < .now {
-            return String(localized: "task.status.overdue")
+            return String(localized: "task.status.overdue", locale: locale)
         }
 
         if Calendar.current.dateComponents([.day], from: .now, to: dueDate).day ?? 0 <= 7 {
-            return String(localized: "task.status.due_soon")
+            return String(localized: "task.status.due_soon", locale: locale)
         }
 
-        return String(localized: "task.status.normal")
+        return String(localized: "task.status.normal", locale: locale)
     }
 
     var reminderSummary: String {
+        reminderSummary(locale: .current)
+    }
+
+    func reminderSummary(locale: Locale) -> String {
         guard reminderEnabled else {
-            return String(localized: "task.reminder.off")
+            return String(localized: "task.reminder.off", locale: locale)
         }
 
-        return reminderOffset.displayName
+        return reminderOffset.displayName(locale: locale)
     }
 }

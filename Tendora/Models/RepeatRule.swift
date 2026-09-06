@@ -19,25 +19,33 @@ enum RepeatRule: String, CaseIterable, Codable, Identifiable {
 
     var id: String { rawValue }
 
-    var displayName: String {
+    var displayNameLocalizationKey: String {
         switch self {
         case .never:
-            return String(localized: "repeat_rule.never")
+            return "repeat_rule.never"
         case .weekly:
-            return String(localized: "repeat_rule.weekly")
+            return "repeat_rule.weekly"
         case .monthly:
-            return String(localized: "repeat_rule.monthly")
+            return "repeat_rule.monthly"
         case .threeMonths:
-            return String(localized: "repeat_rule.three_months")
+            return "repeat_rule.three_months"
         case .sixMonths:
-            return String(localized: "repeat_rule.six_months")
+            return "repeat_rule.six_months"
         case .yearly:
-            return String(localized: "repeat_rule.yearly")
+            return "repeat_rule.yearly"
         case .twoYears:
-            return String(localized: "repeat_rule.two_years")
+            return "repeat_rule.two_years"
         case .custom:
-            return String(localized: "repeat_rule.custom")
+            return "repeat_rule.custom"
         }
+    }
+
+    var displayName: String {
+        String(localized: String.LocalizationValue(displayNameLocalizationKey))
+    }
+
+    func displayName(locale: Locale) -> String {
+        String(localized: String.LocalizationValue(displayNameLocalizationKey), locale: locale)
     }
 
     func nextDate(after date: Date, customValue: Int?, customUnit: RepeatUnit?, calendar: Calendar = .current) -> Date? {

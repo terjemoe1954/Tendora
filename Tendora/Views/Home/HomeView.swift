@@ -170,7 +170,7 @@ private struct AssetCardView: View {
                     .font(.headline)
                     .foregroundStyle(.primary)
 
-                Text(asset.cardSubtitle)
+                AssetCardSubtitleView(asset: asset)
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
             }
@@ -189,46 +189,57 @@ private struct AssetCardView: View {
     }
 }
 
+private struct AssetCardSubtitleView: View {
+    @Environment(\.locale) private var locale
+
+    let asset: Asset
+
+    var body: some View {
+        if asset.activeTaskCount > 0 {
+            Text(asset.taskSubtitle(locale: locale))
+        } else {
+            Text(LocalizedStringKey(asset.type.displayNameLocalizationKey))
+        }
+    }
+}
+
 extension Asset {
-    var cardSubtitle: String {
-        let activeTaskCount = (tasks ?? []).filter { $0.isCompleted == false }.count
-
-        if activeTaskCount > 0 {
-            let format = String(localized: "asset.card.task_count")
-            let taskSummary = String(format: format, locale: .current, activeTaskCount)
-
-            if let nextTask = (tasks ?? [])
-                .filter({ $0.isCompleted == false })
-                .sorted(by: { $0.dueDate < $1.dueDate })
-                .first
-            {
-                let dueFormat = String(localized: "asset.card.next_due")
-                let dueSummary = String(format: dueFormat, locale: .current,
-                    nextTask.title,
-                    nextTask.dueDate.formatted(date: .abbreviated, time: .omitted)
-                )
-                return "\(taskSummary) • \(dueSummary)"
-            }
-
-            return taskSummary
-        }
-
-        if let metadata = primaryMetadata {
-            return "\(type.displayName) • \(metadata)"
-        }
-
-        return type.displayName
+    var activeTaskCount: Int {
+        (tasks ?? []).filter { $0.isCompleted == false }.count
     }
 
-    var primaryMetadata: String? {
+    func taskSubtitle(locale: Locale) -> String {
+        let activeTaskCount = activeTaskCount
+
+        let format = String(localized: "asset.card.task_count", locale: locale)
+        let taskSummary = String(format: format, locale: locale, activeTaskCount)
+
+        if let nextTask = (tasks ?? [])
+            .filter({ $0.isCompleted == false })
+            .sorted(by: { $0.dueDate < $1.dueDate })
+            .first
+        {
+            let dueFormat = String(localized: "asset.card.next_due", locale: locale)
+            let dueDate = nextTask.dueDate.formatted(.dateTime.locale(locale).day().month().year())
+            let dueSummary = String(format: dueFormat, locale: locale,
+                nextTask.title,
+                dueDate
+            )
+            return "\(taskSummary) • \(dueSummary)"
+        }
+
+        return taskSummary
+    }
+
+    func primaryMetadata(locale: Locale) -> String? {
         switch type {
         case .home, .cabin:
             if let address, address.isEmpty == false {
                 return address
             }
             if let year {
-                let format = String(localized: "asset.metadata.built")
-                return String(format: format, locale: .current, year)
+                let format = String(localized: "asset.metadata.built", locale: locale)
+                return String(format: format, locale: locale, year)
             }
         case .car:
             let carSummary = [make, model]
@@ -264,11 +275,13 @@ extension Asset {
             return notes
         }
 
-        return String(localized: "asset.metadata.empty")
+        return nil
     }
 }
 
 private struct UpcomingTaskCard: View {
+    @Environment(\.locale) private var locale
+
     let task: MaintenanceTask
 
     var body: some View {
@@ -295,7 +308,13 @@ private struct UpcomingTaskCard: View {
                     .foregroundStyle(task.statusColor)
             }
 
-            Text(String(format: String(localized: "home.upcoming.due_format"), locale: .current, task.dueDate.formatted(date: .abbreviated, time: .omitted)))
+            Text(
+                String(
+                    format: String(localized: "home.upcoming.due_format", locale: locale),
+                    locale: locale,
+                    task.dueDate.formatted(.dateTime.locale(locale).day().month().year())
+                )
+            )
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
         }

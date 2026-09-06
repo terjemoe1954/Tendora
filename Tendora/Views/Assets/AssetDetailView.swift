@@ -11,6 +11,7 @@ import SwiftUI
 struct AssetDetailView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
+    @Environment(\.locale) private var locale
 
     let asset: Asset
     @State private var isPresentingAddTask = false
@@ -117,7 +118,7 @@ struct AssetDetailView: View {
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
 
-                if let metadata = asset.primaryMetadata, metadata != String(localized: "asset.metadata.empty") {
+                if let metadata = asset.primaryMetadata(locale: locale) {
                     Text(metadata)
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
@@ -139,7 +140,9 @@ struct AssetDetailView: View {
                 .font(.headline)
 
             VStack(spacing: 0) {
-                ForEach(asset.detailItems) { item in
+                let detailItems = asset.detailItems(locale: locale)
+
+                ForEach(detailItems) { item in
                     LabeledContent {
                         if let valueKey = item.valueKey {
                             Text(LocalizedStringKey(valueKey))
@@ -152,7 +155,7 @@ struct AssetDetailView: View {
                         .padding(.horizontal, 16)
                         .padding(.vertical, 14)
 
-                    if item.id != asset.detailItems.last?.id {
+                    if item.id != detailItems.last?.id {
                         Divider()
                             .padding(.leading, 16)
                     }
@@ -292,9 +295,9 @@ struct AssetDetailView: View {
 
                             Text(
                                 String(
-                                    format: String(localized: "asset_detail.history.completed_format"),
-                                    locale: .current,
-                                    entry.record.completedAt.formatted(date: .abbreviated, time: .omitted)
+                                    format: String(localized: "asset_detail.history.completed_format", locale: locale),
+                                    locale: locale,
+                                    entry.record.completedAt.formatted(.dateTime.locale(locale).day().month().year())
                                 )
                             )
                             .font(.subheadline)
@@ -371,27 +374,31 @@ struct AssetDetailView: View {
     }
 
     private func openAttachment(_ attachment: Attachment) {
-        guard let fileURL = try? AttachmentManager.shared.fileURL(for: attachment) else {
+        do {
+            if try AttachmentManager.shared.cacheLocalFileDataIfNeeded(for: attachment) {
+                try modelContext.save()
+            }
+            previewItem = AttachmentPreviewItem(url: try AttachmentManager.shared.fileURL(for: attachment))
+        } catch {
             alertState = AppAlertState(
                 title: String(localized: "error.attachments.title"),
                 message: String(localized: "error.attachments.open_failed.message")
             )
-            return
         }
-
-        previewItem = AttachmentPreviewItem(url: fileURL)
     }
 
     private func shareAttachment(_ attachment: Attachment) {
-        guard let fileURL = try? AttachmentManager.shared.fileURL(for: attachment) else {
+        do {
+            if try AttachmentManager.shared.cacheLocalFileDataIfNeeded(for: attachment) {
+                try modelContext.save()
+            }
+            shareItem = AttachmentShareItem(url: try AttachmentManager.shared.fileURL(for: attachment))
+        } catch {
             alertState = AppAlertState(
                 title: String(localized: "error.attachments.title"),
                 message: String(localized: "error.attachments.open_failed.message")
             )
-            return
         }
-
-        shareItem = AttachmentShareItem(url: fileURL)
     }
 }
 
@@ -415,7 +422,7 @@ private struct AssetDetailItem: Identifiable {
 }
 
 private extension Asset {
-    var detailItems: [AssetDetailItem] {
+    func detailItems(locale: Locale) -> [AssetDetailItem] {
         var items: [AssetDetailItem] = [
             AssetDetailItem(titleKey: "asset_detail.field.asset_type", valueKey: type.displayNameLocalizationKey)
         ]
@@ -437,7 +444,7 @@ private extension Asset {
         }
 
         if let odometer {
-            items.append(AssetDetailItem(titleKey: "asset_detail.field.odometer", value: odometer.formatted()))
+            items.append(AssetDetailItem(titleKey: "asset_detail.field.odometer", value: odometer.formatted(.number.locale(locale))))
         }
 
         if let registrationNumber, registrationNumber.isEmpty == false {
@@ -455,7 +462,7 @@ private extension Asset {
         items.append(
             AssetDetailItem(
                 titleKey: "asset_detail.field.created",
-                value: createdAt.formatted(date: .abbreviated, time: .omitted)
+                value: createdAt.formatted(.dateTime.locale(locale).day().month().year())
             )
         )
 
@@ -464,6 +471,8 @@ private extension Asset {
 }
 
 private struct AssetTaskCard: View {
+    @Environment(\.locale) private var locale
+
     let task: MaintenanceTask
 
     var body: some View {
@@ -473,11 +482,11 @@ private struct AssetTaskCard: View {
                     .font(.headline)
                     .foregroundStyle(.primary)
 
-                Text(task.dueDate.formatted(date: .abbreviated, time: .omitted))
+                Text(task.dueDate.formatted(.dateTime.locale(locale).day().month().year()))
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
 
-                Text(task.repeatSummary)
+                Text(task.repeatSummary(locale: locale))
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }

@@ -15,6 +15,7 @@ final class Attachment {
     var type: AttachmentType = AttachmentType.other
     var displayName: String = ""
     var fileName: String = ""
+    @Attribute(.externalStorage) var fileData: Data?
     var contentTypeIdentifier: String?
     var asset: Asset?
     var task: MaintenanceTask?
@@ -25,6 +26,7 @@ final class Attachment {
         type: AttachmentType,
         displayName: String,
         fileName: String,
+        fileData: Data? = nil,
         contentTypeIdentifier: String? = nil,
         asset: Asset? = nil,
         task: MaintenanceTask? = nil
@@ -34,6 +36,7 @@ final class Attachment {
         self.type = type
         self.displayName = displayName
         self.fileName = fileName
+        self.fileData = fileData
         self.contentTypeIdentifier = contentTypeIdentifier
         self.asset = asset
         self.task = task

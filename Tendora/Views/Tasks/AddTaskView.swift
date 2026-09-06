@@ -57,7 +57,7 @@ struct AddTaskView: View {
 
                     Picker("add_task.field.repeat", selection: $repeatRule) {
                         ForEach(RepeatRule.allCases) { rule in
-                            Text(rule.displayName).tag(rule)
+                            Text(LocalizedStringKey(rule.displayNameLocalizationKey)).tag(rule)
                         }
                     }
 
@@ -67,7 +67,7 @@ struct AddTaskView: View {
 
                         Picker("add_task.field.custom_unit", selection: $customRepeatUnit) {
                             ForEach(RepeatUnit.allCases) { unit in
-                                Text(unit.displayName).tag(unit)
+                                Text(LocalizedStringKey(unit.displayNameLocalizationKey)).tag(unit)
                             }
                         }
                     }
@@ -79,7 +79,7 @@ struct AddTaskView: View {
                     if reminderEnabled {
                         Picker("add_task.field.reminder_timing", selection: $reminderOffset) {
                             ForEach(ReminderOffset.allCases) { offset in
-                                Text(offset.displayName).tag(offset)
+                                Text(LocalizedStringKey(offset.displayNameLocalizationKey)).tag(offset)
                             }
                         }
                     }

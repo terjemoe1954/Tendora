@@ -79,7 +79,7 @@ struct SettingsView: View {
 
                     Picker("settings.default_reminder", selection: $defaultReminderOffsetRawValue) {
                         ForEach(ReminderOffset.allCases) { offset in
-                            Text(offset.displayName).tag(offset.rawValue)
+                            Text(LocalizedStringKey(offset.displayNameLocalizationKey)).tag(offset.rawValue)
                         }
                     }
                 } header: {

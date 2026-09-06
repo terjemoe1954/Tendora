@@ -8,6 +8,10 @@
 import Foundation
 import UniformTypeIdentifiers
 
+enum AttachmentFileError: Error {
+    case missingFileData
+}
+
 @MainActor
 final class AttachmentManager {
     static let shared = AttachmentManager()
@@ -30,6 +34,7 @@ final class AttachmentManager {
             type: .photo,
             displayName: displayName,
             fileName: fileName,
+            fileData: data,
             contentTypeIdentifier: UTType.jpeg.identifier,
             asset: asset,
             task: task
@@ -59,6 +64,7 @@ final class AttachmentManager {
             try fileManager.removeItem(at: destinationURL)
         }
         try fileManager.copyItem(at: sourceURL, to: destinationURL)
+        let fileData = try Data(contentsOf: destinationURL)
 
         let contentTypeIdentifier = try sourceURL.resourceValues(forKeys: [.contentTypeKey]).contentType?.identifier
 
@@ -66,6 +72,7 @@ final class AttachmentManager {
             type: type,
             displayName: sourceURL.lastPathComponent,
             fileName: fileName,
+            fileData: fileData,
             contentTypeIdentifier: contentTypeIdentifier,
             asset: asset,
             task: task
@@ -73,14 +80,42 @@ final class AttachmentManager {
     }
 
     func fileURL(for attachment: Attachment) throws -> URL {
-        try attachmentsDirectoryURL().appending(path: attachment.fileName)
+        let fileURL = try localFileURL(for: attachment)
+        if fileManager.fileExists(atPath: fileURL.path()) {
+            return fileURL
+        }
+
+        guard let fileData = attachment.fileData else {
+            throw AttachmentFileError.missingFileData
+        }
+
+        try fileData.write(to: fileURL, options: .atomic)
+        return fileURL
     }
 
     func deleteAttachmentFile(for attachment: Attachment) throws {
-        let fileURL = try fileURL(for: attachment)
+        let fileURL = try localFileURL(for: attachment)
         if fileManager.fileExists(atPath: fileURL.path()) {
             try fileManager.removeItem(at: fileURL)
         }
+    }
+
+    func cacheLocalFileDataIfNeeded(for attachment: Attachment) throws -> Bool {
+        guard attachment.fileData == nil else {
+            return false
+        }
+
+        let fileURL = try localFileURL(for: attachment)
+        guard fileManager.fileExists(atPath: fileURL.path()) else {
+            return false
+        }
+
+        attachment.fileData = try Data(contentsOf: fileURL)
+        return true
+    }
+
+    private func localFileURL(for attachment: Attachment) throws -> URL {
+        try attachmentsDirectoryURL().appending(path: attachment.fileName)
     }
 
     private func attachmentsDirectoryURL() throws -> URL {

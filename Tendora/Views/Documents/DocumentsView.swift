@@ -116,27 +116,31 @@ struct DocumentsView: View {
     }
 
     private func openAttachment(_ attachment: Attachment) {
-        guard let fileURL = try? AttachmentManager.shared.fileURL(for: attachment) else {
+        do {
+            if try AttachmentManager.shared.cacheLocalFileDataIfNeeded(for: attachment) {
+                try modelContext.save()
+            }
+            previewItem = AttachmentPreviewItem(url: try AttachmentManager.shared.fileURL(for: attachment))
+        } catch {
             alertState = AppAlertState(
                 title: String(localized: "error.attachments.title"),
                 message: String(localized: "error.attachments.open_failed.message")
             )
-            return
         }
-
-        previewItem = AttachmentPreviewItem(url: fileURL)
     }
 
     private func shareAttachment(_ attachment: Attachment) {
-        guard let fileURL = try? AttachmentManager.shared.fileURL(for: attachment) else {
+        do {
+            if try AttachmentManager.shared.cacheLocalFileDataIfNeeded(for: attachment) {
+                try modelContext.save()
+            }
+            shareItem = AttachmentShareItem(url: try AttachmentManager.shared.fileURL(for: attachment))
+        } catch {
             alertState = AppAlertState(
                 title: String(localized: "error.attachments.title"),
                 message: String(localized: "error.attachments.open_failed.message")
             )
-            return
         }
-
-        shareItem = AttachmentShareItem(url: fileURL)
     }
 }
 

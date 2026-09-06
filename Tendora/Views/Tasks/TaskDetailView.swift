@@ -11,6 +11,7 @@ import SwiftUI
 struct TaskDetailView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
+    @Environment(\.locale) private var locale
 
     let task: MaintenanceTask
     @State private var isUpdatingTask = false
@@ -125,7 +126,7 @@ struct TaskDetailView: View {
                         .font(.caption)
                         .foregroundStyle(.secondary)
 
-                    Text(task.dueDate.formatted(date: .abbreviated, time: .omitted))
+                    Text(task.dueDate.formatted(.dateTime.locale(locale).day().month().year()))
                         .font(.headline)
                 }
 
@@ -155,11 +156,11 @@ struct TaskDetailView: View {
                 .font(.headline)
 
             VStack(spacing: 0) {
-                DetailRow(title: String(localized: "task_detail.repeat_rule"), value: task.repeatSummary)
+                DetailRow(title: String(localized: "task_detail.repeat_rule", locale: locale), value: task.repeatSummary(locale: locale))
                 Divider().padding(.leading, 16)
-                DetailRow(title: String(localized: "task_detail.reminder"), value: task.reminderSummary)
+                DetailRow(title: String(localized: "task_detail.reminder", locale: locale), value: task.reminderSummary(locale: locale))
                 Divider().padding(.leading, 16)
-                DetailRow(title: String(localized: "task_detail.status"), value: task.currentStatus)
+                DetailRow(title: String(localized: "task_detail.status", locale: locale), value: task.currentStatus(locale: locale))
 
                 if let notes = task.notes, notes.isEmpty == false {
                     Divider().padding(.leading, 16)
@@ -194,8 +195,8 @@ struct TaskDetailView: View {
                 VStack(spacing: 0) {
                     ForEach(Array(sortedHistory.enumerated()), id: \.element.id) { index, record in
                         DetailRow(
-                            title: record.completedAt.formatted(date: .abbreviated, time: .omitted),
-                            value: record.notes ?? String(localized: "task_detail.history.completed")
+                            title: record.completedAt.formatted(.dateTime.locale(locale).day().month().year()),
+                            value: record.notes ?? String(localized: "task_detail.history.completed", locale: locale)
                         )
 
                         if index < sortedHistory.count - 1 {
@@ -320,14 +321,14 @@ struct TaskDetailView: View {
         let message: String
 
         if let nextDueDate {
-            let format = String(localized: "task_detail.completion_recorded_next_due")
+            let format = String(localized: "task_detail.completion_recorded_next_due", locale: locale)
             message = String(
                 format: format,
-                locale: .current,
-                nextDueDate.formatted(date: .abbreviated, time: .omitted)
+                locale: locale,
+                nextDueDate.formatted(.dateTime.locale(locale).day().month().year())
             )
         } else {
-            message = String(localized: "task_detail.completion_recorded")
+            message = String(localized: "task_detail.completion_recorded", locale: locale)
         }
 
         withAnimation {
@@ -390,27 +391,31 @@ struct TaskDetailView: View {
     }
 
     private func openAttachment(_ attachment: Attachment) {
-        guard let fileURL = try? AttachmentManager.shared.fileURL(for: attachment) else {
+        do {
+            if try AttachmentManager.shared.cacheLocalFileDataIfNeeded(for: attachment) {
+                try modelContext.save()
+            }
+            previewItem = AttachmentPreviewItem(url: try AttachmentManager.shared.fileURL(for: attachment))
+        } catch {
             alertState = AppAlertState(
                 title: String(localized: "error.attachments.title"),
                 message: String(localized: "error.attachments.open_failed.message")
             )
-            return
         }
-
-        previewItem = AttachmentPreviewItem(url: fileURL)
     }
 
     private func shareAttachment(_ attachment: Attachment) {
-        guard let fileURL = try? AttachmentManager.shared.fileURL(for: attachment) else {
+        do {
+            if try AttachmentManager.shared.cacheLocalFileDataIfNeeded(for: attachment) {
+                try modelContext.save()
+            }
+            shareItem = AttachmentShareItem(url: try AttachmentManager.shared.fileURL(for: attachment))
+        } catch {
             alertState = AppAlertState(
                 title: String(localized: "error.attachments.title"),
                 message: String(localized: "error.attachments.open_failed.message")
             )
-            return
         }
-
-        shareItem = AttachmentShareItem(url: fileURL)
     }
 }
 
