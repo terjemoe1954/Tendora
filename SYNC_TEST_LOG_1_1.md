@@ -14,12 +14,12 @@ Apple ID / iCloud account:
 
 ## Preflight
 
-- [ ] All devices use the same iCloud account.
-- [ ] All devices run the same TestFlight/App Store build.
-- [ ] Tendora shows iCloud available in Settings on iPhone.
-- [ ] Tendora shows iCloud available in Settings on iPad.
-- [ ] Tendora shows iCloud available in Settings on Mac.
-- [ ] Tendora launches without the storage unavailable screen on all devices.
+- [x] All devices use the same iCloud account.
+- [x] All devices run the same TestFlight/App Store build.
+- [x] Tendora shows iCloud available in Settings on iPhone.
+- [x] Tendora shows iCloud available in Settings on iPad.
+- [x] Tendora shows iCloud available in Settings on Mac.
+- [x] Tendora launches without the storage unavailable screen on all devices.
 
 ## Basic Sync
 
@@ -70,9 +70,9 @@ Apple ID / iCloud account:
 
 ## Final Decision
 
-- [ ] Ready for TestFlight smoke test.
-- [ ] Ready for App Store metadata update.
-- [ ] Ready for 1.1 release.
+- [X] Ready for TestFlight smoke test.
+- [x] Ready for App Store metadata update.
+- [x] Ready for 1.1 release.
 
 Blocking issues:
 

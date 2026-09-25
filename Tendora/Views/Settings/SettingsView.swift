@@ -14,7 +14,6 @@ struct SettingsView: View {
     @AppStorage("appAppearance") private var appAppearanceRawValue = AppAppearance.system.rawValue
     @AppStorage("appLanguage") private var appLanguageRawValue = AppLanguage.system.rawValue
     @State private var cloudSyncStatus = CloudSyncStatusService()
-    @State private var premiumEntitlement = PremiumEntitlementService()
     @State private var isPresentingAbout = false
 
     var body: some View {
@@ -42,35 +41,6 @@ struct SettingsView: View {
                     Text("settings.section.sync")
                 }
 
-                Section {
-                    VStack(alignment: .leading, spacing: 8) {
-                        Label {
-                            Text(LocalizedStringKey(premiumEntitlement.status.titleLocalizationKey))
-                        } icon: {
-                            Image(systemName: premiumStatusIconName)
-                        }
-                        .font(.headline)
-
-                        Text(LocalizedStringKey(premiumEntitlement.status.messageLocalizationKey))
-                            .font(.subheadline)
-                            .foregroundStyle(.secondary)
-                    }
-                    .padding(.vertical, 4)
-
-                    PremiumFeatureRow(titleKey: "settings.premium.feature.icloud", systemImage: "icloud")
-                    PremiumFeatureRow(titleKey: "settings.premium.feature.backup", systemImage: "externaldrive.badge.icloud")
-                    PremiumFeatureRow(titleKey: "settings.premium.feature.attachments", systemImage: "paperclip")
-
-                    Button {
-                    } label: {
-                        Label("settings.premium.upgrade", systemImage: "crown")
-                    }
-                    .disabled(true)
-                } header: {
-                    Text("settings.section.premium")
-                } footer: {
-                    Text("settings.premium.footer")
-                }
 
                 Section {
                     Button(action: openNotificationSettings) {
@@ -131,9 +101,6 @@ struct SettingsView: View {
         }
     }
 
-    private var premiumStatusIconName: String {
-        premiumEntitlement.isPremiumUnlocked ? "crown.fill" : "crown"
-    }
 
     private func openNotificationSettings() {
         guard let settingsURL = URL(string: UIApplication.openSettingsURLString) else {
@@ -144,18 +111,6 @@ struct SettingsView: View {
     }
 }
 
-private struct PremiumFeatureRow: View {
-    let titleKey: String
-    let systemImage: String
-
-    var body: some View {
-        Label {
-            Text(LocalizedStringKey(titleKey))
-        } icon: {
-            Image(systemName: systemImage)
-        }
-    }
-}
 
 private struct AboutTendoraView: View {
     @Environment(\.dismiss) private var dismiss
