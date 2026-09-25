@@ -1,6 +1,6 @@
 # Tendora App Store Metadata Draft
 
-Updated: August 24, 2026
+Updated: September 25, 2026
 
 This draft is based on the current shipped feature set in the codebase:
 
@@ -9,7 +9,8 @@ This draft is based on the current shipped feature set in the codebase:
 - reminders/notifications
 - document and photo attachments
 - calendar view
-- local on-device storage
+- iCloud sync across the user's Apple devices
+- private user data storage through the user's iCloud account
 
 ## App Name
 
@@ -34,11 +35,11 @@ Draft:
 
 ## Promotional Text
 
-`Keep your assets, maintenance tasks, reminders, and important documents together in one simple app.`
+`Keep your assets, maintenance tasks, reminders, and important documents in sync across your Apple devices.`
 
 ## Description
 
-Draft:
+Updated draft:
 
 `Tendora helps you stay on top of the things you own.
 
@@ -52,20 +53,21 @@ With Tendora you can:
 - Track upcoming tasks in a calendar view
 - Store receipts, manuals, warranties, photos, and other documents
 - Review maintenance history over time
+- Keep your Tendora data in sync across your Apple devices with iCloud
 
 Tendora is designed to make everyday ownership easier, whether you are keeping up with a home, a vehicle, or seasonal equipment.
 
-Your data is currently stored locally on your device.`
+Your Tendora data is stored privately with your iCloud account when iCloud is available. Tendora does not provide shared household accounts or collaboration between different users.`
 
 ## What’s New
 
-For first release:
+For sync/stability release:
 
-`Initial release.`
+`Adds iCloud sync improvements and stability fixes for keeping Tendora data available across your Apple devices.`
 
 Optional richer version:
 
-`First public release of Tendora with asset tracking, maintenance reminders, calendar planning, and document attachments.`
+`This update improves iCloud sync across iPhone, iPad, and Mac, including better attachment handling and clearer storage error states.`
 
 ## Primary Category
 
@@ -108,14 +110,15 @@ Expected result:
 
 Draft:
 
-`Tendora is a local-first maintenance tracking app. Reviewers can create assets, add tasks with reminder settings, and attach local photos or files to assets and tasks. Notification permissions are optional and are used only for maintenance reminders created by the user.`
+`Tendora is a maintenance tracking app for user-created assets, tasks, reminders, and attachments. Reviewers can create assets, add tasks with reminder settings, and attach local photos or files to assets and tasks. If testing on multiple devices signed into the same iCloud account, data should sync through the user's private iCloud database. Notification permissions are optional and are used only for maintenance reminders created by the user.`
 
 ## Privacy Summary Draft
 
 Current likely position based on the app as implemented:
 
-- Data is created by the user and stored locally on device
-- No account system
+- Data is created by the user and stored in the user's private iCloud database when iCloud is available
+- No Tendora account system
+- No sharing of private data between different Apple IDs
 - No third-party analytics visible in the current codebase
 - No advertising SDKs visible in the current codebase
 - No external tracking visible in the current codebase
@@ -129,7 +132,8 @@ This still needs to be confirmed in App Store Connect before submission.
 - Confirm final category choice
 - Provide real privacy policy URL
 - Provide support URL or contact page
-- Confirm whether you want the description to explicitly say `stored locally on your device`
+- Confirm App Store privacy answers for iCloud-synced user content
+- Confirm whether the release should be versioned as `1.0.2` or `1.1`
 
 ## Suggested Next Prompt
 
