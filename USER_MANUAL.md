@@ -6,8 +6,9 @@ Tendora helps you keep track of assets you own and the maintenance tasks and doc
 - Add assets such as a home, cabin, car, boat, or other property
 - Create maintenance tasks with due dates and repeat schedules
 - Receive reminder notifications before tasks are due
-- Attach photos and documents to assets and tasks
+- Add new photos and documents to assets and tasks with Tendora Premium
 - Review upcoming work, past completions, and stored documents
+- Sync Tendora data across Apple devices signed into the same iCloud account
 
 ## First Launch
 The first time you open Tendora, you will see a short onboarding flow. Swipe through the introduction screens and tap `Get Started` to enter the app.
@@ -21,7 +22,7 @@ Tendora uses five tabs:
 - `Calendar`: Graphical calendar view of scheduled tasks
 - `Add`: Quick shortcut for creating a new asset
 - `Documents`: All stored attachments grouped by asset
-- `Settings`: Reminder defaults, appearance, and app info
+- `Settings`: iCloud sync status, Premium, reminder defaults, appearance, language, and app info
 
 ## Home Tab
 The `Home` tab is your main dashboard.
@@ -188,6 +189,8 @@ Tap a day in the calendar to see tasks due on that date. Tap a task to open its 
 Completed non-repeating tasks are not shown as active scheduled items in the calendar.
 
 ## Adding Photos and Documents
+Adding new photos and document attachments requires Tendora Premium for fresh installs. Eligible existing App Store users may keep attachment creation unlocked as an early-supporter transition. Existing attachments remain available to open, share, and delete.
+
 Attachments can be added from:
 
 - An asset detail screen
@@ -222,6 +225,11 @@ Attachments can be:
 
 If an attachment file cannot be opened or imported, Tendora shows an error alert.
 
+### Premium attachment gate
+If adding attachments requires Premium, Tendora shows a Premium cue near the add action and opens an upgrade sheet when you try to add a new attachment.
+
+You can continue using assets, tasks, reminders, the calendar, and existing attachments without purchasing Premium.
+
 ## Documents Tab
 The `Documents` tab shows all saved attachments across the app.
 
@@ -235,10 +243,32 @@ From this tab, you can open, share, or delete attachments just like in the asset
 ## Settings
 The `Settings` tab includes:
 
+- iCloud sync status
+- Tendora Premium status and purchase options
 - Notification settings shortcut
 - Default reminder timing
 - Appearance selection
+- Language selection
 - About screen
+
+### iCloud sync
+Tendora shows whether iCloud is available for syncing on the current device.
+
+Tendora data syncs through the user's private iCloud database when iCloud is available. Sync works across Apple devices signed into the same iCloud account. Tendora does not provide shared household accounts or collaboration between different Apple IDs.
+
+### Tendora Premium
+Tendora Premium unlocks adding new photos and document attachments to assets and tasks.
+
+From Settings, you can:
+
+- View Premium status
+- Buy monthly or yearly Premium when available
+- Restore purchases
+- Manage an active subscription
+
+Premium subscriptions renew automatically until cancelled. You can manage or cancel an active subscription in Tendora Settings or in your App Store account settings.
+
+If the App Store reports an active subscription, Settings may show the current subscription period end date.
 
 ### Notification settings
 Tap `Notifications` to open the system settings page for Tendora. Use this if you previously denied notification permission and want to enable reminders later.
@@ -253,13 +283,16 @@ You can choose:
 - Light
 - Dark
 
+### Language
+You can choose the app language or follow the system language.
+
 ### About
 The About screen shows the app version and build number.
 
 ## Tips
 - Add assets first, then create tasks from the asset detail page
 - Use repeating tasks for maintenance that happens on a schedule
-- Store warranties, receipts, manuals, and service records with the related asset
+- Add warranties, receipts, manuals, and service records to the related asset when Premium or early-supporter attachment access is available
 - Review the Home tab regularly for upcoming work
 - Use the Calendar tab to plan maintenance by date
 
@@ -281,7 +314,14 @@ Make sure:
 ### A document will not open
 The source file may have been corrupted during import or the stored file may no longer be available. Try re-importing the document if possible.
 
+### I bought Premium but the app still shows Free Plan
+Open Settings in Tendora and tap `Restore Purchases`. Make sure the device is signed into the same Apple Account used for the purchase.
+
+### I cannot buy Premium
+Purchases may be disabled by Screen Time, account restrictions, or device management. Check App Store purchase settings on the device.
+
 ## Important Notes
-- Tendora stores attachments locally inside the app’s data storage
+- User-created Tendora data is stored in the user's private iCloud database when iCloud is available
+- Attachments are stored with the user's Tendora data
 - Deleting an asset or task also deletes related records and attachments from Tendora
 - There is currently no separate asset list tab; assets are accessed from the Home screen

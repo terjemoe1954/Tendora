@@ -7,15 +7,16 @@ Tendora is a maintenance tracker for the things you own. It helps you organize a
 - Add and organize assets
 - Create one-time or repeating maintenance tasks
 - Get reminder notifications before due dates
-- Store photos, receipts, manuals, warranties, insurance files, and service records
+- Add new photos, receipts, manuals, warranties, insurance files, and service records with Premium
 - Review upcoming tasks from the Home and Calendar views
+- Sync Tendora data across Apple devices signed into the same iCloud account
 
 ## Quick Start
 1. Open Tendora and complete the onboarding screens.
 2. Add your first asset from the `Add` tab or the `+` button on Home.
 3. Open the asset and add maintenance tasks.
 4. Enable reminders for tasks you do not want to miss.
-5. Attach photos or documents to the asset or to individual tasks.
+5. Upgrade to Tendora Premium if you want to add new photo or document attachments.
 
 ## Main Sections
 ### Home
@@ -28,7 +29,16 @@ Shows active tasks by date so you can see what is due on a selected day.
 Shows saved attachments grouped by asset.
 
 ### Settings
-Lets you manage reminder defaults, notification access, appearance, and app version details.
+Lets you manage iCloud sync status, Premium status, purchases, reminders, appearance, language, notification access, and app version details.
+
+## Tendora Premium
+Tendora is useful without Premium for core asset and task tracking.
+
+Premium unlocks adding new photos and document attachments to assets and tasks.
+
+Existing App Store users who already used Tendora before the paid attachment update may keep attachment creation unlocked as an early-supporter transition. Existing attachments remain available to open, share, and delete.
+
+Premium subscriptions renew automatically until cancelled. You can restore purchases or manage an active subscription from Settings in Tendora. Subscriptions can also be managed or cancelled in your App Store account settings.
 
 ## Notifications
 Tendora can send reminder notifications for maintenance tasks.
@@ -39,7 +49,7 @@ If reminders are not working:
 - Open `Settings` in Tendora and use the notification shortcut to verify iPhone notification permission
 
 ## Attachments
-You can add:
+Premium users can add:
 - Photos from your photo library
 - Files from the Files picker
 
@@ -55,6 +65,8 @@ Supported organization types inside the app include:
 
 Attachments can be opened, shared, and deleted inside Tendora.
 
+If Tendora shows that adding attachments requires Premium, you can still use assets, tasks, reminders, calendar, and existing attachments without purchasing.
+
 ## Troubleshooting
 ### I cannot save an asset
 Check that:
@@ -68,8 +80,16 @@ That is expected for non-repeating tasks. Repeating tasks stay active and move t
 ### A document will not open
 If the stored file cannot be opened, try importing it again from the original source if it is still available.
 
+### I bought Premium but it is not active
+Open Tendora Settings and tap `Restore Purchases`. Confirm that the device is signed into the same Apple Account that purchased the subscription.
+
+### I cannot buy Premium
+Purchases may be disabled by Screen Time, account restrictions, or device management. Check App Store purchase settings on the device.
+
 ## Data and Deletion
-- Attachments are stored locally in the app’s data storage
+- User-created Tendora data is stored in the user's private iCloud database when iCloud is available
+- Tendora does not provide shared household accounts or collaboration between different Apple IDs
+- Attachments are stored with the user's Tendora data
 - Deleting an asset also deletes its related tasks and attachments
 - Deleting a task also deletes its task-specific attachments
 

@@ -27,30 +27,41 @@ struct AttachmentPreviewView: UIViewControllerRepresentable {
         }
     }
 
-    func makeUIViewController(context: Context) -> QLPreviewController {
+    func makeUIViewController(context: Context) -> UINavigationController {
         let controller = QLPreviewController()
         controller.dataSource = context.coordinator
-        controller.view.addGestureRecognizer(context.coordinator.dismissTapGestureRecognizer)
-        return controller
+        controller.navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .close,
+            target: context.coordinator,
+            action: #selector(Coordinator.closePreview)
+        )
+        controller.view.addGestureRecognizer(context.coordinator.dismissDoubleTapGestureRecognizer)
+
+        return UINavigationController(rootViewController: controller)
     }
 
-    func updateUIViewController(_ uiViewController: QLPreviewController, context: Context) {
+    func updateUIViewController(_ uiViewController: UINavigationController, context: Context) {
         context.coordinator.fileURL = fileURL
-        uiViewController.reloadData()
+        guard let previewController = uiViewController.topViewController as? QLPreviewController else {
+            return
+        }
+
+        previewController.reloadData()
     }
 
     final class Coordinator: NSObject, QLPreviewControllerDataSource {
         var fileURL: URL
         let onDismiss: () -> Void
-        let dismissTapGestureRecognizer: UITapGestureRecognizer
+        let dismissDoubleTapGestureRecognizer: UITapGestureRecognizer
 
         init(fileURL: URL, onDismiss: @escaping () -> Void) {
             self.fileURL = fileURL
             self.onDismiss = onDismiss
-            dismissTapGestureRecognizer = UITapGestureRecognizer()
+            dismissDoubleTapGestureRecognizer = UITapGestureRecognizer()
             super.init()
-            dismissTapGestureRecognizer.addTarget(self, action: #selector(handlePreviewTap))
-            dismissTapGestureRecognizer.cancelsTouchesInView = false
+            dismissDoubleTapGestureRecognizer.addTarget(self, action: #selector(closePreview))
+            dismissDoubleTapGestureRecognizer.numberOfTapsRequired = 2
+            dismissDoubleTapGestureRecognizer.cancelsTouchesInView = false
         }
 
         func numberOfPreviewItems(in controller: QLPreviewController) -> Int {
@@ -62,7 +73,7 @@ struct AttachmentPreviewView: UIViewControllerRepresentable {
         }
 
         @objc
-        private func handlePreviewTap() {
+        func closePreview() {
             onDismiss()
         }
     }

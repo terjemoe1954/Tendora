@@ -13,6 +13,7 @@ import UniformTypeIdentifiers
 struct AddAttachmentView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
+    @Environment(PremiumEntitlementService.self) private var premiumEntitlementService
 
     let asset: Asset?
     let task: MaintenanceTask?
@@ -24,66 +25,77 @@ struct AddAttachmentView: View {
     @State private var alertState: AppAlertState?
 
     var body: some View {
-        NavigationStack {
-            Form {
-                Section("add_attachment.section.linked_to") {
-                    if let task {
-                        LabeledContent(String(localized: "add_attachment.field.task"), value: task.title)
+        if premiumEntitlementService.canCreateAttachments {
+            NavigationStack {
+                Form {
+                    Section("add_attachment.section.linked_to") {
+                        if let task {
+                            LabeledContent(String(localized: "add_attachment.field.task"), value: task.title)
+                        }
+
+                        if let asset {
+                            LabeledContent(String(localized: "add_attachment.field.asset"), value: asset.name)
+                        }
                     }
 
-                    if let asset {
-                        LabeledContent(String(localized: "add_attachment.field.asset"), value: asset.name)
+                    Section("add_attachment.section.type") {
+                        Picker("add_attachment.field.type", selection: $attachmentType) {
+                            ForEach(AttachmentType.allCases) { type in
+                                Text(LocalizedStringKey(type.displayNameLocalizationKey)).tag(type)
+                            }
+                        }
+                    }
+
+                    Section("add_attachment.section.import") {
+                        PhotosPicker(selection: $selectedPhoto, matching: .images) {
+                            Label("add_attachment.photo", systemImage: "photo.on.rectangle")
+                        }
+
+                        Button {
+                            isPresentingFileImporter = true
+                        } label: {
+                            Label("add_attachment.document", systemImage: "doc.badge.plus")
+                        }
+                    }
+
+                    Section {
+                        Text("add_attachment.help")
+                            .font(.footnote)
+                            .foregroundStyle(.secondary)
                     }
                 }
-
-                Section("add_attachment.section.type") {
-                    Picker("add_attachment.field.type", selection: $attachmentType) {
-                        ForEach(AttachmentType.allCases) { type in
-                            Text(LocalizedStringKey(type.displayNameLocalizationKey)).tag(type)
+                .navigationTitle("add_attachment.title")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .topBarLeading) {
+                        Button("common.cancel") {
+                            dismiss()
                         }
                     }
                 }
-
-                Section("add_attachment.section.import") {
-                    PhotosPicker(selection: $selectedPhoto, matching: .images) {
-                        Label("add_attachment.photo", systemImage: "photo.on.rectangle")
-                    }
-
-                    Button {
-                        isPresentingFileImporter = true
-                    } label: {
-                        Label("add_attachment.document", systemImage: "doc.badge.plus")
-                    }
+                .disabled(isImporting)
+                .fileImporter(
+                    isPresented: $isPresentingFileImporter,
+                    allowedContentTypes: [.item],
+                    onCompletion: handleImportedFile
+                )
+                .task(id: selectedPhoto) {
+                    guard let selectedPhoto else { return }
+                    await importPhoto(from: selectedPhoto)
                 }
-
-                Section {
-                    Text("add_attachment.help")
-                        .font(.footnote)
-                        .foregroundStyle(.secondary)
-                }
-            }
-            .navigationTitle("add_attachment.title")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Button("common.cancel") {
-                        dismiss()
-                    }
+                .alert(item: $alertState) { alert in
+                    Alert(
+                        title: Text(alert.title),
+                        message: Text(alert.message),
+                        dismissButton: .default(Text(String(localized: "common.ok")))
+                    )
                 }
             }
-            .disabled(isImporting)
-            .fileImporter(
-                isPresented: $isPresentingFileImporter,
-                allowedContentTypes: [.item],
-                onCompletion: handleImportedFile
+        } else {
+            PremiumUpgradeView(
+                titleKey: "premium.upgrade.attachments.title",
+                messageKey: "premium.upgrade.attachments.message"
             )
-            .task(id: selectedPhoto) {
-                guard let selectedPhoto else { return }
-                await importPhoto(from: selectedPhoto)
-            }
-            .alert(item: $alertState) { alert in
-                Alert(title: Text(alert.title), message: Text(alert.message), dismissButton: .default(Text(String(localized: "common.ok"))))
-            }
         }
     }
 
@@ -154,4 +166,5 @@ struct AddAttachmentView: View {
 #Preview {
     AddAttachmentView(asset: PreviewSampleData.assets[0], task: nil)
         .modelContainer(PreviewSampleData.container)
+        .environment(PremiumEntitlementService())
 }

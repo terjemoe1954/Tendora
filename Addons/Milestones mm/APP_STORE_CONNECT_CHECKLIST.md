@@ -1,8 +1,8 @@
 # Tendora App Store Connect Checklist
 
-Updated: August 25, 2026
+Updated: September 26, 2026
 
-Use this document when you create the Tendora app record in App Store Connect and prepare the first submission.
+Use this document when you prepare the Tendora App Store Connect record for the version `1.2` build `5` Premium update. Version `1.1` build `4` is the approved public baseline.
 
 ## 1. App Record
 
@@ -21,7 +21,7 @@ Use this document when you create the Tendora app record in App Store Connect an
 | Devices | `iPhone and iPad` if both are tested and supported | Confirm |
 | Mac on Apple Silicon | Disable unless you want to support Mac now | Review |
 | Apple Vision | Disable unless you want to support it now | Review |
-| Price | Free or your chosen price tier | Choose |
+| Price | Free app with optional Tendora Premium subscription | Confirm |
 | Availability Date | Release when approved or manual release | Choose |
 
 ## 3. App Information
@@ -60,19 +60,22 @@ With Tendora you can:
 - Create maintenance tasks with due dates
 - Set reminder notifications before work is due
 - Track upcoming tasks in a calendar view
-- Store receipts, manuals, warranties, photos, and other documents
+- Add new receipts, manuals, warranties, photos, and other documents with Premium
 - Review maintenance history over time
+- Keep your Tendora data in sync across your Apple devices with iCloud
 
 Tendora is designed to make everyday ownership easier, whether you are keeping up with a home, a vehicle, or seasonal equipment.
 
-Your data is currently stored locally on your device.
+Core asset and task tracking is available without Premium. Tendora Premium unlocks adding new photos and document attachments to assets and tasks. Existing attachments remain available, and eligible existing users may keep attachment creation unlocked as an early-supporter transition.
+
+Your Tendora data is stored privately with your iCloud account when iCloud is available. Tendora does not provide shared household accounts or collaboration between different users.
 ```
 
 ## 6. What’s New
 
 | Release | Text | Status |
 |---|---|---|
-| Version 1.0 | `Initial release.` | Ready |
+| Version 1.2 / Premium update | `Adds Tendora Premium for adding new photo and document attachments, while keeping core asset and task tracking available without Premium. Existing attachments remain accessible.` | Draft |
 
 Optional longer first-release version:
 
@@ -90,8 +93,8 @@ Based on the current codebase, this is the likely position to verify before subm
 | Tracking | No tracking | Verify |
 | Analytics | No third-party analytics visible | Verify |
 | Advertising | No ads or ad SDKs visible | Verify |
-| Data Linked to User | Likely no, if data stays on-device only | Verify carefully |
-| Data Collection | Likely none collected by developer, if fully local | Verify carefully |
+| Data Linked to User | User-created content may sync through the user's private iCloud account; verify App Store privacy wording carefully | Verify carefully |
+| Data Collection | No developer server or analytics visible; verify iCloud/private user content answers carefully | Verify carefully |
 
 Important:
 Only answer these after one final code sweep for analytics, crash SDKs, external APIs, or hidden collection behavior.
@@ -112,10 +115,19 @@ Use demo data before capturing screenshots so every screen looks intentional and
 Suggested review note:
 
 ```text
-Tendora is a local-first maintenance tracking app. Reviewers can create assets, add tasks with reminder settings, and attach local photos or files to assets and tasks. Notification permissions are optional and are used only for maintenance reminders created by the user.
+Tendora is a maintenance tracking app for user-created assets, tasks, reminders, and attachments. Version 1.2 build 5 adds Tendora Premium. Reviewers can create assets and add tasks with reminder settings without purchasing. Adding new photo or document attachments is a Tendora Premium feature for fresh installs; existing attachments remain accessible. Eligible users whose original App Store install predates build 5 may keep attachment creation unlocked as an early-supporter transition. Premium can be purchased, restored, and managed from Settings. Notification permissions are optional and are used only for maintenance reminders created by the user. If testing on multiple devices signed into the same iCloud account, data should sync through the user's private iCloud database.
 ```
 
-## 10. Release Validation Before Upload
+## 10. Premium Subscription Products
+
+| Product | App Store Connect Type | Product ID | Status |
+|---|---|---|---|
+| Tendora Premium Monthly | Auto-renewable subscription | `tendora_premium_monthly` | Create in App Store Connect |
+| Tendora Premium Yearly | Auto-renewable subscription | `tendora_premium_yearly` | Create in App Store Connect |
+
+Use one subscription group for both products. Confirm pricing, localizations, subscription duration, review screenshot, and App Review information in App Store Connect before upload.
+
+## 11. Release Validation Before Upload
 
 | Test | Status |
 |---|---|
@@ -125,6 +137,14 @@ Tendora is a local-first maintenance tracking app. Reviewers can create assets, 
 | Mark task as done and confirm history updates | Pending |
 | Reminder permission flow | Pending |
 | Attachment import, preview, share, delete | Pending |
+| Fresh install attachment gate and Premium upgrade sheet | Pending |
+| Monthly Premium subscription purchase | Pending |
+| Yearly Premium subscription purchase | Pending |
+| Restore purchases | Pending |
+| Manage subscription sheet | Pending |
+| Pending purchase state | Pending |
+| Purchases disabled by device/account restrictions | Pending |
+| Early-supporter upgrade path from existing install | Pending |
 | Calendar screen with realistic data | Pending |
 | Documents screen with realistic data | Pending |
 | English localization pass | Pending |
@@ -132,16 +152,20 @@ Tendora is a local-first maintenance tracking app. Reviewers can create assets, 
 | Thai localization pass | Pending |
 | Archive/release build | Pending |
 
-## 11. Before You Press Submit
+## 12. Before You Press Submit
 
 | Item | Status |
 |---|---|
 | Remove or hide demo-only tools if they should not ship | Review |
 | Confirm supported devices in Xcode and App Store Connect match | Pending |
-| Confirm version and build number | Pending |
+| Confirm version and build number | Ready: `1.2` build `5` |
 | Upload build from Xcode Organizer | Pending |
 | Attach screenshots | Pending |
 | Attach privacy policy and support URL | Pending |
+| Configure Premium subscription group and products | Pending |
+| Confirm monthly/yearly Premium product IDs match the app | Pending |
+| Add subscription group and at least one Premium subscription to the version `1.2` App Review submission | Pending |
+| Add App Review notes for Premium and early-supporter behavior | Pending |
 | Complete age rating | Pending |
 | Complete privacy nutrition answers | Pending |
 | Add reviewer note | Pending |

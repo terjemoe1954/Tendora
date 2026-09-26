@@ -5,10 +5,12 @@
 //  Created by Codex on 24/08/2026.
 //
 
+import StoreKit
 import SwiftUI
 import UIKit
 
 struct SettingsView: View {
+    @Environment(PremiumEntitlementService.self) private var premiumEntitlementService
     @Environment(\.openURL) private var openURL
     @AppStorage("defaultReminderOffset") private var defaultReminderOffsetRawValue = ReminderOffset.oneWeekBefore.rawValue
     @AppStorage("appAppearance") private var appAppearanceRawValue = AppAppearance.system.rawValue
@@ -41,6 +43,7 @@ struct SettingsView: View {
                     Text("settings.section.sync")
                 }
 
+                PremiumSettingsSection(premiumEntitlementService: premiumEntitlementService)
 
                 Section {
                     Button(action: openNotificationSettings) {
@@ -101,7 +104,6 @@ struct SettingsView: View {
         }
     }
 
-
     private func openNotificationSettings() {
         guard let settingsURL = URL(string: UIApplication.openSettingsURLString) else {
             return
@@ -111,6 +113,218 @@ struct SettingsView: View {
     }
 }
 
+private struct PremiumSettingsSection: View {
+    let premiumEntitlementService: PremiumEntitlementService
+
+    @State private var alertState: AppAlertState?
+    @State private var isPresentingManageSubscriptions = false
+
+    var body: some View {
+        Section {
+            PremiumStatusRow(
+                status: premiumEntitlementService.status,
+                expirationDate: premiumEntitlementService.activePremiumExpirationDate
+            )
+
+            if premiumEntitlementService.hasEarlySupporterAttachmentAccess, premiumEntitlementService.isPremiumUnlocked == false {
+                Label("settings.premium.early_supporter", systemImage: "checkmark.seal")
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+            }
+
+            if premiumEntitlementService.isPremiumUnlocked == false {
+                if premiumEntitlementService.isLoadingProducts {
+                    Label("settings.premium.loading", systemImage: "hourglass")
+                        .foregroundStyle(.secondary)
+                } else if premiumEntitlementService.products.isEmpty {
+                    Label("settings.premium.error.products_unavailable", systemImage: "exclamationmark.triangle")
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+
+                    Button {
+                        Task {
+                            await premiumEntitlementService.loadProducts()
+                            updateAlertIfNeeded()
+                        }
+                    } label: {
+                        Label("settings.premium.retry_products", systemImage: "arrow.clockwise")
+                    }
+                } else {
+                    ForEach(premiumEntitlementService.products, id: \.id) { product in
+                        PremiumProductButton(
+                            product: product,
+                            isPurchasing: premiumEntitlementService.purchaseState == .purchasing(productID: product.id),
+                            isDisabled: premiumEntitlementService.isStoreBusy || premiumEntitlementService.canOfferPurchases == false
+                        ) {
+                            Task {
+                                await premiumEntitlementService.purchase(product)
+                                updateAlertIfNeeded()
+                            }
+                        }
+                    }
+                }
+            }
+
+            Button {
+                Task {
+                    await premiumEntitlementService.restorePurchases()
+                    updateAlertIfNeeded()
+                }
+            } label: {
+                Label("settings.premium.restore", systemImage: "arrow.clockwise.circle")
+            }
+            .disabled(premiumEntitlementService.isStoreBusy || premiumEntitlementService.hasPendingPurchase)
+
+            if premiumEntitlementService.isPremiumUnlocked, canShowManageSubscriptions {
+                Button {
+                    isPresentingManageSubscriptions = true
+                } label: {
+                    Label("settings.premium.manage_subscription", systemImage: "person.crop.circle.badge.checkmark")
+                }
+            }
+
+            if premiumEntitlementService.canMakePayments == false,
+               premiumEntitlementService.isPremiumUnlocked == false {
+                Label("settings.premium.payments_unavailable", systemImage: "cart.badge.minus")
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+            }
+
+            if premiumEntitlementService.purchaseState == .pending {
+                Label("settings.premium.pending", systemImage: "clock")
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+            }
+
+            PremiumFeatureList()
+        } header: {
+            Text("settings.section.premium")
+        } footer: {
+            VStack(alignment: .leading, spacing: 6) {
+                Text("settings.premium.footer")
+                PremiumSubscriptionDisclosureView()
+            }
+        }
+        .alert(item: $alertState) { alertState in
+            Alert(
+                title: Text(LocalizedStringKey(alertState.title)),
+                message: Text(LocalizedStringKey(alertState.message)),
+                dismissButton: .default(Text("common.ok")) {
+                    premiumEntitlementService.clearStoreError()
+                }
+            )
+        }
+        .manageSubscriptionsSheet(isPresented: $isPresentingManageSubscriptions)
+        .task {
+            premiumEntitlementService.refreshPaymentAvailability()
+        }
+        .onChange(of: isPresentingManageSubscriptions) { _, isPresented in
+            guard isPresented == false else {
+                return
+            }
+
+            Task {
+                await premiumEntitlementService.refreshEntitlements()
+            }
+        }
+    }
+
+    private var canShowManageSubscriptions: Bool {
+        #if targetEnvironment(macCatalyst)
+        return false
+        #else
+        return ProcessInfo.processInfo.isiOSAppOnMac == false
+        #endif
+    }
+
+    private func updateAlertIfNeeded() {
+        guard let storeError = premiumEntitlementService.storeError else {
+            return
+        }
+
+        alertState = AppAlertState(
+            title: storeError.titleLocalizationKey,
+            message: storeError.messageLocalizationKey
+        )
+    }
+}
+
+private struct PremiumStatusRow: View {
+    let status: PremiumEntitlementStatus
+    let expirationDate: Date?
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Label(LocalizedStringKey(status.titleLocalizationKey), systemImage: iconName)
+                .font(.headline)
+
+            Text(LocalizedStringKey(status.messageLocalizationKey))
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
+
+            if status == .active, let expirationDate {
+                Text("settings.premium.current_period_ends \(expirationDate, format: .dateTime.day().month().year())")
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+            }
+        }
+        .padding(.vertical, 4)
+    }
+
+    private var iconName: String {
+        switch status {
+        case .active:
+            return "checkmark.seal.fill"
+        case .notPurchased:
+            return "star"
+        }
+    }
+}
+
+private struct PremiumProductButton: View {
+    let product: Product
+    let isPurchasing: Bool
+    let isDisabled: Bool
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            HStack(spacing: 12) {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(product.displayName)
+                        .font(.body)
+
+                    Text(product.description)
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+
+                Spacer(minLength: 12)
+
+                if isPurchasing {
+                    ProgressView()
+                } else {
+                    Text(product.displayPrice)
+                        .font(.body.weight(.semibold))
+                        .foregroundStyle(.blue)
+                }
+            }
+            .contentShape(Rectangle())
+        }
+        .disabled(isDisabled)
+    }
+}
+
+private struct PremiumFeatureList: View {
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Label("settings.premium.feature.attachments", systemImage: "paperclip")
+        }
+        .font(.subheadline)
+        .foregroundStyle(.secondary)
+        .padding(.vertical, 4)
+    }
+}
 
 private struct AboutTendoraView: View {
     @Environment(\.dismiss) private var dismiss
@@ -165,4 +379,5 @@ private struct AboutTendoraView: View {
 
 #Preview {
     SettingsView()
+        .environment(PremiumEntitlementService())
 }

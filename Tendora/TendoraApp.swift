@@ -15,6 +15,7 @@ struct TendoraApp: App {
     @AppStorage("hasSeenOnboarding") private var hasSeenOnboarding = false
     @AppStorage("appAppearance") private var appAppearanceRawValue = AppAppearance.system.rawValue
     @AppStorage("appLanguage") private var appLanguageRawValue = AppLanguage.system.rawValue
+    @State private var premiumEntitlementService = PremiumEntitlementService()
     private let modelContainerResult: Result<ModelContainer, Error>
 
     init() {
@@ -29,7 +30,11 @@ struct TendoraApp: App {
                 MainTabView()
                     .preferredColorScheme(selectedAppearance.colorScheme)
                     .environment(\.locale, selectedLanguage.locale)
+                    .environment(premiumEntitlementService)
                     .modelContainer(sharedModelContainer)
+                    .task {
+                        await premiumEntitlementService.start()
+                    }
                     .fullScreenCover(isPresented: onboardingBinding) {
                         OnboardingView {
                             hasSeenOnboarding = true
@@ -39,6 +44,10 @@ struct TendoraApp: App {
                 StorageUnavailableView(error: error)
                     .preferredColorScheme(selectedAppearance.colorScheme)
                     .environment(\.locale, selectedLanguage.locale)
+                    .environment(premiumEntitlementService)
+                    .task {
+                        await premiumEntitlementService.start()
+                    }
             }
         }
     }

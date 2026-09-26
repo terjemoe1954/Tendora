@@ -5,11 +5,29 @@ Use this file when Tendora is ready to continue from the current App Store versi
 ## Current State
 
 - Tendora is already approved and released on the App Store.
+- Approved public baseline is version `1.1` build `4`.
+- The next paid/Premium release target is version `1.2` build `5`.
+- The Xcode target is set to `MARKETING_VERSION = 1.2` and `CURRENT_PROJECT_VERSION = 5`.
+- Premium milestone tracker: `MILESTONE_1_2_PREMIUM.md`.
+- Premium test log: `PREMIUM_TEST_LOG_1_2.md`.
+- Premium App Store Connect setup guide: `APP_STORE_CONNECT_PREMIUM_SETUP.md`.
 - iCloud sync is working across iPhone and iPad.
 - Photos and document attachments are working.
-- The app has a Premium foundation in code, but payment is not active yet.
-- Settings already has a Tendora Premium section.
-- `PremiumEntitlementService` exists and is ready to be connected to StoreKit 2 later.
+- The app has a Premium foundation in code with StoreKit 2 purchase and restore handling.
+- Settings has a Tendora Premium section with product rows, restore purchases, pending, loading, and error states.
+- `PremiumEntitlementService` is connected to StoreKit 2 and updates local Premium entitlement from verified App Store transactions.
+- Premium status is recomputed from StoreKit current entitlements after purchase, restore, transaction updates, and closing the manage-subscription sheet.
+- Premium status is observable app state and is persisted to UserDefaults for launch/offline continuity.
+- Pending purchases disable duplicate purchase/restore actions and clear when an active entitlement appears.
+- Purchase buttons respect StoreKit payment availability and show a restriction message when purchases are disabled by the device or account.
+- Premium purchase surfaces show recurring subscription disclosure text before purchase.
+- Adding new photo/document attachments now requires Premium.
+- Locked attachment add actions show a Premium cue before opening the upgrade sheet.
+- Existing installs that had completed onboarding before this paid update keep new attachment creation unlocked as an early-supporter transition.
+- In production, StoreKit `AppTransaction.originalAppVersion` also grants early-supporter attachment access to App Store customers whose original app build predates the paid attachment gate.
+- Existing attachments remain accessible so existing user data is not locked away.
+- Active Premium users can manage their subscription from Settings.
+- Active Premium users see the current subscription period end date in Settings when StoreKit provides one.
 
 ## Important Product Decision
 
@@ -28,7 +46,7 @@ Good Premium candidates:
 - Advanced iCloud sync controls.
 - Backup and restore tools.
 - Export features.
-- Unlimited or expanded document-heavy usage.
+- Adding new photos, receipts, manuals, and other document-heavy usage.
 - Future power-user features.
 
 Be careful with:
@@ -50,7 +68,7 @@ Recommended product type:
 
 - Auto-renewable subscription
 
-Before coding StoreKit:
+Before submitting Premium:
 
 1. Confirm the products exist in App Store Connect.
 2. Confirm pricing.
@@ -61,16 +79,16 @@ Before coding StoreKit:
 
 ## Technical Implementation Plan
 
-1. Add StoreKit 2 support.
-2. Fetch products using the product IDs from `PremiumEntitlementService`.
-3. Add purchase flow.
-4. Add restore purchases.
-5. Listen for transaction updates.
-6. Verify current entitlements on app launch.
-7. Connect verified Premium status to `PremiumEntitlementService`.
-8. Update Settings to show real subscription status.
+1. StoreKit 2 support is implemented.
+2. Products are fetched using the product IDs from `PremiumEntitlementService`.
+3. Purchase flow is implemented.
+4. Restore purchases is implemented.
+5. Transaction updates are observed from app launch.
+6. Current entitlements are verified on app launch.
+7. Verified Premium status updates `PremiumEntitlementService`.
+8. Settings shows real subscription status and purchase states.
 9. Decide where Premium gates should appear in the UI.
-10. Add user-friendly fallback states for offline, cancelled, pending, expired, and failed purchases.
+10. Test and refine fallback states for offline, cancelled, pending, expired, and failed purchases.
 
 ## Existing User Strategy
 
@@ -86,6 +104,13 @@ Recommended:
 - Do not block viewing or editing existing assets/tasks/documents.
 - If limits are added, apply them to creating new items, not accessing old items.
 
+Current implementation:
+
+- New attachment creation is gated.
+- Existing installs that had completed onboarding before the paid update keep attachment creation unlocked.
+- App Store customers whose original app build predates build `5` keep attachment creation unlocked in production.
+- Viewing, opening, sharing, and deleting existing attachments remains available.
+
 ## Required Test Plan
 
 Test before App Store submission:
@@ -97,14 +122,16 @@ Test before App Store submission:
 5. Purchase monthly subscription.
 6. Purchase yearly subscription.
 7. Restore purchases.
-8. Cancelled purchase.
-9. Pending purchase.
-10. Expired subscription.
-11. Refund/revoked transaction.
-12. Offline launch after previous purchase.
-13. Offline launch without purchase.
-14. Language switching with Premium UI.
-15. App review account flow.
+8. Manage subscription sheet.
+9. Cancelled purchase.
+10. Pending purchase.
+11. Purchases disabled by Screen Time or device management.
+12. Expired subscription.
+13. Refund/revoked transaction.
+14. Offline launch after previous purchase.
+15. Offline launch without purchase.
+16. Language switching with Premium UI.
+17. App review account flow.
 
 ## App Review Notes
 
@@ -112,6 +139,7 @@ When submitting:
 
 - Explain what Premium unlocks.
 - Make sure restore purchases is visible.
+- Make sure manage subscription is visible for active subscribers.
 - Make sure locked features explain why they are locked.
 - Make sure the app is useful without purchase if it is listed as free.
 - Avoid mentioning iCloud backup in a way that sounds like Apple system backup unless it is clearly Tendora data sync/backup.
@@ -120,5 +148,4 @@ When submitting:
 
 When ready, ask:
 
-> Continue from `go_for_paid_version.md` and implement StoreKit 2 for Tendora Premium.
-
+> Continue from `go_for_paid_version.md` and add the Premium feature gates after StoreKit sandbox testing passes.

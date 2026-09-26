@@ -614,7 +614,7 @@ Tendora/
 │   └── Components/
 ├── Services/
 │   ├── NotificationManager.swift
-│   ├── StoreManager.swift
+│   ├── PremiumEntitlementService.swift
 │   └── AttachmentManager.swift
 ├── Utilities/
 │   ├── DateHelpers.swift
@@ -715,23 +715,27 @@ Avoid fear-based messaging.
 
 ---
 
-## 15. Free and Pro Model
+## 15. Free and Premium Model
 
-Build the app architecture so StoreKit 2 can be added cleanly.
+StoreKit 2 is now the Premium purchase foundation.
 
-Possible Free plan:
+Current Free plan:
 
-- 1 asset
-- Up to 10 active tasks
+- Core asset tracking
+- Maintenance tasks
 - Basic reminders
+- iCloud sync remains available in version 1.2
 
-Possible Pro plan:
+Current Premium boundary:
 
-- Unlimited assets
-- Unlimited tasks
-- Photos and documents
-- Advanced reminders
-- iCloud sync in a later version
+- Adding new photos and documents
+- Early-supporter attachment access for eligible existing users
+- Restore purchases and manage subscription from Settings
+
+Possible future Premium features:
+
+- Advanced iCloud sync controls
+- Backup and restore tools
 - PDF export in a later version
 - Priority features
 
@@ -741,7 +745,7 @@ Possible pricing direction:
 - Yearly
 - Lifetime
 
-Pricing is not final and must not be hard-coded throughout the UI.
+Pricing is configured in App Store Connect and must not be hard-coded throughout the UI.
 
 Use a centralized product configuration.
 
@@ -749,19 +753,12 @@ Use a centralized product configuration.
 
 ## 16. StoreKit
 
-Create a dedicated:
+StoreKit 2 is implemented through `PremiumEntitlementService`.
 
-`StoreManager`
+Product identifiers:
 
-Do not implement fake purchase state throughout the app.
-
-Use StoreKit 2 when payments are introduced.
-
-Suggested product identifiers may eventually be:
-
-- `tendora.pro.monthly`
-- `tendora.pro.yearly`
-- `tendora.pro.lifetime`
+- `tendora_premium_monthly`
+- `tendora_premium_yearly`
 
 Treat these as placeholders until App Store Connect products are created.
 
@@ -914,7 +911,7 @@ Keep these in mind when designing the data model, but do not build them yet:
 - AI receipt scanning
 - AI maintenance suggestions
 - OCR for service documents
-- iCloud sync
+- Shared household or collaboration features
 - Family sharing
 - PDF maintenance reports
 - Vehicle resale reports

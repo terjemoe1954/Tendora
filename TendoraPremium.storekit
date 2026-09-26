@@ -1,0 +1,101 @@
+{
+  "identifier" : "A7D31E42",
+  "nonRenewingSubscriptions" : [
+  ],
+  "products" : [
+  ],
+  "settings" : {
+  },
+  "subscriptionGroups" : [
+    {
+      "id" : "E1B8245C",
+      "localizations" : [
+        {
+          "displayName" : "Tendora Premium",
+          "locale" : "en_US"
+        },
+        {
+          "displayName" : "Tendora Premium",
+          "locale" : "nb_NO"
+        },
+        {
+          "displayName" : "Tendora Premium",
+          "locale" : "th_TH"
+        }
+      ],
+      "name" : "Tendora Premium",
+      "subscriptions" : [
+        {
+          "adHocOffers" : [
+          ],
+          "codeOffers" : [
+          ],
+          "displayPrice" : "2.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "58E2B7A1",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Add photos and documents to assets and tasks.",
+              "displayName" : "Tendora Premium Monthly",
+              "locale" : "en_US"
+            },
+            {
+              "description" : "Legg til bilder og dokumenter på eiendeler og oppgaver.",
+              "displayName" : "Tendora Premium månedlig",
+              "locale" : "nb_NO"
+            },
+            {
+              "description" : "เพิ่มรูปภาพและเอกสารในทรัพย์สินและงาน",
+              "displayName" : "Tendora Premium รายเดือน",
+              "locale" : "th_TH"
+            }
+          ],
+          "productID" : "tendora_premium_monthly",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : "Tendora Premium Monthly",
+          "subscriptionGroupID" : "E1B8245C",
+          "type" : "RecurringSubscription"
+        },
+        {
+          "adHocOffers" : [
+          ],
+          "codeOffers" : [
+          ],
+          "displayPrice" : "24.99",
+          "familyShareable" : false,
+          "groupNumber" : 2,
+          "internalID" : "C9F04D6B",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Add photos and documents to assets and tasks.",
+              "displayName" : "Tendora Premium Yearly",
+              "locale" : "en_US"
+            },
+            {
+              "description" : "Legg til bilder og dokumenter på eiendeler og oppgaver.",
+              "displayName" : "Tendora Premium årlig",
+              "locale" : "nb_NO"
+            },
+            {
+              "description" : "เพิ่มรูปภาพและเอกสารในทรัพย์สินและงาน",
+              "displayName" : "Tendora Premium รายปี",
+              "locale" : "th_TH"
+            }
+          ],
+          "productID" : "tendora_premium_yearly",
+          "recurringSubscriptionPeriod" : "P1Y",
+          "referenceName" : "Tendora Premium Yearly",
+          "subscriptionGroupID" : "E1B8245C",
+          "type" : "RecurringSubscription"
+        }
+      ]
+    }
+  ],
+  "version" : {
+    "major" : 2,
+    "minor" : 0
+  }
+}

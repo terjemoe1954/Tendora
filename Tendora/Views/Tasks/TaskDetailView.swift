@@ -12,10 +12,12 @@ struct TaskDetailView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
     @Environment(\.locale) private var locale
+    @Environment(PremiumEntitlementService.self) private var premiumEntitlementService
 
     let task: MaintenanceTask
     @State private var isUpdatingTask = false
     @State private var isPresentingAddAttachment = false
+    @State private var isPresentingPremiumUpgrade = false
     @State private var isPresentingEditTask = false
     @State private var isShowingDeleteTaskConfirmation = false
     @State private var attachmentPendingDeletion: Attachment?
@@ -52,7 +54,7 @@ struct TaskDetailView: View {
             ToolbarItem(placement: .topBarTrailing) {
                 Menu {
                     Button {
-                        isPresentingAddAttachment = true
+                        presentAddAttachment()
                     } label: {
                         Label("task_detail.add_attachment", systemImage: "paperclip")
                     }
@@ -75,6 +77,12 @@ struct TaskDetailView: View {
         }
         .sheet(isPresented: $isPresentingAddAttachment) {
             AddAttachmentView(asset: task.asset, task: task)
+        }
+        .sheet(isPresented: $isPresentingPremiumUpgrade) {
+            PremiumUpgradeView(
+                titleKey: "premium.upgrade.attachments.title",
+                messageKey: "premium.upgrade.attachments.message"
+            )
         }
         .sheet(isPresented: $isPresentingEditTask) {
             if let asset = task.asset {
@@ -221,8 +229,12 @@ struct TaskDetailView: View {
 
                 Spacer()
 
+                if premiumEntitlementService.canCreateAttachments == false {
+                    PremiumLockLabel()
+                }
+
                 Button("task_detail.add_attachment") {
-                    isPresentingAddAttachment = true
+                    presentAddAttachment()
                 }
                 .font(.subheadline.weight(.semibold))
             }
@@ -261,6 +273,14 @@ struct TaskDetailView: View {
 
     private var sortedHistory: [CompletionRecord] {
         (task.completionRecords ?? []).sorted { $0.completedAt > $1.completedAt }
+    }
+
+    private func presentAddAttachment() {
+        if premiumEntitlementService.canCreateAttachments {
+            isPresentingAddAttachment = true
+        } else {
+            isPresentingPremiumUpgrade = true
+        }
     }
 
     private func markTaskDone() async {
@@ -435,4 +455,5 @@ private struct DetailRow: View {
         TaskDetailView(task: PreviewSampleData.tasks[0])
     }
     .modelContainer(PreviewSampleData.container)
+    .environment(PremiumEntitlementService())
 }

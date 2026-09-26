@@ -12,10 +12,12 @@ struct AssetDetailView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
     @Environment(\.locale) private var locale
+    @Environment(PremiumEntitlementService.self) private var premiumEntitlementService
 
     let asset: Asset
     @State private var isPresentingAddTask = false
     @State private var isPresentingAddAttachment = false
+    @State private var isPresentingPremiumUpgrade = false
     @State private var isPresentingEditAsset = false
     @State private var isShowingDeleteAssetConfirmation = false
     @State private var attachmentPendingDeletion: Attachment?
@@ -71,6 +73,12 @@ struct AssetDetailView: View {
         }
         .sheet(isPresented: $isPresentingAddAttachment) {
             AddAttachmentView(asset: asset, task: nil)
+        }
+        .sheet(isPresented: $isPresentingPremiumUpgrade) {
+            PremiumUpgradeView(
+                titleKey: "premium.upgrade.attachments.title",
+                messageKey: "premium.upgrade.attachments.message"
+            )
         }
         .confirmationDialog("asset_detail.delete_asset_confirmation", isPresented: $isShowingDeleteAssetConfirmation, titleVisibility: .visible) {
             Button("asset_detail.delete_asset", role: .destructive) {
@@ -231,8 +239,12 @@ struct AssetDetailView: View {
 
                 Spacer()
 
+                if premiumEntitlementService.canCreateAttachments == false {
+                    PremiumLockLabel()
+                }
+
                 Button("asset_detail.add_document") {
-                    isPresentingAddAttachment = true
+                    presentAddAttachment()
                 }
                 .font(.subheadline.weight(.semibold))
             }
@@ -330,6 +342,14 @@ struct AssetDetailView: View {
                 }
             }
         )
+    }
+
+    private func presentAddAttachment() {
+        if premiumEntitlementService.canCreateAttachments {
+            isPresentingAddAttachment = true
+        } else {
+            isPresentingPremiumUpgrade = true
+        }
     }
 
     private func deleteAsset() {
@@ -509,4 +529,5 @@ private struct AssetTaskCard: View {
     NavigationStack {
         AssetDetailView(asset: PreviewSampleData.assets[0])
     }
+    .environment(PremiumEntitlementService())
 }
