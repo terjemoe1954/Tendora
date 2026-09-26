@@ -2,7 +2,7 @@
 //  HomeView.swift
 //  Tendora
 //
-//  Created by Terje Moe on 22/08/2026.
+//   Created by Terje Moe on 22/08/2026.
 //
 
 import SwiftData
