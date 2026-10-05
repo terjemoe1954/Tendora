@@ -1,7 +1,7 @@
 // 
 //  AppAppearance.swift
 //  Tendora
-//
+//  
 //  Created by Codex on 24/08/2026.
 //
 
