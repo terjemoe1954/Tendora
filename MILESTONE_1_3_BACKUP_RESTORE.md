@@ -54,6 +54,7 @@ Include:
 - Local reminder rescheduling after restore.
 - Settings UI entry point.
 - File export/import using the system document picker.
+- Registered `.tendorabackup` document type so Files can select Tendora backups for restore.
 - Clear restore confirmation before deleting/replacing local data.
 - Localized strings in English, Norwegian Bokmal, and Thai.
 - Manual test log.
@@ -96,14 +97,15 @@ For the first implementation, keep the entitlement decision easy to adjust. Do n
 - [x] Implement export from current SwiftData model context.
 - [x] Implement import validation and summary.
 - [x] Implement replace-all restore.
-- [ ] Recreate attachment local files after restore.
+- [x] Recreate attachment local files after restore.
 - [x] Add Settings backup/restore section.
 - [x] Add file exporter/importer.
+- [x] Register `.tendorabackup` document type for restore picker.
 - [x] Add restore confirmation and success/error alerts.
 - [x] Add localization.
 - [x] Reschedule local task reminders after restore.
 - [ ] Update user manual.
-- [ ] Run manual backup/restore tests.
+- [x] Run manual backup/restore tests.
 - [ ] Archive and upload version `1.3`.
 
 ## Success Criteria

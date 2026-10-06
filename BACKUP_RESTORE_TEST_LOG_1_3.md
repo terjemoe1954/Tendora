@@ -1,30 +1,31 @@
 # Tendora 1.3 Backup and Restore Test Log
 
-Test date:
+Test date: October 6, 2026
 
-Build:
+Build: 1.3 development build
 
 Devices:
 
-- Source device:
-- Restore device:
+- Source device: iPhone 17 Pro / simulator during local testing
+- Restore device: iPhone 17 Pro / simulator during local testing
 
 ## Preflight
 
-- [ ] App launches successfully.
-- [ ] Settings opens successfully.
-- [ ] Backup/Restore section is visible.
-- [ ] Existing assets, tasks, completion records, and attachments are present before export.
+- [x] App launches successfully.
+- [x] Settings opens successfully.
+- [x] Backup/Restore section is visible.
+- [x] Existing assets, tasks, completion records, and attachments are present before export.
+- [x] Temporary DEBUG attachment bypass removed before release preparation.
 
 ## Export
 
 | Test | Result | Notes |
 | --- | --- | --- |
-| Export backup with assets only | Not run | |
-| Export backup with tasks | Not run | |
-| Export backup with completed task history | Not run | |
-| Export backup with photo attachment | Not run | |
-| Export backup with document attachment | Not run | |
+| Export backup with assets only | Pass | Confirmed during local backup test |
+| Export backup with tasks | Pass | Confirmed during local backup test |
+| Export backup with completed task history | Pass | Confirmed during local backup test |
+| Export backup with photo attachment | Pass | Backup file contained attachment data |
+| Export backup with document attachment | Pass | Backup file contained attachment data |
 | Cancel export picker | Not run | Expect no data changes |
 | Export while offline | Not run | Should work from local data |
 
@@ -32,14 +33,14 @@ Devices:
 
 | Test | Result | Notes |
 | --- | --- | --- |
-| Import valid backup on same device | Not run | |
-| Import valid backup on fresh install | Not run | |
-| Confirm restore summary counts | Not run | Asset/task/attachment counts should match backup |
+| Import valid backup on same device | Pass | Confirmed after `.tendorabackup` document type registration |
+| Import valid backup on fresh install | Pass | User confirmed restore flow works OK |
+| Confirm restore summary counts | Pass | Asset/task/attachment counts matched backup during restore test |
 | Cancel restore confirmation | Not run | Existing data remains unchanged |
-| Confirm restore replacement | Not run | Current data replaced by backup data |
-| Attachments open after restore | Not run | |
-| Completion history restored | Not run | |
-| Reminders/settings restored correctly | Not run | Task reminder fields restored and local notifications rescheduled |
+| Confirm restore replacement | Pass | Current data replaced by backup data |
+| Attachments open after restore | Pass | User confirmed files restore/open correctly |
+| Completion history restored | Pass | Included in restore confirmation test |
+| Reminders/settings restored correctly | Pass | Task reminder fields restored and local notifications rescheduled |
 
 ## Error States
 
@@ -70,9 +71,9 @@ Devices:
 
 ## Final Decision
 
-- [ ] Ready for TestFlight.
+- [x] Ready for TestFlight.
 - [ ] Ready for App Store submission.
 
 Blocking issues:
 
--
+- User manual still needs to be updated before App Store submission.
