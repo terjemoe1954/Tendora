@@ -1,7 +1,7 @@
 # Tendora App Store Release 1.3
 
 Version: `1.3`
-Build: `6`
+Build: `7`
 
 ## What's New
 
@@ -23,4 +23,3 @@ This update also improves backup file handling so Tendora backup files can be se
 Tendora 1.3 adds user-controlled backup and restore. Backup files are exported and imported through the standard iOS document picker. Restore requires explicit confirmation before local Tendora data is replaced.
 
 No new account system or server-side backup service is included in this version.
-
