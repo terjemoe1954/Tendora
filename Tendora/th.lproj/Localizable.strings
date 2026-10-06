@@ -295,3 +295,16 @@
 "premium.upgrade.attachments.message" = "อัปเกรดเพื่อเพิ่มรูปภาพ ใบเสร็จ คู่มือ และไฟล์ใหม่ให้กับทรัพย์สินและงานของคุณ ไฟล์แนบที่มีอยู่ยังคงใช้งานได้";
 "premium.upgrade.footer" = "คุณยังสามารถใช้ Tendora สำหรับทรัพย์สินและงานได้โดยไม่ต้องมี Premium";
 "premium.subscription.disclosure" = "การสมัครสมาชิกจะต่ออายุรายเดือนหรือรายปีตามแผนที่คุณเลือกจนกว่าจะยกเลิก และสามารถจัดการหรือยกเลิกได้ในการตั้งค่าบัญชี App Store ของคุณ";
+
+"settings.section.backup" = "สำรองและกู้คืน";
+"settings.backup.export" = "สร้างข้อมูลสำรอง";
+"settings.backup.restore" = "กู้คืนข้อมูลสำรอง";
+"settings.backup.footer" = "ส่งออกไฟล์สำรอง Tendora หรือกู้คืนจากไฟล์สำรอง การกู้คืนจะแทนที่ข้อมูล Tendora ที่อยู่บนอุปกรณ์นี้ในปัจจุบัน";
+"settings.backup.export.success.title" = "บันทึกข้อมูลสำรองแล้ว";
+"settings.backup.export.success.message" = "บันทึกข้อมูลสำรอง Tendora ของคุณแล้ว";
+"settings.backup.restore.confirm.title" = "กู้คืนข้อมูลสำรองหรือไม่";
+"settings.backup.restore.confirm.action" = "แทนที่ข้อมูลปัจจุบัน";
+"settings.backup.restore.confirm.message %lld %lld %lld" = "ข้อมูลสำรองนี้มีทรัพย์สิน %lld รายการ งาน %lld รายการ และไฟล์แนบ %lld รายการ การกู้คืนจะแทนที่ข้อมูล Tendora ที่อยู่บนอุปกรณ์นี้ในปัจจุบัน";
+"settings.backup.restore.success.title" = "กู้คืนเสร็จสมบูรณ์";
+"settings.backup.restore.success.message %lld %lld %lld" = "กู้คืนทรัพย์สิน %lld รายการ งาน %lld รายการ และไฟล์แนบ %lld รายการแล้ว";
+"settings.backup.error.title" = "ข้อผิดพลาดเกี่ยวกับข้อมูลสำรอง";

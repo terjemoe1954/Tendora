@@ -104,8 +104,32 @@ final class NotificationManager: NSObject, UNUserNotificationCenterDelegate {
         center.removeDeliveredNotifications(withIdentifiers: [identifier])
     }
 
+    func rescheduleNotifications(for tasks: [MaintenanceTask]) async throws {
+        await cancelAllTaskNotifications()
+
+        for task in tasks where task.reminderEnabled && task.isCompleted == false {
+            try await scheduleNotification(for: task)
+        }
+    }
+
+    func cancelAllTaskNotifications() async {
+        let pendingIdentifiers = await center.pendingNotificationRequests()
+            .map(\.identifier)
+            .filter { $0.hasPrefix(notificationIdentifierPrefix) }
+        let deliveredIdentifiers = await center.deliveredNotifications()
+            .map(\.request.identifier)
+            .filter { $0.hasPrefix(notificationIdentifierPrefix) }
+
+        center.removePendingNotificationRequests(withIdentifiers: pendingIdentifiers)
+        center.removeDeliveredNotifications(withIdentifiers: deliveredIdentifiers)
+    }
+
+    private var notificationIdentifierPrefix: String {
+        "tendora.task."
+    }
+
     private func notificationIdentifier(for task: MaintenanceTask) -> String {
-        "tendora.task.\(task.id.uuidString)"
+        "\(notificationIdentifierPrefix)\(task.id.uuidString)"
     }
 
     private func notificationBody(for task: MaintenanceTask) -> String {

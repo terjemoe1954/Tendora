@@ -295,3 +295,16 @@
 "premium.upgrade.attachments.message" = "Upgrade to add new photos, receipts, manuals, and files to your assets and tasks. Existing attachments stay available.";
 "premium.upgrade.footer" = "You can continue using Tendora for assets and tasks without Premium.";
 "premium.subscription.disclosure" = "Subscriptions renew monthly or yearly based on the plan you choose until cancelled, and can be managed or cancelled in your App Store account settings.";
+
+"settings.section.backup" = "Backup and Restore";
+"settings.backup.export" = "Create Backup";
+"settings.backup.restore" = "Restore Backup";
+"settings.backup.footer" = "Export a Tendora backup file or restore from one. Restoring replaces the Tendora data currently on this device.";
+"settings.backup.export.success.title" = "Backup Saved";
+"settings.backup.export.success.message" = "Your Tendora backup was saved.";
+"settings.backup.restore.confirm.title" = "Restore Backup?";
+"settings.backup.restore.confirm.action" = "Replace Current Data";
+"settings.backup.restore.confirm.message %lld %lld %lld" = "This backup contains %lld assets, %lld tasks, and %lld attachments. Restoring will replace the Tendora data currently on this device.";
+"settings.backup.restore.success.title" = "Restore Complete";
+"settings.backup.restore.success.message %lld %lld %lld" = "Restored %lld assets, %lld tasks, and %lld attachments.";
+"settings.backup.error.title" = "Backup Error";

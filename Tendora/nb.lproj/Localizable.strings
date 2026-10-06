@@ -295,3 +295,16 @@
 "premium.upgrade.attachments.message" = "Oppgrader for å legge til nye bilder, kvitteringer, manualer og filer på eiendeler og oppgaver. Eksisterende vedlegg forblir tilgjengelige.";
 "premium.upgrade.footer" = "Du kan fortsatt bruke Tendora til eiendeler og oppgaver uten Premium.";
 "premium.subscription.disclosure" = "Abonnement fornyes månedlig eller årlig basert på planen du velger til det avsluttes, og kan administreres eller avsluttes i App Store-kontoinnstillingene dine.";
+
+"settings.section.backup" = "Backup og gjenoppretting";
+"settings.backup.export" = "Lag backup";
+"settings.backup.restore" = "Gjenopprett backup";
+"settings.backup.footer" = "Eksporter en Tendora-backupfil eller gjenopprett fra en. Gjenoppretting erstatter Tendora-dataene som ligger på denne enheten nå.";
+"settings.backup.export.success.title" = "Backup lagret";
+"settings.backup.export.success.message" = "Tendora-backupen ble lagret.";
+"settings.backup.restore.confirm.title" = "Gjenopprette backup?";
+"settings.backup.restore.confirm.action" = "Erstatt gjeldende data";
+"settings.backup.restore.confirm.message %lld %lld %lld" = "Denne backupen inneholder %lld eiendeler, %lld oppgaver og %lld vedlegg. Gjenoppretting erstatter Tendora-dataene som ligger på denne enheten nå.";
+"settings.backup.restore.success.title" = "Gjenoppretting fullført";
+"settings.backup.restore.success.message %lld %lld %lld" = "Gjenopprettet %lld eiendeler, %lld oppgaver og %lld vedlegg.";
+"settings.backup.error.title" = "Backup-feil";
