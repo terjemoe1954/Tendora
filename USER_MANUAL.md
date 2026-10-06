@@ -244,6 +244,7 @@ From this tab, you can open, share, or delete attachments just like in the asset
 The `Settings` tab includes:
 
 - iCloud sync status
+- Backup and restore
 - Tendora Premium status and purchase options
 - Notification settings shortcut
 - Default reminder timing
@@ -255,6 +256,48 @@ The `Settings` tab includes:
 Tendora shows whether iCloud is available for syncing on the current device.
 
 Tendora data syncs through the user's private iCloud database when iCloud is available. Sync works across Apple devices signed into the same iCloud account. Tendora does not provide shared household accounts or collaboration between different Apple IDs.
+
+### Backup and restore
+Use Backup and Restore when you want to keep a separate copy of your Tendora data or move your data to another device.
+
+Backup files use the `.tendorabackup` file extension. You can save them in Files, iCloud Drive, or another location offered by the system share sheet.
+
+Backups include:
+
+- Assets
+- Maintenance tasks
+- Completion history
+- Photos and document attachments when attachment data is available
+- Task reminder settings
+
+Backups do not include:
+
+- StoreKit purchase state
+- App Store account information
+- iCloud account information
+- Device-specific notification identifiers
+
+#### Exporting a backup
+To export a backup:
+
+1. Open `Settings`.
+2. Tap `Export Backup`.
+3. Choose where to save the `.tendorabackup` file.
+
+Keep the backup file somewhere safe. Anyone with access to the backup file may be able to access the Tendora data inside it.
+
+#### Restoring a backup
+To restore a backup:
+
+1. Open `Settings`.
+2. Tap `Restore Backup`.
+3. Choose a `.tendorabackup` file.
+4. Review the restore summary.
+5. Confirm the restore.
+
+Important: restoring a backup replaces the current Tendora data on the device with the contents of the backup file. Tendora asks for confirmation before doing this.
+
+After restore, Tendora recreates assets, tasks, completion history, attachments, and local reminder notifications from the backup data.
 
 ### Tendora Premium
 Tendora Premium unlocks adding new photos and document attachments to assets and tasks.
@@ -314,6 +357,12 @@ Make sure:
 ### A document will not open
 The source file may have been corrupted during import or the stored file may no longer be available. Try re-importing the document if possible.
 
+### A backup file is greyed out in Files
+Make sure the file has the `.tendorabackup` extension. If the file was renamed or downloaded without the extension, Tendora may not be able to select it from the file picker.
+
+### Restore did not show the data I expected
+Check that you selected the correct backup file. Restoring replaces the current local Tendora data with the backup contents, so choose the newest backup if you want the latest data.
+
 ### I bought Premium but the app still shows Free Plan
 Open Settings in Tendora and tap `Restore Purchases`. Make sure the device is signed into the same Apple Account used for the purchase.
 
@@ -323,5 +372,7 @@ Purchases may be disabled by Screen Time, account restrictions, or device manage
 ## Important Notes
 - User-created Tendora data is stored in the user's private iCloud database when iCloud is available
 - Attachments are stored with the user's Tendora data
+- Backup files are separate files selected and saved by the user
+- Restoring a backup replaces the current Tendora data on the device after confirmation
 - Deleting an asset or task also deletes related records and attachments from Tendora
 - There is currently no separate asset list tab; assets are accessed from the Home screen

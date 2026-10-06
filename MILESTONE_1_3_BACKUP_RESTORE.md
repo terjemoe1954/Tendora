@@ -11,6 +11,7 @@ The first version should prioritize trust over cleverness: a user can export all
 ## Release Context
 
 - Version `1.2 (5)` is live on the App Store with Tendora Premium.
+- Version `1.3 (6)` is prepared for backup/restore submission.
 - Current data is stored with SwiftData and private iCloud sync.
 - Attachments are represented both as SwiftData `fileData` and as local files, so backup can use the stored attachment data.
 - Premium currently gates adding new photo/document attachments for fresh installs.
@@ -104,8 +105,9 @@ For the first implementation, keep the entitlement decision easy to adjust. Do n
 - [x] Add restore confirmation and success/error alerts.
 - [x] Add localization.
 - [x] Reschedule local task reminders after restore.
-- [ ] Update user manual.
+- [x] Update user manual.
 - [x] Run manual backup/restore tests.
+- [x] Set version/build to `1.3 (6)`.
 - [ ] Archive and upload version `1.3`.
 
 ## Success Criteria
