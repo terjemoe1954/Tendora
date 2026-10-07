@@ -311,6 +311,8 @@
 
 "settings.section.reset" = "Nullstill Tendora";
 "settings.reset.action" = "Slett alle data";
+"settings.reset.in_progress" = "Sletter data";
+"settings.reset.progress.message" = "Sletter lokale data og klargjør iCloud-synk.";
 "settings.reset.footer" = "Sletter alle Tendora-eiendeler, oppgaver, historikk, vedlegg og lokale påminnelser fra denne enheten. Lag en backup først hvis du kan trenge dataene senere.";
 "settings.reset.confirm.title" = "Slette alle Tendora-data?";
 "settings.reset.confirm.action" = "Slett alle data";

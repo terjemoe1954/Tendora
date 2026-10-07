@@ -311,6 +311,8 @@
 
 "settings.section.reset" = "Reset Tendora";
 "settings.reset.action" = "Delete All Data";
+"settings.reset.in_progress" = "Deleting Data";
+"settings.reset.progress.message" = "Removing local data and preparing iCloud sync.";
 "settings.reset.footer" = "Deletes all Tendora assets, tasks, history, attachments, and reminder notifications from this device. Create a backup first if you may need this data later.";
 "settings.reset.confirm.title" = "Delete All Tendora Data?";
 "settings.reset.confirm.action" = "Delete All Data";

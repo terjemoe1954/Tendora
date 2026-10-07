@@ -311,6 +311,8 @@
 
 "settings.section.reset" = "รีเซ็ต Tendora";
 "settings.reset.action" = "ลบข้อมูลทั้งหมด";
+"settings.reset.in_progress" = "กำลังลบข้อมูล";
+"settings.reset.progress.message" = "กำลังลบข้อมูลในเครื่องและเตรียมการซิงค์ iCloud";
 "settings.reset.footer" = "ลบทรัพย์สิน งาน ประวัติ ไฟล์แนบ และการเตือนภายในเครื่องทั้งหมดของ Tendora จากอุปกรณ์นี้ สร้างข้อมูลสำรองก่อนหากคุณอาจต้องใช้ข้อมูลนี้ในภายหลัง";
 "settings.reset.confirm.title" = "ลบข้อมูล Tendora ทั้งหมดหรือไม่";
 "settings.reset.confirm.action" = "ลบข้อมูลทั้งหมด";

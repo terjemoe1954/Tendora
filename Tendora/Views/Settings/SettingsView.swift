@@ -20,6 +20,17 @@ struct SettingsView: View {
     @State private var cloudSyncStatus = CloudSyncStatusService()
     @State private var isPresentingAbout = false
 
+    let isResettingData: Bool
+    let resetAllUserData: () async -> Void
+
+    init(
+        isResettingData: Bool = false,
+        resetAllUserData: @escaping () async -> Void = {}
+    ) {
+        self.isResettingData = isResettingData
+        self.resetAllUserData = resetAllUserData
+    }
+
     var body: some View {
         NavigationStack {
             List {
@@ -89,7 +100,10 @@ struct SettingsView: View {
                     }
                 }
 
-                DataResetSettingsSection()
+                DataResetSettingsSection(
+                    isResetting: isResettingData,
+                    resetAllUserData: resetAllUserData
+                )
             }
             .navigationTitle("tab.settings")
             .sheet(isPresented: $isPresentingAbout) {
@@ -290,20 +304,23 @@ private struct BackupAlertState: Identifiable {
 }
 
 private struct DataResetSettingsSection: View {
-    @Environment(\.modelContext) private var modelContext
-
     @State private var isPresentingResetConfirmation = false
-    @State private var alertState: DataResetAlertState?
 
-    private let resetService = DataResetService.shared
+    let isResetting: Bool
+    let resetAllUserData: () async -> Void
 
     var body: some View {
         Section {
             Button(role: .destructive) {
                 isPresentingResetConfirmation = true
             } label: {
-                Label("settings.reset.action", systemImage: "trash")
+                if isResetting {
+                    Label("settings.reset.in_progress", systemImage: "hourglass")
+                } else {
+                    Label("settings.reset.action", systemImage: "trash")
+                }
             }
+            .disabled(isResetting)
         } header: {
             Text("settings.section.reset")
         } footer: {
@@ -324,38 +341,7 @@ private struct DataResetSettingsSection: View {
         } message: {
             Text("settings.reset.confirm.message")
         }
-        .alert(item: $alertState) { alertState in
-            Alert(
-                title: Text(LocalizedStringKey(alertState.title)),
-                message: Text(alertState.message),
-                dismissButton: .default(Text("common.ok"))
-            )
-        }
     }
-
-    private func resetAllUserData() async {
-        do {
-            let summary = try await resetService.resetAllUserData(in: modelContext)
-            let message = String(
-                localized: "settings.reset.success.message \(summary.assetCount) \(summary.taskCount) \(summary.attachmentCount)"
-            )
-            alertState = DataResetAlertState(
-                title: "settings.reset.success.title",
-                message: message
-            )
-        } catch {
-            alertState = DataResetAlertState(
-                title: "settings.reset.error.title",
-                message: error.localizedDescription
-            )
-        }
-    }
-}
-
-private struct DataResetAlertState: Identifiable {
-    let id = UUID()
-    let title: String
-    let message: String
 }
 
 private struct PremiumSettingsSection: View {

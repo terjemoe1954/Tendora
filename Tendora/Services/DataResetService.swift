@@ -26,32 +26,37 @@ final class DataResetService {
         let completionRecords = try modelContext.fetch(FetchDescriptor<CompletionRecord>())
         let tasks = try modelContext.fetch(FetchDescriptor<MaintenanceTask>())
         let assets = try modelContext.fetch(FetchDescriptor<Asset>())
+        let summary = DataResetSummary(
+            assetCount: assets.count,
+            taskCount: tasks.count,
+            completionRecordCount: completionRecords.count,
+            attachmentCount: attachments.count
+        )
 
         for attachment in attachments {
             try? AttachmentManager.shared.deleteAttachmentFile(for: attachment)
+            attachment.asset = nil
+            attachment.task = nil
             modelContext.delete(attachment)
         }
 
         for completionRecord in completionRecords {
+            completionRecord.task = nil
             modelContext.delete(completionRecord)
         }
 
         for task in tasks {
+            task.asset = nil
             modelContext.delete(task)
         }
 
         for asset in assets {
             modelContext.delete(asset)
         }
-
         try modelContext.save()
+
         await NotificationManager.shared.cancelAllTaskNotifications()
 
-        return DataResetSummary(
-            assetCount: assets.count,
-            taskCount: tasks.count,
-            completionRecordCount: completionRecords.count,
-            attachmentCount: attachments.count
-        )
+        return summary
     }
 }
