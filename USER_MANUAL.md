@@ -34,6 +34,7 @@ After assets have been added, the Home tab shows:
 - An overview message
 - A list of your assets
 - Up to four upcoming active tasks
+- A shortcut to maintenance reports
 
 Tap any asset card to open its detail screen. Tap any upcoming task to open the task detail screen.
 
@@ -240,12 +241,29 @@ Documents are:
 
 From this tab, you can open, share, or delete attachments just like in the asset and task detail screens.
 
+## Reports
+Open reports from the Home tab or from `Settings` > `Reports`.
+
+Reports help you review:
+
+- Tasks due in the next 30 days
+- Overdue active tasks
+- Recent service history
+- Assets that do not have any attached photos or documents
+
+Tap a task in a report to open its task detail screen. Tap an asset in the missing documents report to open its asset detail screen.
+
+Use the share button in the top-right corner to create a PDF report. The PDF can be saved, shared, or printed from the system share sheet. It includes a summary, asset contents, overdue tasks, upcoming tasks, service history, and assets missing documents.
+
 ## Settings
 The `Settings` tab includes:
 
 - iCloud sync status
 - Backup and restore
 - Tendora Premium status and purchase options
+- User manual
+- Reports
+- Reset all Tendora data
 - Notification settings shortcut
 - Default reminder timing
 - Appearance selection
@@ -298,6 +316,34 @@ To restore a backup:
 Important: restoring a backup replaces the current Tendora data on the device with the contents of the backup file. Tendora asks for confirmation before doing this.
 
 After restore, Tendora recreates assets, tasks, completion history, attachments, and local reminder notifications from the backup data.
+
+### Reset all Tendora data
+Use Reset Tendora only when you want to remove all Tendora user data from the device.
+
+Reset deletes:
+
+- Assets
+- Maintenance tasks
+- Completion history
+- Photos and document attachments
+- Local reminder notifications
+
+Reset does not delete:
+
+- Tendora Premium status
+- App Store purchase history
+- App language or appearance settings
+- iCloud account settings
+- Backup files you previously saved outside Tendora
+
+To reset Tendora:
+
+1. Open `Settings`.
+2. Scroll to `Reset Tendora`.
+3. Tap `Delete All Data`.
+4. Confirm the warning.
+
+Important: create a backup before resetting if you may need the data later.
 
 ### Tendora Premium
 Tendora Premium unlocks adding new photos and document attachments to assets and tasks.
@@ -363,6 +409,9 @@ Make sure the file has the `.tendorabackup` extension. If the file was renamed o
 ### Restore did not show the data I expected
 Check that you selected the correct backup file. Restoring replaces the current local Tendora data with the backup contents, so choose the newest backup if you want the latest data.
 
+### Reset did not remove my Premium status
+That is expected. Reset only deletes Tendora user data such as assets, tasks, history, attachments, and local reminders. Premium purchases are managed by the App Store.
+
 ### I bought Premium but the app still shows Free Plan
 Open Settings in Tendora and tap `Restore Purchases`. Make sure the device is signed into the same Apple Account used for the purchase.
 
@@ -374,5 +423,6 @@ Purchases may be disabled by Screen Time, account restrictions, or device manage
 - Attachments are stored with the user's Tendora data
 - Backup files are separate files selected and saved by the user
 - Restoring a backup replaces the current Tendora data on the device after confirmation
+- Resetting Tendora deletes current user data on the device after confirmation, but does not cancel Premium or change App Store purchases
 - Deleting an asset or task also deletes related records and attachments from Tendora
 - There is currently no separate asset list tab; assets are accessed from the Home screen

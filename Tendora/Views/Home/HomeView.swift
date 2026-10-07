@@ -25,6 +25,7 @@ struct HomeView: View {
                             dashboardIntro
                             assetsSection
                             upcomingSection
+                            HomeReportsEntrySection()
                         }
                         .padding(.horizontal, 20)
                         .padding(.vertical, 24)
@@ -107,6 +108,53 @@ struct HomeView: View {
                     }
                 }
             }
+        }
+    }
+}
+
+private struct HomeReportsEntrySection: View {
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text("home.reports.section_title")
+                .font(.headline)
+
+            NavigationLink {
+                ReportsView()
+            } label: {
+                HStack(spacing: 16) {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 18, style: .continuous)
+                            .fill(Color.blue.opacity(0.12))
+                            .frame(width: 56, height: 56)
+
+                        Image(systemName: "chart.bar.doc.horizontal")
+                            .font(.title3)
+                            .foregroundStyle(.blue)
+                    }
+
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("home.reports.title")
+                            .font(.headline)
+                            .foregroundStyle(.primary)
+
+                        Text("home.reports.message")
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
+                    }
+
+                    Spacer()
+
+                    Image(systemName: "chevron.right")
+                        .font(.footnote.weight(.semibold))
+                        .foregroundStyle(.tertiary)
+                }
+                .padding(16)
+                .background(
+                    RoundedRectangle(cornerRadius: 24, style: .continuous)
+                        .fill(Color(.secondarySystemGroupedBackground))
+                )
+            }
+            .buttonStyle(.plain)
         }
     }
 }

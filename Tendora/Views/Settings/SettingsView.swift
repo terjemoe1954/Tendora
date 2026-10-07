@@ -79,6 +79,8 @@ struct SettingsView: View {
                     }
                 }
 
+                HelpSettingsSection()
+
                 Section("settings.section.support") {
                     Button {
                         isPresentingAbout = true
@@ -86,6 +88,8 @@ struct SettingsView: View {
                         Label("settings.about", systemImage: "info.circle")
                     }
                 }
+
+                DataResetSettingsSection()
             }
             .navigationTitle("tab.settings")
             .sheet(isPresented: $isPresentingAbout) {
@@ -114,6 +118,24 @@ struct SettingsView: View {
         }
 
         openURL(settingsURL)
+    }
+}
+
+private struct HelpSettingsSection: View {
+    var body: some View {
+        Section("settings.section.help") {
+            NavigationLink {
+                UserManualView()
+            } label: {
+                Label("settings.user_manual", systemImage: "book")
+            }
+
+            NavigationLink {
+                ReportsView()
+            } label: {
+                Label("settings.reports", systemImage: "chart.bar.doc.horizontal")
+            }
+        }
     }
 }
 
@@ -262,6 +284,75 @@ private struct RestoreConfirmation: Identifiable {
 }
 
 private struct BackupAlertState: Identifiable {
+    let id = UUID()
+    let title: String
+    let message: String
+}
+
+private struct DataResetSettingsSection: View {
+    @Environment(\.modelContext) private var modelContext
+
+    @State private var isPresentingResetConfirmation = false
+    @State private var alertState: DataResetAlertState?
+
+    private let resetService = DataResetService.shared
+
+    var body: some View {
+        Section {
+            Button(role: .destructive) {
+                isPresentingResetConfirmation = true
+            } label: {
+                Label("settings.reset.action", systemImage: "trash")
+            }
+        } header: {
+            Text("settings.section.reset")
+        } footer: {
+            Text("settings.reset.footer")
+        }
+        .confirmationDialog(
+            "settings.reset.confirm.title",
+            isPresented: $isPresentingResetConfirmation,
+            titleVisibility: .visible
+        ) {
+            Button("settings.reset.confirm.action", role: .destructive) {
+                Task {
+                    await resetAllUserData()
+                }
+            }
+
+            Button("common.cancel", role: .cancel) {}
+        } message: {
+            Text("settings.reset.confirm.message")
+        }
+        .alert(item: $alertState) { alertState in
+            Alert(
+                title: Text(LocalizedStringKey(alertState.title)),
+                message: Text(alertState.message),
+                dismissButton: .default(Text("common.ok"))
+            )
+        }
+    }
+
+    private func resetAllUserData() async {
+        do {
+            let summary = try await resetService.resetAllUserData(in: modelContext)
+            let message = String(
+                localized: "settings.reset.success.message \(summary.assetCount) \(summary.taskCount) \(summary.attachmentCount)"
+            )
+            alertState = DataResetAlertState(
+                title: "settings.reset.success.title",
+                message: message
+            )
+        } catch {
+            alertState = DataResetAlertState(
+                title: "settings.reset.error.title",
+                message: error.localizedDescription
+            )
+        }
+    }
+}
+
+private struct DataResetAlertState: Identifiable {
     let id = UUID()
     let title: String
     let message: String
