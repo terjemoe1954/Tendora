@@ -30,6 +30,7 @@
 "home.empty.cta" = "เพิ่มทรัพย์สินชิ้นแรกของคุณ";
 
 "calendar.selected_day" = "วันที่เลือก";
+"calendar.summary.tasks_due.one" = "มีงานครบกำหนด %d งานในเดือนนี้";
 "calendar.summary.tasks_due" = "มีงานครบกำหนด %d งานในเดือนนี้";
 "calendar.summary.next_due" = "ครบกำหนดถัดไป: %@ วันที่ %@";
 "calendar.empty.title" = "ไม่มีงานครบกำหนดในวันนั้น";
@@ -86,6 +87,7 @@
 
 "asset.metadata.built" = "สร้างเมื่อ %d";
 "asset.metadata.empty" = "ยังไม่มีรายละเอียด";
+"asset.card.task_count.one" = "%d งาน";
 "asset.card.task_count" = "%d งาน";
 "asset.card.next_due" = "ถัดไป: %@ วันที่ %@";
 

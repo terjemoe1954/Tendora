@@ -30,6 +30,7 @@
 "home.empty.cta" = "Add Your First Asset";
 
 "calendar.selected_day" = "Selected Day";
+"calendar.summary.tasks_due.one" = "%d task due this month";
 "calendar.summary.tasks_due" = "%d tasks due this month";
 "calendar.summary.next_due" = "Next due: %@ on %@";
 "calendar.empty.title" = "Nothing due that day";
@@ -86,6 +87,7 @@
 
 "asset.metadata.built" = "Built %d";
 "asset.metadata.empty" = "No details added yet";
+"asset.card.task_count.one" = "%d task";
 "asset.card.task_count" = "%d tasks";
 "asset.card.next_due" = "Next: %@ on %@";
 

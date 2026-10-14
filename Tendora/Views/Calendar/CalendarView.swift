@@ -52,7 +52,7 @@ struct CalendarView: View {
             Text(selectedDate.formatted(.dateTime.locale(locale).month(.wide).year()))
                 .font(.title2.weight(.semibold))
 
-            Text(String(format: String(localized: "calendar.summary.tasks_due", locale: locale), locale: locale, currentMonthTasks.count))
+            Text(monthTaskSummary)
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
 
@@ -80,6 +80,15 @@ struct CalendarView: View {
             RoundedRectangle(cornerRadius: 28, style: .continuous)
                 .fill(Color(.secondarySystemGroupedBackground))
         )
+    }
+
+    private var monthTaskSummary: String {
+        let taskCount = currentMonthTasks.count
+        let key = taskCount == 1
+            ? "calendar.summary.tasks_due.one"
+            : "calendar.summary.tasks_due"
+        let format = String(localized: String.LocalizationValue(key), locale: locale)
+        return String(format: format, locale: locale, taskCount)
     }
 
     private var calendarPicker: some View {

@@ -30,6 +30,7 @@
 "home.empty.cta" = "Legg til din første eiendel";
 
 "calendar.selected_day" = "Valgt dag";
+"calendar.summary.tasks_due.one" = "%d oppgave forfaller denne måneden";
 "calendar.summary.tasks_due" = "%d oppgaver forfaller denne måneden";
 "calendar.summary.next_due" = "Neste forfall: %@ den %@";
 "calendar.empty.title" = "Ingenting forfaller denne dagen";
@@ -86,6 +87,7 @@
 
 "asset.metadata.built" = "Bygget %d";
 "asset.metadata.empty" = "Ingen detaljer lagt til ennå";
+"asset.card.task_count.one" = "%d oppgave";
 "asset.card.task_count" = "%d oppgaver";
 "asset.card.next_due" = "Neste: %@ den %@";
 

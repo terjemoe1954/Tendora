@@ -259,7 +259,10 @@ extension Asset {
     func taskSubtitle(locale: Locale) -> String {
         let activeTaskCount = activeTaskCount
 
-        let format = String(localized: "asset.card.task_count", locale: locale)
+        let taskCountKey = activeTaskCount == 1
+            ? "asset.card.task_count.one"
+            : "asset.card.task_count"
+        let format = String(localized: String.LocalizationValue(taskCountKey), locale: locale)
         let taskSummary = String(format: format, locale: locale, activeTaskCount)
 
         if let nextTask = (tasks ?? [])
